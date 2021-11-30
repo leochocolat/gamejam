@@ -1,11 +1,11 @@
-# Gleec - Front end
+# Game Jam - Gobelins
 
 ## Environments
 
-| Name           | URL                                                       |
-| -------------- | --------------------------------------------------------- |
-| **Staging**    | [gleec-2021.imm-g-prod.com](http://gleec-2021.imm-g-prod.com/) |
-| **Production** | Coming soon                                               |
+| Name           | URL         |
+| -------------- | ----------- |
+| **Staging**    | Coming soon |
+| **Production** | Coming soon |
 
 ## Build Setup
 
@@ -26,21 +26,11 @@ $ npm run generate
 
 For detailed explanation on how things work, check out the [documentation](https://nuxtjs.org).
 
-## CMS
-
-This project is using [Contentful](https://app.contentful.com/).
-
 ## Deploy Guide
 
 ### Staging
 
-Pushing on main or publishing on Contentful triggers a SSH Deploy to staging with [Github action](https://github.com/immersive-garden/gleec-2021/actions/workflows/deploy-staging.yml).
-
-You can also manually deploy any branch or tag with the [Github action interface](https://github.com/immersive-garden/gleec-2021/actions/workflows/deploy-staging.yml) :
-
--   Click "Run Workflow" drop down
--   Enter branch or tag if needed (if empty it will use master)
--   Click "Run Workflow"
+Coming soon
 
 ### Production
 
