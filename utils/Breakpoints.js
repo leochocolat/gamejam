@@ -32,18 +32,21 @@ class Breakpoints {
         for (let i = 0, len = arguments.length; i < len; i++) {
             if (arguments[i] === this._active) return true;
         }
+
         return false;
     }
 
     rem(value) {
         const viewportWidth = parseInt(viewportWidthSmall);
         const fontSize = parseFloat(this._active === 'medium' ? fontSizeMedium : fontSizeSmall);
+
         return (value / (viewportWidth / 100) / 100) * fontSize * WindowResizeObserver.width;
     }
 
     reml(value) {
         const viewportWidth = parseInt(viewportWidthLarge);
         const fontSize = parseFloat(fontSizeLarge);
+
         return (value / (viewportWidth / 100) / 100) * fontSize * WindowResizeObserver.width;
     }
 
@@ -65,6 +68,7 @@ class Breakpoints {
     _getNameFromDocumentElement() {
         const before = window.getComputedStyle(document.documentElement, ':before');
         const name = before.content.replace(/"/g, '');
+
         return name;
     }
 

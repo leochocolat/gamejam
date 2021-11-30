@@ -1,11 +1,11 @@
 @function strip-unit($number) {
-    @return $number / ($number * 0 + 1);
+    @return math.div($number, ($number * 0 + 1));
 }
 
 @function rem($value, $name: 'small') {
     @if map-has-key($sizes, $name) {
         $viewport-size: map-get($sizes, $name);
-        @return #{strip-unit($value) / (strip-unit($viewport-size) / 100)}rem;
+        @return #{math.div(strip-unit($value), (math.div(strip-unit($viewport-size), 100)))}rem;
     }
 
     @else {

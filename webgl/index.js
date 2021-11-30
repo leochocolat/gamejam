@@ -43,6 +43,14 @@ export default class WebGLApplication {
     /**
      * Public
      */
+
+    /**
+     * This is called when all resources are available
+     */
+    setup() {
+        this._scene.setup();
+    }
+
     destroy() {
         this._removeEventListeners();
         this._removeDebugger();

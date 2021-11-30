@@ -9,6 +9,15 @@
 			"}"
 		]
 	},
+	"Mediaquery: Small": {
+        "scope": "scss",
+		"prefix": "mqs",
+		"body": [
+			"@include respond-to('small') {",
+			"    $0",
+			"}"
+		]
+	},
     "Mediaquery: Medium": {
         "scope": "scss",
 		"prefix": "mqm",

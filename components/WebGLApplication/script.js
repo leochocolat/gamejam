@@ -7,9 +7,18 @@ import WebGLApplication from '@/webgl';
 export default {
     computed: {
         ...mapGetters({
+            // Context
             isDebug: 'context/isDebug',
             isDevelopment: 'context/isDevelopment',
+            // Preloader
+            isLoadingCompleted: 'preloader/isLoadingCompleted',
         }),
+    },
+
+    watch: {
+        isLoadingCompleted(isCompleted) {
+            if (isCompleted) this.$root.webglApp.setup();
+        },
     },
 
     mounted() {
@@ -26,9 +35,11 @@ export default {
             this.$root.webglApp = new WebGLApplication({
                 canvas: this.$el,
                 nuxtRoot: this.$root,
-                isDebug: this.$root,
+                isDebug: this.isDebug,
                 isDevelopment: this.$root,
             });
+
+            if (this.isLoadingCompleted) this.$root.webglApp.setup();
         },
     },
 };

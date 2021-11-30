@@ -1,3 +1,5 @@
+@use "sass:math";
+
 // Colors
 
 // Fonts
@@ -7,7 +9,7 @@ $font-primary: Arial;
 
 // Font sizes
 $font-size-small: 1vw;
-$font-size-medium: 0.55vw;
+$font-size-medium: 1vw;
 $font-size-large: 1vw;
 
 // Fluid type
@@ -30,6 +32,13 @@ $breakpoints: (
     'large': (
         min-width: 850px,
     ),
+);
+
+// Sizes
+$sizes: (
+    'small': $viewport-width-small,
+    'medium': $viewport-width-medium,
+    'large': $viewport-width-large,
 );
 
 // Easings

@@ -1,6 +1,14 @@
 <template>
     <div class="preloader">
 
+        <div class="container">
+
+            <div class="loading-message">
+                Loading...
+            </div>
+
+        </div>
+
     </div>
 </template>
 

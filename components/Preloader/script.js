@@ -19,6 +19,10 @@ export default {
     },
 
     methods: {
+        transitionOut() {
+            this.$el.style.display = 'none';
+        },
+
         registerLoaders() {
             ResourceLoader.registerLoader(ThreeTextureLoader, 'texture');
         },
@@ -49,8 +53,8 @@ export default {
         },
 
         loadResourcesCompleteHandler() {
-            console.log('Complete');
             this.$store.dispatch('preloader/setLoadingCompleted');
+            this.transitionOut();
         },
     },
 };

@@ -1,6 +1,6 @@
 // Vendor
 import { component } from './vendor/bidello';
-import { Scene } from 'three';
+import { BoxGeometry, Scene } from 'three';
 
 // Components
 import DebugBox from './components/DebugBox';
@@ -10,7 +10,7 @@ export default class MainScene extends component(Scene) {
     init(options = {}) {
         this._renderer = options.renderer;
         this._width = options.width;
-        this._height = options.width;
+        this._height = options.height;
         this._debugger = options.debugger;
 
         this._debugFolder = this._createDebugFolder();
@@ -25,6 +25,17 @@ export default class MainScene extends component(Scene) {
      */
     get camera() {
         return this._cameras.active;
+    }
+
+    /**
+     * Public
+     */
+
+    /**
+     * This is called when all resources are available
+     */
+    setup() {
+
     }
 
     /**

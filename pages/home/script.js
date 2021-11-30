@@ -1,9 +1,10 @@
 // Mixins
 import seo from '@/mixins/seo';
 import pageTransitions from '@/mixins/pageTransitions';
+import utils from '@/mixins/utils';
 
 export default {
-    mixins: [seo, pageTransitions],
+    mixins: [seo, pageTransitions, utils],
 
     methods: {
         transitionIn(done, routeInfos) {
