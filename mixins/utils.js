@@ -4,7 +4,7 @@ export default {
             return this.$i18n.locale;
         },
 
-        localeCopy() {
+        staticCopy() {
             return this.$t('data');
         },
     },
