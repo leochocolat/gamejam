@@ -3,6 +3,7 @@ import { mapGetters } from 'vuex';
 
 // Components
 import WebGLApplication from '@/components/WebGLApplication';
+import Preloader from '@/components/Preloader';
 
 export default {
     watch: {
@@ -19,6 +20,7 @@ export default {
 
     components: {
         WebGLApplication,
+        Preloader,
     },
 };
 

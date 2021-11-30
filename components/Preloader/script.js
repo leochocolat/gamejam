@@ -1,0 +1,56 @@
+// Vendor
+import ResourceLoader from '@/vendor/resource-loader';
+import ThreeTextureLoader from '@/vendor/loaders/three-texture-loader';
+
+// Resources
+import globalResources from '@/configs/globalResources';
+
+export default {
+
+    mounted() {
+        this.registerLoaders();
+        this.setupResourceLoader();
+        this.setupEventListeners();
+        this.loadResources();
+    },
+
+    beforeDestroy() {
+        this.removeEventListeners();
+    },
+
+    methods: {
+        registerLoaders() {
+            ResourceLoader.registerLoader(ThreeTextureLoader, 'texture');
+        },
+
+        setupResourceLoader() {
+            this.resourceLoader = new ResourceLoader();
+
+            // Global resources
+            this.resourceLoader.add({
+                resources: globalResources,
+                preload: true,
+            });
+        },
+
+        loadResources() {
+            this.resourceLoader.preload();
+        },
+
+        /**
+         * Events
+         */
+        setupEventListeners() {
+            this.resourceLoader.addEventListener('complete', this.loadResourcesCompleteHandler);
+        },
+
+        removeEventListeners() {
+            this.resourceLoader.removeEventListener('complete', this.loadResourcesCompleteHandler);
+        },
+
+        loadResourcesCompleteHandler() {
+            console.log('Complete');
+            this.$store.dispatch('preloader/setLoadingCompleted');
+        },
+    },
+};

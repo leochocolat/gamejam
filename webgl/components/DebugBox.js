@@ -23,8 +23,8 @@ export default class DebugBox extends component(Object3D) {
      * Update cycle
      */
     onUpdate({ time }) {
-        this.rotation.x = time;
-        this.rotation.y = time;
+        // this.rotation.x = time;
+        // this.rotation.y = time;
     }
 
     onResize({ width, height }) {

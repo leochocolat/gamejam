@@ -5,6 +5,8 @@
 
         <Nuxt />
 
+        <Preloader />
+
     </div>
 </template>
 
