@@ -1,10 +1,10 @@
 // Vendor
-import { component } from './vendor/bidello';
+import { component } from '../vendor/bidello';
 import { BoxGeometry, Scene } from 'three';
 
 // Components
-import DebugBox from './components/DebugBox';
-import Cameras from './modules/Cameras';
+import DebugBox from '../components/DebugBox';
+import Cameras from '../modules/Cameras';
 
 export default class MainScene extends component(Scene) {
     init(options = {}) {

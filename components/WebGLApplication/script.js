@@ -37,6 +37,7 @@ export default {
                 nuxtRoot: this.$root,
                 isDebug: this.isDebug,
                 isDevelopment: this.$root,
+                sceneName: this.$route.query.scene,
             });
 
             if (this.isLoadingCompleted) this.$root.webglApp.setup();

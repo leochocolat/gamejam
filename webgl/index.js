@@ -10,8 +10,11 @@ import Debugger from '@/utils/Debugger';
 import WindowResizeObserver from '@/utils/WindowResizeObserver';
 import device from '@/utils/device';
 
+// Modules
+import SceneManager from './modules/SceneManager';
+
 // Scenes
-import MainScene from './MainScene';
+// import MainScene from './scenes/MainScene';
 
 export default class WebGLApplication {
     constructor(options = {}) {
@@ -20,6 +23,7 @@ export default class WebGLApplication {
         this._nuxtRoot = options.nuxtRoot;
         this._isDebug = options.isDebug;
         this._isDevelopment = options.isDevelopment;
+        this._sceneName = options.sceneName;
 
         // Setup
         this._width = null;
@@ -78,7 +82,8 @@ export default class WebGLApplication {
     }
 
     _createScene() {
-        const scene = new MainScene({
+        const sceneManager = new SceneManager({
+            sceneName: this._sceneName,
             root: this,
             renderer: this._renderer,
             width: this._width,
@@ -86,7 +91,7 @@ export default class WebGLApplication {
             debugger: this._debugger,
         });
 
-        return scene;
+        return sceneManager.activeScene;
     }
 
     /**
