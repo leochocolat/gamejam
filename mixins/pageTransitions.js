@@ -9,7 +9,7 @@ export default {
 
     computed: {
         ...mapGetters({
-            // isCompleted: 'preloader/isCompleted',
+            isCompleted: 'preloader/isCompleted',
         }),
     },
 
@@ -18,9 +18,9 @@ export default {
          * Trigger first page reveal when the preloader
          * transition out animation is done
          */
-        // isCompleted(isCompleted) {
-        //     if (isCompleted) this.__transitionIn();
-        // },
+        isCompleted(isCompleted) {
+            if (isCompleted) this.__transitionIn();
+        },
     },
 
     methods: {
@@ -52,10 +52,11 @@ export default {
             };
 
             // On first navigation, let preloader state trigger transitions (see line 17)
-            // if (!routeInfos.previous) {
-            //     done();
-            //     return;
-            // }
+            if (!routeInfos.previous) {
+                done();
+
+                return;
+            }
 
             const page = getPage(el.__vue__);
 

@@ -9,12 +9,12 @@ export default {
     methods: {
         transitionIn(done, routeInfos) {
             // console.log('transition in');
-            done();
+            if (done) done();
         },
 
         transitionOut(done, routeInfos) {
             // console.log('transition out');
-            done();
+            if (done) done();
         },
     },
 };

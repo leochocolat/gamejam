@@ -1,17 +1,3 @@
 .page-home {
     position: relative;
 }
-
-h1 {
-    font-size: rem(100px, 'small');
-
-    color: white;
-    
-    @include respond-to('medium') {
-        font-size: rem(100px, 'medium');
-    }
-
-    @include respond-to('large') {
-        font-size: rem(100px, 'large');
-    }
-}

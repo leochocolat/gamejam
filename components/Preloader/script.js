@@ -54,6 +54,7 @@ export default {
 
         loadResourcesCompleteHandler() {
             this.$store.dispatch('preloader/setLoadingCompleted');
+            this.$store.dispatch('preloader/setCompleted');
             this.transitionOut();
         },
     },

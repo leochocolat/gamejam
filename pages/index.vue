@@ -1,8 +1,6 @@
 <template>
     <div class="page-home">
 
-        <h1>La part du gateau</h1>
-
     </div>
 </template>
 
