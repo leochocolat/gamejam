@@ -1,0 +1,18 @@
+@function strip-unit($number) {
+    @return $number / ($number * 0 + 1);
+}
+
+@function rem($value, $name: 'small') {
+    @if map-has-key($sizes, $name) {
+        $viewport-size: map-get($sizes, $name);
+        @return #{strip-unit($value) / (strip-unit($viewport-size) / 100)}rem;
+    }
+
+    @else {
+        @warn 'Unfortunately, no value could retieved from `#{$name}`. Please make sure it is defined in the `$sizes` map.';
+    }
+}
+
+@function aspect-ratio($width, $height) {
+    @return #{strip-unit($height) / strip-unit($width) * 100%};
+}
