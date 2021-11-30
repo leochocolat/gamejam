@@ -3,15 +3,14 @@ import { WebGLRenderer, Clock } from 'three';
 import Stats from 'three/examples/jsm/libs/stats.module.js';
 import { GPUStatsPanel } from '@/webgl/vendor/GPUStatsPanel.js';
 import bidello from './vendor/bidello';
-import gsap from 'gsap';
+import { gsap } from 'gsap';
 
 // Utils
 import Debugger from '@/utils/Debugger';
 import WindowResizeObserver from '@/utils/WindowResizeObserver';
 import device from '@/utils/device';
 
-// Components
-import DebugBox from './components/DebugBox';
+// Scenes
 import MainScene from './MainScene';
 
 export default class WebGLApplication {
@@ -71,7 +70,13 @@ export default class WebGLApplication {
     }
 
     _createScene() {
-        const scene = new MainScene();
+        const scene = new MainScene({
+            root: this,
+            renderer: this._renderer,
+            width: this._width,
+            height: this._height,
+            debugger: this._debugger,
+        });
 
         return scene;
     }
@@ -199,13 +204,13 @@ export default class WebGLApplication {
         if (!this._isDebug) return;
 
         const debug = new Debugger({
-            title: 'BOOM',
+            title: 'Debugger',
         });
 
         return debug;
     }
 
     _removeDebugger() {
-
+        this._debugger?.destroy();
     }
 }

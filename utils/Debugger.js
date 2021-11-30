@@ -41,8 +41,8 @@ class Debugger extends Tweakpane {
     }
 
     __setupStyle() {
-        this.element.style.position = 'fixed';
-        this.element.style.right = '10px';
+        // this.element.style.position = 'fixed';
+        // this.element.style.right = '10px';
     }
 
     __createDragButton() {

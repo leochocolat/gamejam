@@ -16,9 +16,14 @@ export default {
         this.setupWebGL();
     },
 
+    beforeDestroy() {
+        this.$root.webglApp?.destroy();
+        this.$root.webglApp = null;
+    },
+
     methods: {
         setupWebGL() {
-            this.$root.webGLApplication = new WebGLApplication({
+            this.$root.webglApp = new WebGLApplication({
                 canvas: this.$el,
                 nuxtRoot: this.$root,
                 isDebug: this.$root,

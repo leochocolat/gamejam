@@ -1,13 +1,20 @@
 // Vendor
 import { component } from './vendor/bidello';
-import { PerspectiveCamera, Scene } from 'three';
+import { Scene } from 'three';
 
 // Components
 import DebugBox from './components/DebugBox';
+import Cameras from './modules/Cameras';
 
 export default class MainScene extends component(Scene) {
-    init() {
-        this._camera = this._createCamera();
+    init(options = {}) {
+        this._renderer = options.renderer;
+        this._width = options.width;
+        this._height = options.width;
+        this._debugger = options.debugger;
+
+        this._debugFolder = this._createDebugFolder();
+        this._cameras = this._createCameras();
 
         const box = new DebugBox();
         this.add(box);
@@ -17,16 +24,45 @@ export default class MainScene extends component(Scene) {
      * Getters
      */
     get camera() {
-        return this._camera;
+        return this._cameras.active;
     }
 
     /**
      * Private
      */
-    _createCamera() {
-        const camera = new PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        camera.position.z = 5;
+    _createCameras() {
+        const cameras = new Cameras({
+            renderer: this._renderer,
+            width: this._width,
+            height: this._height,
+            debugFolder: this._debugFolder,
+        });
 
-        return camera;
+        return cameras;
+    }
+
+    _createDebugFolder() {
+        if (!this._debugger) return;
+
+        const folder = this._debugger.addFolder({ title: 'Scene' });
+
+        return folder;
+    }
+
+    /**
+     * Update cycle
+     */
+    onUpdate({ time, delta }) {
+
+    }
+
+    /**
+     * Resize
+     */
+    onResize({ width, height }) {
+        this._width = width;
+        this._height = height;
+
+        this._cameras.resize({ width, height });
     }
 }
