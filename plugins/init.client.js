@@ -18,6 +18,7 @@ export default ({ app }) => {
     app.router.beforeEach((to, from, next) => {
         if (app.getRouteBaseName(to) === inferiorRoute) {
             next();
+
             return;
         };
 

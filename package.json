@@ -17,7 +17,8 @@
     "gsap": "^3.8.0",
     "nuxt": "^2.15.7",
     "nuxt-i18n": "^6.28.1",
-    "three": "^0.134.0"
+    "three": "^0.134.0",
+    "tweakpane": "^2.4.3"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.16.3",
@@ -32,10 +33,10 @@
     "raw-loader": "^4.0.2",
     "sass": "^1.43.4",
     "sass-loader": "^10.2.0",
-    "vue-eslint-parser": "^8.0.1",
     "stylelint": "^13.13.1",
     "stylelint-config-standard": "^21.0.0",
     "stylelint-order": "^4.1.0",
-    "stylelint-scss": "^3.20.1"
+    "stylelint-scss": "^3.20.1",
+    "vue-eslint-parser": "^8.0.1"
   }
 }

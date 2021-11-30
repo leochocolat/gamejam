@@ -1,6 +1,9 @@
 // Vendor
 import { mapGetters } from 'vuex';
 
+// Components
+import WebGLApplication from '@/components/WebGLApplication';
+
 export default {
     watch: {
         $route(to, from) {
@@ -12,6 +15,10 @@ export default {
 
     mounted() {
         this.$store.dispatch('router/setCurrent', this.$route);
+    },
+
+    components: {
+        WebGLApplication,
     },
 };
 

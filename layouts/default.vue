@@ -1,6 +1,8 @@
 <template>
     <div class="default">
 
+        <WebGLApplication />
+
         <Nuxt />
 
     </div>
