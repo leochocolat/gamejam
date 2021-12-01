@@ -1,5 +1,5 @@
 // Vendor
-import { WebGLRenderer, Clock } from 'three';
+import { WebGLRenderer, Clock, Vector2 } from 'three';
 import Stats from 'three/examples/jsm/libs/stats.module.js';
 import { GPUStatsPanel } from '@/webgl/vendor/GPUStatsPanel.js';
 import bidello from './vendor/bidello';
@@ -32,6 +32,10 @@ export default class WebGLApplication {
         this._debugger = this._createDebugger();
         this._renderer = this._createRenderer();
         this._scene = this._createScene();
+
+        this._mousePosition = new Vector2();
+        this._normalizedMousePosition = new Vector2();
+        this._centeredMousePosition = new Vector2();
 
         this._bindHandlers();
         this._setupEventListeners();
@@ -169,16 +173,67 @@ export default class WebGLApplication {
     _bindHandlers() {
         this._resizeHandler = this._resizeHandler.bind(this);
         this._tickHandler = this._tickHandler.bind(this);
+        this._mousemoveHandler = this._mousemoveHandler.bind(this);
     }
 
     _setupEventListeners() {
         WindowResizeObserver.addEventListener('resize', this._resizeHandler);
         gsap.ticker.add(this._tickHandler);
+        window.addEventListener('mousemove', this._mousemoveHandler);
     }
 
     _removeEventListeners() {
         WindowResizeObserver.removeEventListener('resize', this._resizeHandler);
         gsap.ticker.remove(this._tickHandler);
+        window.removeEventListener('mousemove', this._mousemoveHandler);
+    }
+
+    _resizeHandler() {
+        this._resize();
+    }
+
+    _tickHandler() {
+        this._update();
+    }
+
+    _mousemoveHandler(e) {
+        this._mousePosition.x = e.clientX;
+        this._mousePosition.y = e.clientY;
+
+        this._normalizedMousePosition.x = this._mousePosition.x / this._width;
+        this._normalizedMousePosition.y = 1.0 - this._mousePosition.y / this._height;
+
+        this._centeredMousePosition.x = (this._mousePosition.x / this._width) * 2 - 1;
+        this._centeredMousePosition.y = -(this._mousePosition.y / this._height) * 2 + 1;
+
+        bidello.trigger(
+            {
+                name: 'mousemove',
+                fireAtStart: false,
+            },
+            {
+                mousePosition: this._mousePosition,
+                normalizedMousePosition: this._normalizedMousePosition,
+                centeredMousePosition: this._centeredMousePosition,
+            },
+        );
+    }
+
+    /**
+     * Debugger
+     */
+    _createDebugger() {
+        if (!this._isDebug) return;
+
+        const debug = new Debugger({
+            title: 'Debugger',
+        });
+
+        return debug;
+    }
+
+    _removeDebugger() {
+        this._debugger?.destroy();
     }
 
     _createStats() {
@@ -200,30 +255,5 @@ export default class WebGLApplication {
         this._stats.showPanel(3);
 
         return panel;
-    }
-
-    _resizeHandler() {
-        this._resize();
-    }
-
-    _tickHandler() {
-        this._update();
-    }
-
-    /**
-     * Debugger
-     */
-    _createDebugger() {
-        if (!this._isDebug) return;
-
-        const debug = new Debugger({
-            title: 'Debugger',
-        });
-
-        return debug;
-    }
-
-    _removeDebugger() {
-        this._debugger?.destroy();
     }
 }
