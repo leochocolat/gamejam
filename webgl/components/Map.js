@@ -73,12 +73,12 @@ export default class Map extends component(Object3D) {
             for (let j = 0; j < cols; j++) {
                 const chunk = new Chunk({
                     row: i,
-                    col: j,
+                    column: j,
                     resource: this._mapManager.resources[Math.round(Math.random() * (this._mapManager.resources.length - 1))],
                     population: this._mapManager.populations[Math.round(Math.random() * (this._mapManager.populations.length - 1))],
                     mesh: new ChunkMesh({ size }),
                 });
-                chunk.mesh.position.x = j * size.x + padding * j;
+                chunk.mesh.position.x = j * size.x + padding * j + ((i % 2) * (size.x / 2));
                 chunk.mesh.position.z = (i * size.z + padding * i) * -1;
                 chunks.push(chunk);
                 container.add(chunk.mesh);

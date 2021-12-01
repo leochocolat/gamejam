@@ -52,14 +52,15 @@ export default class Chunk {
      * Public
      */
     isNeighbourOf(chunk) {
-        // if (chunk.row <= (this.row + 1) || chunk.row >= (this.row - 1)) {
-        //     if (chunk.row % 2 === 0) {
+        if (this.row === (chunk.row + 1) || this.row === (chunk.row - 1)) {
+            if (chunk.column === this.column)
+                return true;
 
-        //     } else {
+            return (chunk.row % 2 === 0) ? chunk.column === (this.column + 1) : chunk.column === (this.column - 1);
+        } else if (this.row === chunk.row)
+            return this.column === (chunk.column + 1) || this.column === (chunk.column - 1);
 
-        //     }
-        // }
-        return true;
+        return false;
     }
 
     /**

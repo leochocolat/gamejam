@@ -40,6 +40,16 @@ export default class Territory {
     }
 
     isNeighbourOf(territory) {
-        return true;
+        for (let i = 0; i < this.chunks.length; i++) {
+            const currChunk = this.chunks[i];
+            for (let j = 0; j < territory.chunks.length; j++) {
+                const territoryChunk = territory.chunks[j];
+                if (currChunk.isNeighbourOf(territoryChunk)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 }
