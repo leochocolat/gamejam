@@ -174,18 +174,21 @@ export default class WebGLApplication {
         this._resizeHandler = this._resizeHandler.bind(this);
         this._tickHandler = this._tickHandler.bind(this);
         this._mousemoveHandler = this._mousemoveHandler.bind(this);
+        this._clickHandler = this._clickHandler.bind(this);
     }
 
     _setupEventListeners() {
         WindowResizeObserver.addEventListener('resize', this._resizeHandler);
         gsap.ticker.add(this._tickHandler);
         window.addEventListener('mousemove', this._mousemoveHandler);
+        this._canvas.addEventListener('click', this._clickHandler);
     }
 
     _removeEventListeners() {
         WindowResizeObserver.removeEventListener('resize', this._resizeHandler);
         gsap.ticker.remove(this._tickHandler);
         window.removeEventListener('mousemove', this._mousemoveHandler);
+        this._canvas.removeEventListener('click', this._clickHandler);
     }
 
     _resizeHandler() {
@@ -209,6 +212,29 @@ export default class WebGLApplication {
         bidello.trigger(
             {
                 name: 'mousemove',
+                fireAtStart: false,
+            },
+            {
+                mousePosition: this._mousePosition,
+                normalizedMousePosition: this._normalizedMousePosition,
+                centeredMousePosition: this._centeredMousePosition,
+            },
+        );
+    }
+
+    _clickHandler(e) {
+        this._mousePosition.x = e.clientX;
+        this._mousePosition.y = e.clientY;
+
+        this._normalizedMousePosition.x = this._mousePosition.x / this._width;
+        this._normalizedMousePosition.y = 1.0 - this._mousePosition.y / this._height;
+
+        this._centeredMousePosition.x = (this._mousePosition.x / this._width) * 2 - 1;
+        this._centeredMousePosition.y = -(this._mousePosition.y / this._height) * 2 + 1;
+
+        bidello.trigger(
+            {
+                name: 'click',
                 fireAtStart: false,
             },
             {
