@@ -1,7 +1,8 @@
 // Vendor
 import ResourceLoader from '@/vendor/resource-loader';
 import ThreeTextureLoader from '@/vendor/loaders/three-texture-loader';
-import ThreeGLTFLoader from '@/vendor/loaders/three-gltf-draco-loader';
+import ThreeGLTFLoader from '@/vendor/loaders/three-gltf-loader';
+import ThreeFBXLoader from '@/vendor/loaders/three-fbx-loader';
 
 // Resources
 import globalResources from '@/configs/globalResources';
@@ -27,6 +28,7 @@ export default {
         registerLoaders() {
             ResourceLoader.registerLoader(ThreeTextureLoader, 'texture');
             ResourceLoader.registerLoader(ThreeGLTFLoader, 'gltf');
+            ResourceLoader.registerLoader(ThreeFBXLoader, 'fbx');
         },
 
         setupResourceLoader() {
