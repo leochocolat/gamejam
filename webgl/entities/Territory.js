@@ -14,14 +14,32 @@ export default class Territory {
      * Public
      */
     addChunk(chunk) {
+        let isChunkAdded = false;
+
         if (this._chunks.length > 0) {
             for (let i = 0; i < this._chunks.length; i++) {
-                if (chunk.isNeighbourOf(this._chunks[i])) this._chunks.push();
+                if (isChunkAdded) continue;
+                if (chunk.isNeighbourOf(this._chunks[i])) {
+                    this._chunks.push(chunk);
+                    isChunkAdded = true;
+                }
             }
         } else {
             this._chunks.push(chunk);
+            isChunkAdded = true;
         }
 
-        return this._chunks;
+        // Return success of operation
+        return isChunkAdded;
+    }
+
+    mergeChunks(chunks) {
+        for (let i = 0; i < chunks.length; i++) {
+            this._chunks.push(chunks[i]);
+        }
+    }
+
+    isNeighbourOf(territory) {
+        return true;
     }
 }

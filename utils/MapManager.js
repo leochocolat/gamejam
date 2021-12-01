@@ -44,19 +44,20 @@ export default class MapManager {
      * Public
      */
     setChunkSettler(chunk, settler) {
-        // if (chunk.settler) {
-        //     console.error('This chunk already has a settler');
+        if (chunk.settler) {
+            console.error('This chunk already has a settler');
 
-        //     return;
-        // }
+            return;
+        }
 
         // if (settler.territories.length >= MAX_TERRITORIES) {
         //     console.error(`This settler already has a ${MAX_TERRITORIES} territories`);
-
         //     return;
         // }
 
-        chunk.settler = settler;
+        settler.addChunk(chunk);
+
+        // chunk.settler = settler;
     }
 
     /**

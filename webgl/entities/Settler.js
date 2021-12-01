@@ -30,16 +30,34 @@ export default class Settler {
      * Public
      */
     addChunk(chunk) {
+        let territory = null;
+        let isChunkAdded = false;
+
+        // Try to add the chunk to an existing territory
+        // If no territories, create a new one
         if (this._territories.length > 0) {
             for (let i = 0; i < this._territories.length; i++) {
-                const territory = this._territories[i];
-                territory.addChunk(chunk);
+                if (isChunkAdded) continue;
+                territory = this._territories[i];
+                isChunkAdded = territory.addChunk(chunk);
             }
         } else {
-            const territory = new Territory();
+            territory = new Territory();
             territory.addChunk(chunk);
             this._territories.push(territory);
+            isChunkAdded = true;
         }
+
+        // Check mergeable territories
+        for (let i = 0; i < this._territories.length; i++) {
+            if (territory === this._territories[i]) continue;
+            if (territory.isNeighbourOf(this._territories[i])) {
+                this._mergeTerritories(territory, this._territories[i]);
+            }
+        }
+
+        // Assign settler to chunk
+        if (isChunkAdded) chunk.settler = this;
     }
 
     // addTerritory(territory) {
@@ -52,4 +70,14 @@ export default class Settler {
 
     //     return this._territories;
     // }
+
+    /**
+     * Private
+     */
+    _mergeTerritories(territory1, territory2) {
+        const indexOf2 = this._territories.indexOf(territory2);
+        territory1.mergeChunks(territory2.chunks);
+        this._territories.splice(indexOf2, 1);
+        console.log(`Territories amount: ${this._territories.length}`);
+    }
 }
