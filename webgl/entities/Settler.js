@@ -1,5 +1,7 @@
 import Territory from './Territory';
 
+const MAX_TERRITORIES = 3;
+
 export default class Settler {
     constructor({ id, targetResourceId, targetResourceAmount, enemy, color }) {
         this._id = id;
@@ -41,6 +43,13 @@ export default class Settler {
                 territory = this._territories[i];
                 isChunkAdded = territory.addChunk(chunk);
             }
+
+            if (!isChunkAdded) {
+                territory = new Territory();
+                territory.addChunk(chunk);
+                this._territories.push(territory);
+                isChunkAdded = true;
+            }
         } else {
             territory = new Territory();
             territory.addChunk(chunk);
@@ -51,8 +60,15 @@ export default class Settler {
         // Check mergeable territories
         for (let i = 0; i < this._territories.length; i++) {
             if (territory === this._territories[i]) continue;
+
+            // If territories are neighbours, merge them
+            // Otherwise check is the max length is reached and then remove it
             if (territory.isNeighbourOf(this._territories[i])) {
                 this._mergeTerritories(territory, this._territories[i]);
+            } else if (this._territories.length > MAX_TERRITORIES) {
+                isChunkAdded = false;
+                const index = this._territories.indexOf(territory);
+                this._territories.splice(index, 1);
             }
         }
 
@@ -67,14 +83,13 @@ export default class Settler {
     // removeTerritory(territory) {
     //     const index = this._territories.indexOf(territory);
     //     this._territories.splice(index, 1);
-
     //     return this._territories;
     // }
 
     /**
      * Private
      */
-    _mergeTerritories(territory1, territory2) {
+    _mergeTerritories(territory1, territory2, { removeIfNotMerged }) {
         const indexOf2 = this._territories.indexOf(territory2);
         territory1.mergeChunks(territory2.chunks);
         this._territories.splice(indexOf2, 1);
