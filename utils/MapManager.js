@@ -6,8 +6,6 @@ import Settler from '@/webgl/entities/Settler';
 import Resource from '@/webgl/entities/Resource';
 import Population from '@/webgl/entities/Population';
 
-const MAX_TERRITORIES = 3;
-
 export default class MapManager {
     constructor() {
         this._settlers = this._createSettlers();
