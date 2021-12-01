@@ -4,7 +4,7 @@ export default class Chunk {
         column,
         resource,
         population,
-        mesh
+        mesh,
     }) {
         this._row = row;
         this._column = column;
@@ -52,13 +52,14 @@ export default class Chunk {
      * Public
      */
     isNeighbourOf(chunk) {
-        if (chunk.row <= (this.row + 1) || chunk.row >= (this.row - 1)) {
-            if (chunk.row % 2 === 0) {
+        // if (chunk.row <= (this.row + 1) || chunk.row >= (this.row - 1)) {
+        //     if (chunk.row % 2 === 0) {
 
-            } else {
+        //     } else {
 
-            }
-        }
+        //     }
+        // }
+        return true;
     }
 
     /**
