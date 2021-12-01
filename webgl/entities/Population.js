@@ -1,11 +1,16 @@
 export default class Population {
-    constructor({ religion, language, culture }) {
+    constructor({ id, religion, language, culture }) {
+        this._id = id;
         this._properties = { religion, language, culture };
     }
 
     /**
      * Getters & Setters
      */
+    get id() {
+        return this._id;
+    }
+
     get properties() {
         return this._properties;
     }

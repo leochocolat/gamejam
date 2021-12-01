@@ -2,32 +2,24 @@
 import { component } from '../vendor/bidello';
 import { BoxBufferGeometry, BoxGeometry, Color, InstancedMesh, Matrix4, Mesh, MeshBasicMaterial, MeshNormalMaterial, Object3D, Raycaster, Scene, Vector2, Vector3 } from 'three';
 
-// Components
+// Modules
 import Cameras from '../modules/Cameras';
-import Block from '../components/Block';
 
-// data
-import data from '@/configs/data';
-
-// Entities
-import Settler from '../entities/Settler';
+// Components
+import Map from '../components/Map';
 
 export default class TestScene extends component(Scene) {
     init(options = {}) {
+        // Props
         this._renderer = options.renderer;
         this._width = options.width;
         this._height = options.height;
         this._debugger = options.debugger;
 
-        this._activeSettler = null;
-        this._centeredMousePosition = { x: null, y: null };
-
-        this._settlers = this._createSettlers();
-
+        // Setup
         this._debugFolder = this._createDebugFolder();
+        this._map = this._createMap();
         this._cameras = this._createCameras();
-        this._raycaster = this._createRaycaster();
-        this._blocks = this._createBlocks();
     }
 
     /**
@@ -48,22 +40,6 @@ export default class TestScene extends component(Scene) {
 
     }
 
-    /**
-     * Private
-     */
-    _createSettlers() {
-        const settlers = [];
-        for (let i = 0; i < data.settlers.length; i++) {
-            const settlerData = data.settlers[i];
-            const settler = new Settler({
-                ...settlerData,
-            });
-            settlers.push(settler);
-        }
-
-        return settlers;
-    }
-
     _createCameras() {
         const cameras = new Cameras({
             renderer: this._renderer,
@@ -80,67 +56,25 @@ export default class TestScene extends component(Scene) {
         return cameras;
     }
 
-    _createDebugFolder() {
-        if (!this._debugger) return;
+    _createMap() {
+        const map = new Map({
+            renderer: this._renderer,
+            scene: this,
+            width: this._width,
+            height: this._height,
+            debugFolder: this._debugFolder,
+        });
 
-        const folder = this._debugger.addFolder({ title: 'Scene' });
+        this.add(map);
 
-        return folder;
-    }
-
-    _createRaycaster() {
-        const raycaster = new Raycaster();
-
-        return raycaster;
-    }
-
-    _createBlocks() {
-        const blocks = [];
-
-        const rows = 15;
-        const cols = 15;
-
-        const size = new Vector3(1, 100, 1);
-        const padding = 0.15;
-
-        const container = new Object3D();
-        container.position.x = -((cols - 1) * size.x + padding * (cols - 1)) / 2;
-        container.position.y = -size.y / 2;
-        container.position.z = -1;
-        this.add(container);
-
-        for (let i = 0; i < rows; i++) {
-            for (let j = 0; j < cols; j++) {
-                const block = new Block({ size });
-                block.position.x = j * size.x + padding * j;
-                block.position.z = (i * size.z + padding * i) * -1;
-                blocks.push(block);
-                container.add(block);
-            }
-        }
-
-        return blocks;
+        return map;
     }
 
     /**
      * Update cycle
      */
     onUpdate({ time, delta }) {
-        this._updateRaycaster();
-    }
 
-    _updateRaycaster() {
-        this._raycaster.setFromCamera(this._centeredMousePosition, this.camera);
-        const intersects = this._raycaster.intersectObjects(this.children);
-
-        for (let i = 0; i < this._blocks.length; i++) {
-            const block = this._blocks[i];
-            if (intersects.length > 0 && block === intersects[0].object.parent) {
-                block.isHovered = true;
-            } else {
-                block.isHovered = false;
-            }
-        }
     }
 
     /**
@@ -154,13 +88,13 @@ export default class TestScene extends component(Scene) {
     }
 
     /**
-     * Mousemove
+     * Debug
      */
-    onMousemove({ centeredMousePosition }) {
-        this._centeredMousePosition = centeredMousePosition;
-    }
+    _createDebugFolder() {
+        if (!this._debugger) return;
 
-    onClick({ centeredMousePosition }) {
-        this._centeredMousePosition = centeredMousePosition;
+        const folder = this._debugger.addFolder({ title: 'Scene' });
+
+        return folder;
     }
 }

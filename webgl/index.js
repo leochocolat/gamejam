@@ -26,8 +26,8 @@ export default class WebGLApplication {
         this._sceneName = options.sceneName;
 
         // Setup
-        this._width = null;
-        this._height = null;
+        this._width = WindowResizeObserver.width;
+        this._height = WindowResizeObserver.height;
         this._clock = this._createClock();
         this._debugger = this._createDebugger();
         this._renderer = this._createRenderer();

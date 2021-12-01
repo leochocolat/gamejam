@@ -14,14 +14,13 @@ export default class Territory {
      * Public
      */
     addChunk(chunk) {
-        this._chunks.push(chunk);
-
-        return this._chunks;
-    }
-
-    removeChunk(chunk) {
-        const index = this._chunks.indexOf(chunk);
-        this._chunks.splice(index, 1);
+        if (this._chunks.length > 0) {
+            for (let i = 0; i < this._chunks.length; i++) {
+                if (chunk.isNeighbourOf(this._chunks[i])) this._chunks.push();
+            }
+        } else {
+            this._chunks.push(chunk);
+        }
 
         return this._chunks;
     }
