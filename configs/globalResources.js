@@ -11,6 +11,11 @@ const models = [
         type: 'gltf',
         path: '/models/gamejam_test.gltf',
     },
+    {
+        name: 'map-test-materials',
+        type: 'gltf',
+        path: '/models/map-test-v2.glb',
+    },
 ];
 const sounds = [];
 
