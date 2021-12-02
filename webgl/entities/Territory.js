@@ -10,6 +10,10 @@ export default class Territory {
         return this._chunks;
     }
 
+    get resources() {
+        return this._chunks.map(chunk => chunk.resource);
+    }
+
     /**
      * Public
      */
@@ -40,16 +44,22 @@ export default class Territory {
     }
 
     isNeighbourOf(territory) {
+        return !!this.getNeighbourChunks(territory).length;
+    }
+
+    getNeighbourChunks(territory) {
+        const chunks = [];
+
         for (let i = 0; i < this.chunks.length; i++) {
             const currChunk = this.chunks[i];
             for (let j = 0; j < territory.chunks.length; j++) {
                 const territoryChunk = territory.chunks[j];
                 if (currChunk.isNeighbourOf(territoryChunk)) {
-                    return true;
+                    chunks.push(territoryChunk);
                 }
             }
         }
 
-        return false;
+        return chunks;
     }
 }
