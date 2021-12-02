@@ -1,5 +1,5 @@
 // Vendor
-import { Object3D, Raycaster, Vector3 } from 'three';
+import { MeshBasicMaterial, Object3D, Raycaster, Vector3 } from 'three';
 import { component } from '@/webgl/vendor/bidello';
 
 // data
@@ -11,6 +11,7 @@ import ChunkMesh from '@/webgl/components/ChunkMesh';
 // Entities
 import Chunk from '@/webgl/entities/Chunk';
 import MapManager from '@/utils/MapManager';
+import ResourceLoader from '@/vendor/resource-loader';
 
 export default class Map extends component(Object3D) {
     init(options) {
@@ -27,11 +28,17 @@ export default class Map extends component(Object3D) {
 
         // Entities
         this._mapManager = this._createMapManager();
-        this._chunks = this._createChunk();
+        this._model = this._createModel();
+        this._chunks = this._createChunkFromModel();
+        // this._chunks = this._createChunk();
 
         this._raycaster = this._createRaycaster();
 
         this._debugFolder = this._createDebugFolder();
+    }
+
+    destroy() {
+        super.destroy();
     }
 
     /**
@@ -52,6 +59,38 @@ export default class Map extends component(Object3D) {
         const mapManager = new MapManager();
 
         return mapManager;
+    }
+
+    _createModel() {
+        const model = ResourceLoader.get('gamejam_test');
+
+        this.add(model.scene);
+
+        return model.scene;
+    }
+
+    _createChunkFromModel() {
+        const chunks = [];
+        this._chunkMeshes = [];
+
+        for (let i = 0; i < this._model.children.length; i++) {
+            const line = this._model.children[i];
+
+            for (let j = 0; j < line.children.length; j++) {
+                const row = line.children[j];
+                const chunk = new Chunk({
+                    row: i,
+                    col: j,
+                    resource: this._mapManager.resources[Math.round(Math.random() * (this._mapManager.resources.length - 1))],
+                    population: this._mapManager.populations[Math.round(Math.random() * (this._mapManager.populations.length - 1))],
+                    mesh: new ChunkMesh({ mesh: row }),
+                });
+                chunks.push(chunk);
+                this._chunkMeshes.push(row);
+            }
+        }
+
+        return chunks;
     }
 
     _createChunk() {
@@ -153,7 +192,8 @@ export default class Map extends component(Object3D) {
         };
 
         for (let i = 0; i < this._chunks.length; i++) {
-            const mesh = this._chunks[i].mesh;
+            const mesh = this._chunks[i].mesh.mesh;
+            // const mesh = this._chunks[i].mesh;
             if (intersects.length > 0 && mesh === intersects[0].object.parent) {
                 this._mapManager.setChunkSettler(this._chunks[i], getSettlerById(this._activeSettler));
             }

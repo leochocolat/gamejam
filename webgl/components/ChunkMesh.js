@@ -1,6 +1,6 @@
 // Vendor
 import { component } from '../vendor/bidello';
-import { BoxGeometry, Color, Mesh, MeshNormalMaterial, Object3D, ShaderMaterial } from 'three';
+import { BoxGeometry, Color, DoubleSide, Mesh, MeshBasicMaterial, MeshNormalMaterial, Object3D, ShaderMaterial } from 'three';
 import { gsap } from 'gsap';
 
 // Shaders
@@ -14,7 +14,11 @@ export default class ChunkMesh extends component(Object3D) {
         this._isHovered = false;
 
         this._material = this._createMaterial();
-        this._mesh = this._createMesh();
+        this._mesh = options.mesh || this._createMesh();
+
+        this._mesh.traverse((child) => {
+            if (child.isMesh) child.material = this._material;
+        });
     }
 
     /**
@@ -30,11 +34,14 @@ export default class ChunkMesh extends component(Object3D) {
         this._isHovered = isHovered;
     }
 
+    get mesh() {
+        return this._mesh;
+    }
+
     /**
      * Public
      */
     setColor(color) {
-        console.log(color);
         this._material.uniforms.color.value.set(color);
     }
 

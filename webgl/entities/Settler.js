@@ -34,6 +34,7 @@ export default class Settler {
     addChunk(chunk) {
         let territory = null;
         let isChunkAdded = false;
+        const errorMessage = null;
 
         // Try to add the chunk to an existing territory
         // If no territories, create a new one
@@ -62,11 +63,12 @@ export default class Settler {
             if (territory === this._territories[i]) continue;
 
             // If territories are neighbours, merge them
-            // Otherwise check is the max length is reached and then remove it
+            // Otherwise check if the max length is reached and then remove it
             if (territory.isNeighbourOf(this._territories[i])) {
                 this._mergeTerritories(territory, this._territories[i]);
             } else if (this._territories.length > MAX_TERRITORIES) {
                 isChunkAdded = false;
+                console.error('This settler already has 3 territories');
                 const index = this._territories.indexOf(territory);
                 this._territories.splice(index, 1);
             }
@@ -76,23 +78,12 @@ export default class Settler {
         if (isChunkAdded) chunk.settler = this;
     }
 
-    // addTerritory(territory) {
-    //     this._territories.push(territory);
-    // }
-
-    // removeTerritory(territory) {
-    //     const index = this._territories.indexOf(territory);
-    //     this._territories.splice(index, 1);
-    //     return this._territories;
-    // }
-
     /**
      * Private
      */
-    _mergeTerritories(territory1, territory2, { removeIfNotMerged }) {
+    _mergeTerritories(territory1, territory2) {
         const indexOf2 = this._territories.indexOf(territory2);
         territory1.mergeChunks(territory2.chunks);
         this._territories.splice(indexOf2, 1);
-        console.log(`Territories amount: ${this._territories.length}`);
     }
 }

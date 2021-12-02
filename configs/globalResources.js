@@ -5,7 +5,13 @@ const textures = [
     //     path: 'https://picsum.photos/200/300',
     // },
 ];
-const models = [];
+const models = [
+    {
+        name: 'gamejam_test',
+        type: 'gltf',
+        path: '/models/gamejam_test.gltf',
+    },
+];
 const sounds = [];
 
 export default [...textures, ...models, ...sounds];

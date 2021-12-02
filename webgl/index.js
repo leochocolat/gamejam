@@ -65,6 +65,7 @@ export default class WebGLApplication {
         this._removeStats();
         this._clock.stop();
         this._renderer.dispose();
+        if (this._scene.destroy) this._scene.destroy();
     }
 
     /**

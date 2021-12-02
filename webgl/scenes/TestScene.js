@@ -18,8 +18,12 @@ export default class TestScene extends component(Scene) {
 
         // Setup
         this._debugFolder = this._createDebugFolder();
-        this._map = this._createMap();
         this._cameras = this._createCameras();
+    }
+
+    destroy() {
+        super.destroy();
+        this._map.destroy();
     }
 
     /**
@@ -37,7 +41,7 @@ export default class TestScene extends component(Scene) {
      * This is called when all resources are available
      */
     setup() {
-
+        this._map = this._createMap();
     }
 
     _createCameras() {
