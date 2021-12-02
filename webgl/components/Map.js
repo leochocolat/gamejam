@@ -80,7 +80,7 @@ export default class Map extends component(Object3D) {
                 const row = line.children[j];
                 const chunk = new Chunk({
                     row: i,
-                    col: j,
+                    column: j,
                     resource: this._mapManager.resources[Math.round(Math.random() * (this._mapManager.resources.length - 1))],
                     population: this._mapManager.populations[Math.round(Math.random() * (this._mapManager.populations.length - 1))],
                     mesh: new ChunkMesh({ mesh: row }),
