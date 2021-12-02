@@ -31,7 +31,7 @@ export default class FinalScene extends component(Scene) {
             model: {
                 position: new Vector3(0, 0, 0),
                 rotation: new Vector3(),
-                scale: 1,
+                scale: 0.35,
             },
         };
 
