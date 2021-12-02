@@ -1,13 +1,16 @@
 // Vendor
 import { component } from '../vendor/bidello';
 import { AmbientLight, Box3, BoxBufferGeometry, BoxGeometry, Color, DirectionalLight, InstancedMesh, Matrix4, Mesh, MeshBasicMaterial, MeshNormalMaterial, Object3D, Raycaster, Scene, Vector2, Vector3 } from 'three';
+import ResourceLoader from '@/vendor/resource-loader';
 
 // Utils
 import math from '@/utils/math';
 
-// Components
+// Modules
 import Cameras from '../modules/Cameras';
-import ResourceLoader from '@/vendor/resource-loader';
+
+// Components
+import Map from '../components/Map';
 
 const matrix = new Matrix4();
 
@@ -58,6 +61,7 @@ export default class FinalScene extends component(Scene) {
      */
     setup() {
         this._model = this._createModel();
+        this._map = this._createMap();
 
         this._resizeModel();
     }
@@ -71,6 +75,7 @@ export default class FinalScene extends component(Scene) {
             width: this._width,
             height: this._height,
             debugFolder: this._debugFolder,
+            mode: this._model,
         });
 
         // cameras.active.rotation.x = Math.PI * 0.5;
@@ -97,6 +102,7 @@ export default class FinalScene extends component(Scene) {
     }
 
     _createModel() {
+        // const model = ResourceLoader.get('gamejam_test').scene;
         const model = ResourceLoader.get('map-test-materials').scene;
         const container = new Object3D();
         const size = this._getSize(model);
@@ -106,6 +112,20 @@ export default class FinalScene extends component(Scene) {
         this.add(container);
 
         return container;
+    }
+
+    _createMap() {
+        const map = new Map({
+            renderer: this._renderer,
+            scene: this,
+            camera: this.camera,
+            width: this._width,
+            height: this._height,
+            debugFolder: this._debugFolder,
+            model: this._model.children[0],
+        });
+
+        return map;
     }
 
     /**

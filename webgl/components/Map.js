@@ -21,16 +21,17 @@ export default class Map extends component(Object3D) {
         this._width = options.width;
         this._height = options.height;
         this._debugFolder = options.debugFolder;
+        this._model = options.model;
 
         // Setup
         this._centeredMousePosition = { x: null, y: null };
-        this._activeSettler = '';
 
         // Entities
         this._mapManager = this._createMapManager();
-        this._model = this._createModel();
         this._chunks = this._createChunkFromModel();
         // this._chunks = this._createChunk();
+
+        this._activeSettler = this._mapManager.settlers[0].id;
 
         this._raycaster = this._createRaycaster();
 
@@ -61,17 +62,11 @@ export default class Map extends component(Object3D) {
         return mapManager;
     }
 
-    _createModel() {
-        const model = ResourceLoader.get('gamejam_test');
-
-        this.add(model.scene);
-
-        return model.scene;
-    }
-
     _createChunkFromModel() {
         const chunks = [];
         this._chunkMeshes = [];
+
+        console.log(this._model);
 
         for (let i = 0; i < this._model.children.length; i++) {
             const line = this._model.children[i];
@@ -166,11 +161,13 @@ export default class Map extends component(Object3D) {
         this._centeredMousePosition = centeredMousePosition;
 
         this._raycaster.setFromCamera(this._centeredMousePosition, this._scene.camera);
-        const intersects = this._raycaster.intersectObjects(this.children);
+        const intersects = this._raycaster.intersectObjects(this._chunkMeshes);
 
-        for (let i = 0; i < this._chunks.length; i++) {
+        for (let i = 0; i < this._chunkMeshes.length; i++) {
+            const chunkMesh = this._chunkMeshes[i];
             const mesh = this._chunks[i].mesh;
-            if (intersects.length > 0 && mesh === intersects[0].object.parent) {
+            const isWater = intersects[0] && intersects[0].object.userData.state === 0;
+            if (intersects.length > 0 && chunkMesh === intersects[0].object && !isWater) {
                 mesh.isHovered = true;
             } else {
                 mesh.isHovered = false;
@@ -182,7 +179,7 @@ export default class Map extends component(Object3D) {
         this._centeredMousePosition = centeredMousePosition;
 
         this._raycaster.setFromCamera(this._centeredMousePosition, this._scene.camera);
-        const intersects = this._raycaster.intersectObjects(this.children);
+        const intersects = this._raycaster.intersectObjects(this._chunkMeshes);
 
         const getSettlerById = (id) => {
             for (let i = 0; i < this._mapManager.settlers.length; i++) {
@@ -191,10 +188,11 @@ export default class Map extends component(Object3D) {
             }
         };
 
-        for (let i = 0; i < this._chunks.length; i++) {
-            const mesh = this._chunks[i].mesh.mesh;
-            // const mesh = this._chunks[i].mesh;
-            if (intersects.length > 0 && mesh === intersects[0].object.parent) {
+        if (intersects[0] && intersects[0].object.userData.state === 0) return;
+
+        for (let i = 0; i < this._chunkMeshes.length; i++) {
+            const chunkMesh = this._chunkMeshes[i];
+            if (intersects.length > 0 && chunkMesh === intersects[0].object) {
                 this._mapManager.setChunkSettler(this._chunks[i], getSettlerById(this._activeSettler));
             }
         }

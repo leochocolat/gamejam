@@ -12,6 +12,7 @@ import device from '@/utils/device';
 
 // Modules
 import SceneManager from './modules/SceneManager';
+import DragManager from '@/utils/DragManager';
 
 // Scenes
 // import MainScene from './scenes/MainScene';
@@ -32,6 +33,7 @@ export default class WebGLApplication {
         this._debugger = this._createDebugger();
         this._renderer = this._createRenderer();
         this._scene = this._createScene();
+        this._dragManager = new DragManager({ el: this._canvas });
 
         this._mousePosition = new Vector2();
         this._normalizedMousePosition = new Vector2();
@@ -65,6 +67,7 @@ export default class WebGLApplication {
         this._removeStats();
         this._clock.stop();
         this._renderer.dispose();
+        this._dragManager.close();
         if (this._scene.destroy) this._scene.destroy();
     }
 
@@ -176,6 +179,7 @@ export default class WebGLApplication {
         this._tickHandler = this._tickHandler.bind(this);
         this._mousemoveHandler = this._mousemoveHandler.bind(this);
         this._clickHandler = this._clickHandler.bind(this);
+        this._tapHandler = this._tapHandler.bind(this);
     }
 
     _setupEventListeners() {
@@ -183,6 +187,7 @@ export default class WebGLApplication {
         gsap.ticker.add(this._tickHandler);
         window.addEventListener('mousemove', this._mousemoveHandler);
         this._canvas.addEventListener('click', this._clickHandler);
+        this._dragManager.addEventListener('tap', this._tapHandler);
     }
 
     _removeEventListeners() {
@@ -224,8 +229,31 @@ export default class WebGLApplication {
     }
 
     _clickHandler(e) {
-        this._mousePosition.x = e.clientX;
-        this._mousePosition.y = e.clientY;
+        // this._mousePosition.x = e.clientX;
+        // this._mousePosition.y = e.clientY;
+
+        // this._normalizedMousePosition.x = this._mousePosition.x / this._width;
+        // this._normalizedMousePosition.y = 1.0 - this._mousePosition.y / this._height;
+
+        // this._centeredMousePosition.x = (this._mousePosition.x / this._width) * 2 - 1;
+        // this._centeredMousePosition.y = -(this._mousePosition.y / this._height) * 2 + 1;
+
+        // bidello.trigger(
+        //     {
+        //         name: 'click',
+        //         fireAtStart: false,
+        //     },
+        //     {
+        //         mousePosition: this._mousePosition,
+        //         normalizedMousePosition: this._normalizedMousePosition,
+        //         centeredMousePosition: this._centeredMousePosition,
+        //     },
+        // );
+    }
+
+    _tapHandler(e) {
+        this._mousePosition.x = e.position.x;
+        this._mousePosition.y = e.position.y;
 
         this._normalizedMousePosition.x = this._mousePosition.x / this._width;
         this._normalizedMousePosition.y = 1.0 - this._mousePosition.y / this._height;

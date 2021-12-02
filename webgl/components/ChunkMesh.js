@@ -1,6 +1,6 @@
 // Vendor
 import { component } from '../vendor/bidello';
-import { BoxGeometry, Color, DoubleSide, Mesh, MeshBasicMaterial, MeshNormalMaterial, Object3D, ShaderMaterial } from 'three';
+import { BoxGeometry, Color, DoubleSide, Mesh, MeshBasicMaterial, MeshNormalMaterial, Object3D, ShaderMaterial, Vector3 } from 'three';
 import { gsap } from 'gsap';
 
 // Shaders
@@ -13,11 +13,18 @@ export default class ChunkMesh extends component(Object3D) {
 
         this._isHovered = false;
 
+        this._settings = {
+            hover: {
+                translateY: 0.5,
+            },
+        };
+
         this._material = this._createMaterial();
         this._mesh = options.mesh || this._createMesh();
+        this._initialPosition = new Vector3(this._mesh.position.x, this._mesh.position.y, this._mesh.position.z);
 
         this._mesh.traverse((child) => {
-            if (child.isMesh) child.material = this._material;
+            if (child.isMesh) child.material = child.material.clone();
         });
     }
 
@@ -42,7 +49,8 @@ export default class ChunkMesh extends component(Object3D) {
      * Public
      */
     setColor(color) {
-        this._material.uniforms.color.value.set(color);
+        this._mesh.material.color.set(color);
+        // this._material.uniforms.color.value.set(color);
     }
 
     /**
@@ -73,11 +81,11 @@ export default class ChunkMesh extends component(Object3D) {
      * Events
      */
     _mouseenterHandler() {
-        gsap.to(this._mesh.position, { duration: 0.3, y: 1 });
+        gsap.to(this._mesh.position, { duration: 0.3, y: this._initialPosition.y + this._settings.hover.translateY });
     }
 
     _mouseleaveHandler() {
-        gsap.to(this._mesh.position, { duration: 0.3, y: 0 });
+        gsap.to(this._mesh.position, { duration: 0.3, y: this._initialPosition.y });
     }
 
     /**
