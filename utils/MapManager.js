@@ -1,5 +1,6 @@
 // Data
-import data from '@/configs/data';
+// import data from '@/configs/data';
+import data from '@/configs/data-daria';
 
 // Utils
 import EventDispatcher from './EventDispatcher';
@@ -48,6 +49,41 @@ export default class MapManager extends EventDispatcher {
     /**
      * Public
      */
+    getResourceByColor(color) {
+        for (let i = 0; i < this._resources.length; i++) {
+            if (this._resources[i].color === color) {
+                console.log('FOUNED');
+
+                return this._resources[i];
+            };
+        }
+    }
+
+    getPopulationWithData(data) {
+        for (let i = 0; i < this._populations.length; i++) {
+            const population = this._populations[i];
+            if (
+                population.properties.religion.id === data.religion &&
+                population.properties.language.id === data.language &&
+                population.properties.culture.id === data.culture
+            ) {
+                return population;
+            }
+        }
+    }
+
+    // getCultureById(id) {
+    //     for (let i = 0; i < this._resources.length; i++) {
+    //         if (this._resources[i].id === id) return this._resources[i];
+    //     }
+    // }
+
+    // getPopulationById(id) {
+    // for (let i = 0; i < this._resources.length; i++) {
+    //     if (this._resources[i].id === id) return this._resources[i];
+    // }
+    // }
+
     setChunkSettler(chunk, settler) {
         if (chunk.settler) {
             console.error('This chunk already has a settler');

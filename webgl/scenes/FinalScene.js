@@ -108,8 +108,8 @@ export default class FinalScene extends component(Scene) {
 
     _createModel() {
         // const model = ResourceLoader.get('gamejam_test').scene;
-        const model = ResourceLoader.get('map-test-materials').scene;
-        // const model = ResourceLoader.get('map-test-perso').scene;
+        // const model = ResourceLoader.get('map-test-materials').scene;
+        const model = ResourceLoader.get('map-test-perso').scene;
         const container = new Object3D();
         const size = this._getSize(model);
         model.position.x = -size.x / 2;

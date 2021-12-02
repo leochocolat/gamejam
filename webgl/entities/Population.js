@@ -1,7 +1,7 @@
 export default class Population {
-    constructor({ id, religion, language, culture }) {
+    constructor({ id, properties }) {
         this._id = id;
-        this._properties = { religion, language, culture };
+        this._properties = properties;
     }
 
     /**

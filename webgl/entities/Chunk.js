@@ -4,6 +4,7 @@ export default class Chunk {
         column,
         resource,
         population,
+        isWater,
         mesh,
     }) {
         this._id = `${row}_${column}`;
@@ -11,6 +12,7 @@ export default class Chunk {
         this._column = column;
         this._resource = resource;
         this._population = population;
+        this._isWater = isWater;
 
         this._mesh = mesh;
 

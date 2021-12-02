@@ -4,113 +4,200 @@ const settlers = [
         targetResourceId: 'bois',
         targetResourceAmount: 4,
         enemy: null,
-        color: 'red',
+        color: '#AD79B3',
     },
     {
         id: 'Prespuré',
         targetResourceId: 'bétail',
         targetResourceAmount: 4,
         enemy: 'Moulacake',
-        color: 'green',
+        color: '#5EB16F',
     },
     {
         id: 'Moulacake',
         targetResourceId: 'minerai',
         targetResourceAmount: 4,
         enemy: 'Prespuré',
-        color: 'blue',
+        color: '#E08C5C',
     },
     {
         id: 'Spatulia',
         targetResourceId: 'culture',
         targetResourceAmount: 4,
         enemy: null,
-        color: 'yellow',
+        color: '#666EB2',
     },
 ];
 
 const resources = [
-    { id: 'bois' },
-    { id: 'bétail' },
-    { id: 'minerai' },
-    { id: 'culture' },
+    { id: 'bois', color: '#274213' }, // Vert
+    { id: 'bétail', color: '#899237' }, // Jaune
+    { id: 'minerai', color: '#755447' }, // Marron
+    { id: 'culture', color: '#FFD478' }, // Jaune
 ];
+
+// #402e0a : Marron
+// #0a2e3e : Bleu
+// #2d1610 : Marron foncé rouge
+// #3f4909 : Vert
+// #ffa72f : Jaune
 
 const populations = [
     {
         id: 'choucremien',
         properties: {
-            religion: 'Selish',
-            language: 'Kuri',
-            culture: 'Furnisme',
+            religion: {
+                name: 'Selish',
+                id: 0,
+            },
+            language: {
+                name: 'Kuri',
+                id: 0,
+            },
+            culture: {
+                name: 'Furnisme',
+                id: 0,
+            },
         },
     },
     {
         id: 'baklavien',
         properties: {
-            religion: 'Selish',
-            language: 'Kurkum',
-            culture: 'Furnisme',
+            religion: {
+                name: 'Selish',
+                id: 0,
+            },
+            language: {
+                name: 'Kurkum',
+                id: 1,
+            },
+            culture: {
+                name: 'Furnisme',
+                id: 0,
+            },
         },
     },
     {
         id: 'crumblien',
         properties: {
-            religion: 'Selish',
-            language: 'Kuri',
-            culture: 'Spathisme',
+            religion: {
+                name: 'Selish',
+                id: 0,
+            },
+            language: {
+                name: 'Kuri',
+                id: 0,
+            },
+            culture: {
+                name: 'Spathisme',
+                id: 1,
+            },
         },
     },
     {
         id: 'flaonien',
         properties: {
-            religion: 'Selish',
-            language: 'Kurkum',
-            culture: 'Spathisme',
+            religion: {
+                name: 'Selish',
+                id: 0,
+            },
+            language: {
+                name: 'Kurkum',
+                id: 1,
+            },
+            culture: {
+                name: 'Spathisme',
+                id: 1,
+            },
         },
     },
     {
         id: 'kouignien',
         properties: {
-            religion: 'Sucran',
-            language: 'Kuri',
-            culture: 'Furnisme',
+            religion: {
+                name: 'Sucran',
+                id: 1,
+            },
+            language: {
+                name: 'Kuri',
+                id: 0,
+            },
+            culture: {
+                name: 'Furnisme',
+                id: 0,
+            },
         },
     },
-    
-     {
+
+    {
         id: 'loukoumien',
         properties: {
-            religion: 'Selish',
-            language: 'Kurkum',
-            culture: 'Furnisme',
+            religion: {
+                name: 'Selish',
+                id: 0,
+            },
+            language: {
+                name: 'Kurkum',
+                id: 1,
+            },
+            culture: {
+                name: 'Furnisme',
+                id: 0,
+            },
         },
     },
-    
-     {
+
+    {
         id: 'panettien',
         properties: {
-            religion: 'Sucran',
-            language: 'Kurkum',
-            culture: 'Furnisme',
+            religion: {
+                name: 'Sucran',
+                id: 1,
+            },
+            language: {
+                name: 'Kurkum',
+                id: 1,
+            },
+            culture: {
+                name: 'Furnisme',
+                id: 0,
+            },
         },
     },
-    
-     {
+
+    {
         id: 'spéculien',
         properties: {
-            religion: 'Sucran',
-            language: 'Kuri',
-            culture: 'Spathisme',
+            religion: {
+                name: 'Sucran',
+                id: 1,
+            },
+            language: {
+                name: 'Kuri',
+                id: 0,
+            },
+            culture: {
+                name: 'Spathisme',
+                id: 1,
+            },
         },
     },
-    
-     {
+
+    {
         id: 'tartatien',
         properties: {
-            religion: 'Sucran',
-            language: 'Kurkum',
-            culture: 'Spathisme',
+            religion: {
+                name: 'Sucran',
+                id: 1,
+            },
+            language: {
+                name: 'Kurkum',
+                id: 1,
+            },
+            culture: {
+                name: 'Spathisme',
+                id: 1,
+            },
         },
     },
 ];

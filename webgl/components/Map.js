@@ -92,15 +92,19 @@ export default class Map extends component(Object3D) {
 
             for (let j = 0; j < line.children.length; j++) {
                 const row = line.children[j];
-                // console.log(row);
+                const language = row.userData.language !== undefined ? row.userData.language : row.userData.langue;
+                const culture = row.userData.culture !== undefined ? row.userData.culture : row.userData.coutume;
+                const populationData = { religion: row.userData.religion, language, culture };
                 const chunk = new Chunk({
                     row: i,
                     column: j,
                     resource: this._mapManager.resources[Math.round(Math.random() * (this._mapManager.resources.length - 1))],
-                    population: this._mapManager.populations[Math.round(Math.random() * (this._mapManager.populations.length - 1))],
+                    population: this._mapManager.getPopulationWithData(populationData),
+                    isWater: row.userData.state === 0,
                     mesh: new ChunkMesh({ mesh: row }),
                 });
                 chunks.push(chunk);
+                const tailMesh = row.isMesh ? row : row.children[0];
                 this._chunkMeshes.push(row.isMesh ? row : row.children[0]);
             }
         }
