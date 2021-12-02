@@ -20,12 +20,24 @@ export default class Settler {
         return this._id;
     }
 
+    get enemy() {
+        return this._enemy;
+    }
+
     get color() {
         return this._color;
     }
 
     get territories() {
         return this._territories;
+    }
+
+    get resources() {
+        return this.territories.map(territory => territory.resources).flat();
+    }
+
+    get targetResourceCount() {
+        return this.resources.filter(resource => resource.id === this._targetResourceId);
     }
 
     /**
@@ -76,6 +88,32 @@ export default class Settler {
 
         // Assign settler to chunk
         if (isChunkAdded) chunk.settler = this;
+    }
+
+    isInWarWith(settler) {
+        if (settler.id === this.id || settler.id !== this.enemy)
+            return false;
+
+        if (this.targetResourceCount < this._targetResourceAmount)
+            return !!this.getWarChunks(settler).length;
+        else
+            return false;
+    }
+
+    getWarChunks(settler) {
+        const chunks = [];
+
+        for (let i = 0; i < this.territories.length; i++) {
+            const curr = this.territories[i];
+            for (let j = 0; j < settler.territories.length; j++) {
+                const other = settler.territories[j];
+                if (curr.isNeighbourOf(other) && !!other.resources.filter(r => r.id === this._targetResourceId).length) {
+                    chunks.push(curr.getNeighbourChunks(other));
+                }
+            }
+        }
+
+        return chunks;
     }
 
     /**

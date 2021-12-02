@@ -58,6 +58,23 @@ export default class MapManager {
         // chunk.settler = settler;
     }
 
+    getSettlersWars() {
+        const wars = {};
+        for (let i = 0; i < this.settlers.length; i++) {
+            const curr = this.settlers[i];
+            wars[curr.id] = {};
+            for (let j = 0; j < this.settlers.length; j++) {
+                const other = this.settlers[j];
+                console.log(curr.isInWarWith(other));
+                if (curr.isInWarWith(other)) {
+                    wars[curr.id][other.id] = curr.getWarChunks(other);
+                }
+            }
+        }
+
+        return wars;
+    }
+
     /**
      * Private
      */
