@@ -1,6 +1,17 @@
 <template>
     <div class="page-home">
-
+        <div class="settlers">
+            <div 
+                class="settler"
+                v-for="(settler, i) in settlers"
+                    :key="i"
+            >
+                <SettlersCard 
+                    :settler="settler"
+                    @on-click="onClickSettlers"
+                />
+            </div>
+        </div>
     </div>
 </template>
 
