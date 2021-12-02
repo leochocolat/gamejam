@@ -112,7 +112,7 @@ export default class FinalScene extends component(Scene) {
      * Update cycle
      */
     onUpdate({ time, delta }) {
-
+        this._cameras.update({ time, delta });
     }
 
     /**
