@@ -18,6 +18,8 @@ import SceneManager from './modules/SceneManager';
 
 export default class WebGLApplication {
     constructor(options = {}) {
+        console.log('Chloé');
+
         // Props
         this._canvas = options.canvas;
         this._nuxtRoot = options.nuxtRoot;
