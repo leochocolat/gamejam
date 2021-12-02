@@ -1,0 +1,15 @@
+html, body {
+    font-family: $font-primary, Arial, Helvetica, sans-serif;
+
+    font-size: $font-size-small;
+
+    color: white;
+
+    @include respond-to('medium') {
+        font-size: $font-size-medium;
+    }
+
+    @include respond-to('large') {
+        font-size: $font-size-large;
+    }
+}

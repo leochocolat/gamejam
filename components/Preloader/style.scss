@@ -1,0 +1,33 @@
+.preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background-color: $color-background;
+}
+
+.container {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    height: 100%;
+}
+
+.loading-message {
+    font-size: rem(30px, 'small');
+    text-transform: uppercase;
+
+    @include respond-to('medium') {
+        font-size: rem(30px, 'medium');
+    }
+
+    @include respond-to('large') {
+        font-size: rem(30px, 'large');
+    }
+}
