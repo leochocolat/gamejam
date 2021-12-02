@@ -6,6 +6,7 @@ export default class Chunk {
         population,
         mesh,
     }) {
+        this._id = `${row}_${column}`;
         this._row = row;
         this._column = column;
         this._resource = resource;
@@ -19,6 +20,10 @@ export default class Chunk {
     /**
      * Getters & Setters
      */
+    get id() {
+        return this._id;
+    }
+
     get row() {
         return this._row;
     }

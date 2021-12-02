@@ -37,7 +37,7 @@ export default class Settler {
     }
 
     get targetResourceCount() {
-        return this.resources.filter(resource => resource.id === this._targetResourceId);
+        return this.resources.filter(resource => resource.id === this._targetResourceId).length;
     }
 
     /**
@@ -109,6 +109,9 @@ export default class Settler {
             const curr = this.territories[i];
             for (let j = 0; j < settler.territories.length; j++) {
                 const other = settler.territories[j];
+                // CHECK ONLY IF TERRITORY NEIGHBOUR
+                // if (curr.isNeighbourOf(other)) {
+                // CHECK IF TERRITORY NEIGHBOUR && HAS TARGET RESOURCE
                 if (curr.isNeighbourOf(other) && !!other.resources.filter(r => r.id === this._targetResourceId).length) {
                     chunks.push(curr.getNeighbourChunks(other));
                 }
