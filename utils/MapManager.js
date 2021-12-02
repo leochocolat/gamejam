@@ -65,7 +65,6 @@ export default class MapManager {
             wars[curr.id] = {};
             for (let j = 0; j < this.settlers.length; j++) {
                 const other = this.settlers[j];
-                console.log(curr.isInWarWith(other));
                 if (curr.isInWarWith(other)) {
                     wars[curr.id][other.id] = curr.getWarChunks(other);
                 }

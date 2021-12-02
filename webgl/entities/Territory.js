@@ -54,7 +54,7 @@ export default class Territory {
             const currChunk = this.chunks[i];
             for (let j = 0; j < territory.chunks.length; j++) {
                 const territoryChunk = territory.chunks[j];
-                if (currChunk.isNeighbourOf(territoryChunk)) {
+                if (currChunk.isNeighbourOf(territoryChunk) && !chunks.filter(c => c.id === territoryChunk.id).length) {
                     chunks.push(territoryChunk);
                 }
             }
