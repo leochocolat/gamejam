@@ -93,6 +93,7 @@ export default class WebGLApplication {
         const sceneManager = new SceneManager({
             sceneName: this._sceneName,
             root: this,
+            nuxtRoot: this._nuxtRoot,
             renderer: this._renderer,
             width: this._width,
             height: this._height,
@@ -140,7 +141,7 @@ export default class WebGLApplication {
     _resize() {
         this._width = WindowResizeObserver.width;
         this._height = WindowResizeObserver.height;
-        this._dpr = Math.max(2, device.dpr());
+        this._dpr = Math.max(1.5, device.dpr());
 
         this._resizeCanvas();
         this._resizeRenderer();

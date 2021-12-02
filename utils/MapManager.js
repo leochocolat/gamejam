@@ -1,16 +1,23 @@
 // Data
 import data from '@/configs/data';
 
+// Utils
+import EventDispatcher from './EventDispatcher';
+
 // Entities
 import Settler from '@/webgl/entities/Settler';
 import Resource from '@/webgl/entities/Resource';
 import Population from '@/webgl/entities/Population';
 
-export default class MapManager {
+export default class MapManager extends EventDispatcher {
     constructor() {
+        super();
+
         this._settlers = this._createSettlers();
         this._resources = this._createResources();
         this._populations = this._createPopulations();
+
+        this._activeSettler = this._settlers[0];
 
         this._chunks = [];
     }
@@ -48,14 +55,16 @@ export default class MapManager {
             return;
         }
 
-        // if (settler.territories.length >= MAX_TERRITORIES) {
-        //     console.error(`This settler already has a ${MAX_TERRITORIES} territories`);
-        //     return;
-        // }
+        const isChunkAdded = settler.addChunk(chunk);
 
-        settler.addChunk(chunk);
-
-        // chunk.settler = settler;
+        if (isChunkAdded) {
+            this.dispatchEvent('change', {
+                settlers: this._settlers,
+                resources: this._resources,
+                populations: this._populations,
+                chunks: this._chunks,
+            });
+        }
     }
 
     getSettlersWars() {

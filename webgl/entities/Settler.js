@@ -88,6 +88,8 @@ export default class Settler {
 
         // Assign settler to chunk
         if (isChunkAdded) chunk.settler = this;
+
+        return isChunkAdded;
     }
 
     isInWarWith(settler) {

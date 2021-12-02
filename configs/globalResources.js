@@ -14,7 +14,12 @@ const models = [
     {
         name: 'map-test-materials',
         type: 'gltf',
-        path: '/models/map-test-v3.glb',
+        path: '/models/map-test-v4.gltf',
+    },
+    {
+        name: 'map-test-perso',
+        type: 'gltf',
+        path: '/models/map-test-perso-v2.gltf',
     },
 ];
 const sounds = [];

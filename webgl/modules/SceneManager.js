@@ -5,6 +5,7 @@ export default class SceneManager {
     constructor(options = {}) {
         this._sceneName = options.sceneName || 'main';
         this._root = options.root;
+        this._nuxtRoot = options.nuxtRoot;
         this._renderer = options.renderer;
         this._width = options.width;
         this._height = options.height;
@@ -35,6 +36,7 @@ export default class SceneManager {
             width: this._width,
             height: this._height,
             debugger: this._debugger,
+            nuxtRoot: this._nuxtRoot,
         });
 
         return scene;

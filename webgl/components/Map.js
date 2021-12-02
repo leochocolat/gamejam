@@ -11,11 +11,11 @@ import ChunkMesh from '@/webgl/components/ChunkMesh';
 // Entities
 import Chunk from '@/webgl/entities/Chunk';
 import MapManager from '@/utils/MapManager';
-import ResourceLoader from '@/vendor/resource-loader';
 
 export default class Map extends component(Object3D) {
     init(options) {
         // Props
+        this._nuxtRoot = options.nuxtRoot;
         this._scene = options.scene;
         this._renderer = options.renderer;
         this._width = options.width;
@@ -27,7 +27,8 @@ export default class Map extends component(Object3D) {
         this._centeredMousePosition = { x: null, y: null };
 
         // Entities
-        this._mapManager = this._createMapManager();
+        this._mapManager = this._nuxtRoot.$mapManager;
+        this._filteredChunks = this._filterChunks();
         this._chunks = this._createChunkFromModel();
         // this._chunks = this._createChunk();
 
@@ -62,17 +63,36 @@ export default class Map extends component(Object3D) {
         return mapManager;
     }
 
+    _filterChunks() {
+        const rows = [...this._model.children];
+
+        for (let i = 0; i < rows.length; i++) {
+            const row = rows[i];
+
+            const filteredCols = row.children.sort((colA, colB) => {
+                const idA = parseInt(colA.name.split('_')[2]);
+                const idB = parseInt(colB.name.split('_')[2]);
+
+                return idA - idB;
+                // return 1;
+            });
+
+            row.filteredCols = filteredCols;
+        }
+
+        return rows;
+    }
+
     _createChunkFromModel() {
         const chunks = [];
         this._chunkMeshes = [];
-
-        console.log(this._model);
 
         for (let i = 0; i < this._model.children.length; i++) {
             const line = this._model.children[i];
 
             for (let j = 0; j < line.children.length; j++) {
                 const row = line.children[j];
+                // console.log(row);
                 const chunk = new Chunk({
                     row: i,
                     column: j,
@@ -81,7 +101,7 @@ export default class Map extends component(Object3D) {
                     mesh: new ChunkMesh({ mesh: row }),
                 });
                 chunks.push(chunk);
-                this._chunkMeshes.push(row);
+                this._chunkMeshes.push(row.isMesh ? row : row.children[0]);
             }
         }
 
@@ -187,6 +207,8 @@ export default class Map extends component(Object3D) {
                 if (element.id === id) return element;
             }
         };
+
+        if (!intersects[0]) return;
 
         if (intersects[0] && intersects[0].object.userData.state === 0) return;
 

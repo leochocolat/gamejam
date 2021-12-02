@@ -49,7 +49,11 @@ export default class ChunkMesh extends component(Object3D) {
      * Public
      */
     setColor(color) {
-        this._mesh.material.color.set(color);
+        this._mesh.traverse((child) => {
+            if (child.isMesh) {
+                child.material.color.set(color);
+            }
+        });
         // this._material.uniforms.color.value.set(color);
     }
 

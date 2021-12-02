@@ -20,6 +20,7 @@ export default class FinalScene extends component(Scene) {
         this._width = options.width;
         this._height = options.height;
         this._debugger = options.debugger;
+        this._nuxtRoot = options.nuxtRoot;
 
         this._settings = {
             backgroundColor: '#EFEAE1',
@@ -43,6 +44,10 @@ export default class FinalScene extends component(Scene) {
         this._lights = this._createLights();
         this._debugFolder = this._createDebugFolder();
         this._cameras = this._createCameras();
+    }
+
+    destroy() {
+        this._map?.destroy();
     }
 
     /**
@@ -104,6 +109,7 @@ export default class FinalScene extends component(Scene) {
     _createModel() {
         // const model = ResourceLoader.get('gamejam_test').scene;
         const model = ResourceLoader.get('map-test-materials').scene;
+        // const model = ResourceLoader.get('map-test-perso').scene;
         const container = new Object3D();
         const size = this._getSize(model);
         model.position.x = -size.x / 2;
@@ -123,6 +129,7 @@ export default class FinalScene extends component(Scene) {
             height: this._height,
             debugFolder: this._debugFolder,
             model: this._model.children[0],
+            nuxtRoot: this._nuxtRoot,
         });
 
         return map;
@@ -175,7 +182,7 @@ export default class FinalScene extends component(Scene) {
         const lights = folder.addFolder({ title: 'Lights' });
         lights.addInput(this._lights.ambiant, 'intensity', { label: 'ambiant intensity', min: 0, max: 1 });
         lights.addInput(this._settings.lights.ambiant, 'color', { label: 'ambiant color' }).on('change', () => { this._lights.ambiant.color.set(this._settings.lights.ambiant.color); });
-        lights.addInput(this._lights.directional, 'intensity', { label: 'directional intensity', min: 0, max: 1 });
+        lights.addInput(this._lights.directional, 'intensity', { label: 'directional intensity', min: 0, max: 10 });
         lights.addInput(this._settings.lights.directional, 'color', { label: 'directional color' }).on('change', () => { this._lights.directional.color.set(this._settings.lights.directional.color); });
         const model = folder.addFolder({ title: 'Model' });
         const positions = model.addFolder({ title: 'Position' });
