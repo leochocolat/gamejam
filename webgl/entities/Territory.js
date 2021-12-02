@@ -14,6 +14,26 @@ export default class Territory {
         return this._chunks.map(chunk => chunk.resource);
     }
 
+    get majorProperties() {
+        return {
+            religion: this.majorReligion,
+            culture: this.majorCulture,
+            language: this.majorLanguage,
+        };
+    }
+
+    get majorReligion() {
+        return this.getMajorOcc('religion');
+    }
+
+    get majorCulture() {
+        return this.getMajorOcc('culture');
+    }
+
+    get majorLanguage() {
+        return this.getMajorOcc('language');
+    }
+
     /**
      * Public
      */
@@ -61,5 +81,22 @@ export default class Territory {
         }
 
         return chunks;
+    }
+
+    getMajorOcc(property) {
+        const occ = this.getOcc(property);
+
+        return Object.keys(occ).reduce((a, b) => occ[a] > occ[b] ? a : b);
+    }
+
+    getOcc(property) {
+        const occ = {};
+        for (let i = 0; i < this._chunks.length; i++) {
+            const chunk = this._chunks[i];
+            if (chunk?.population[property])
+                occ[chunk.population[property].name] = (occ[chunk.population[property].name] + 1) || 1;
+        }
+
+        return occ;
     }
 }
