@@ -99,6 +99,10 @@ export default class WebGLApplication {
         timeline.add(this._scene.transitionIn(), 0);
         timeline.call(() => { this._allowMouseInteractions = true }, null, 2);
     }
+    
+    startTimelapse() {
+        this._scene.startTimelapse();
+    }
 
     /**
      * This is called when all resources are available

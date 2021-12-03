@@ -11,6 +11,8 @@ export default {
         init() {
             gsap.to(this.$el, { duration: 0.5, y: '0%', ease: 'power3.out' });
 
+            this.$root.webglApp.startTimelapse();
+
             // const interval = 10;
             const interval = 10;
             let cpt = 0;

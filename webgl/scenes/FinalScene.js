@@ -70,6 +70,11 @@ export default class FinalScene extends component(Scene) {
         timeline.fromTo(this.rotation, { y: math.degToRad(360) }, { duration: 3, y: 0, ease: 'power3.out' }, 0);
         return timeline;
     }
+    
+    startTimelapse() {
+        const timeline = new gsap.timeline();
+        timeline.to(this.rotation, { duration: 8, y: `${math.degToRad(360 * 1)}`, ease: 'power3.inOut' });
+    }
 
     /**
      * This is called when all resources are available
