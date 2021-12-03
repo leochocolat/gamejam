@@ -15,6 +15,10 @@ export default class Population {
         return this._properties;
     }
 
+    get propertiesName() {
+        return Object.values(this._properties).map(k => k.name);
+    }
+
     get religion() {
         return this._properties.religion;
     }

@@ -21,6 +21,11 @@ export default class MapManager extends EventDispatcher {
         this._activeSettler = this._settlers[0];
 
         this._chunks = [];
+
+        // PLAY
+        // this._mapManager.getSettlersWars()
+        // this._mapManager.getSettlersIndependenceWar()
+        // this._mapManager.getPopulationsWars()
     }
 
     /**
@@ -111,7 +116,9 @@ export default class MapManager extends EventDispatcher {
             for (let j = 0; j < this.settlers.length; j++) {
                 const other = this.settlers[j];
                 if (curr.isInWarWith(other)) {
-                    wars[curr.id][other.id] = curr.getWarChunks(other);
+                    const chunks = curr.getWarChunks(other);
+                    chunks.flat().forEach(c => c.mesh.playPin('war'));
+                    wars[curr.id][other.id] = chunks;
                 }
             }
         }
@@ -141,8 +148,50 @@ export default class MapManager extends EventDispatcher {
                         independentists.push(territory.chunks[k]);
                 }
 
-                if (independentists.length > Math.floor(territory.chunks.length * 0.75))
+                if (independentists.length > Math.floor(territory.chunks.length * 0.5)) {
+                    independentists.forEach(c => c.mesh.playPin('revolution'));
                     wars[settler.id][j] = independentists;
+                }
+            }
+        }
+
+        return wars;
+    }
+
+    getPopulationsWars() {
+        const wars = {};
+
+        const territories = this.settlers.map(s => s.territories).flat();
+
+        for (let i = 0; i < territories.length; i++) {
+            const curr = territories[i];
+            for (let j = 0; j < territories.length; j++) {
+                const other = territories[j];
+                if (curr.isNeighbourOf(other)) {
+                    const currProperties = curr.majorProperties;
+                    const otherProperties = other.majorProperties;
+                    const commonProperties = Object.values(currProperties).filter(p => Object.values(otherProperties).includes(p));
+                    if (commonProperties.length <= 1) {
+                        const currChunks = other.getNeighbourChunks(curr);
+                        const otherChunks = curr.getNeighbourChunks(other);
+                        for (let x = 0; x < currChunks.length; x++) {
+                            const currChunk = currChunks[x];
+                            if (currChunk.population) {
+                                const currPopulationsProps = currChunk.population.propertiesName;
+                                if (Object.values(currProperties).filter(p => currPopulationsProps.includes(p)).length >= 2) {
+                                    for (let y = 0; y < otherChunks.length; y++) {
+                                        const otherChunk = otherChunks[y];
+                                        const { populationWar } = currChunk.compareChunk(otherChunk);
+                                        if (populationWar) {
+                                            otherChunk.mesh.playPin('bombe');
+                                            wars[currChunk.population.id] = [...(wars[currChunk.population.id] || []), otherChunk];
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
 

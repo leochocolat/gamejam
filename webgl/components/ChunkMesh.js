@@ -114,33 +114,33 @@ export default class ChunkMesh extends component(Object3D) {
     }
 
     _createPinWar() {
-        const model = ResourceLoader.get('pin-guerre-anim');
+        const model = { ...ResourceLoader.get('pin-guerre-anim') };
         model.scene = model.scene.clone();
         model.animationManager = new AnimationManager({ model, animations: model.animations });
 
-        model.scene.position.set(this._position.x, this._position.y, this._position.z);
+        model.scene.position.set(this._position.x + (1 / 3), this._position.y, this._position.z + (1 / 3));
         this._container.add(model.scene);
 
         return model;
     }
 
     _createPinRevolution() {
-        const model = ResourceLoader.get('pin-revolution-anim');
+        const model = { ...ResourceLoader.get('pin-revolution-anim') };
         model.scene = model.scene.clone();
         model.animationManager = new AnimationManager({ model, animations: model.animations });
 
-        model.scene.position.set(this._position.x, this._position.y, this._position.z);
+        model.scene.position.set(this._position.x - (1 / 3), this._position.y, this._position.z + (1 / 3));
         this._container.add(model.scene);
 
         return model;
     }
 
     _createPinBombe() {
-        const model = ResourceLoader.get('pin-bombe-anim');
+        const model = { ...ResourceLoader.get('pin-bombe-anim') };
         model.scene = model.scene.clone();
         model.animationManager = new AnimationManager({ model, animations: model.animations });
 
-        model.scene.position.set(this._position.x, this._position.y, this._position.z);
+        model.scene.position.set(this._position.x, this._position.y, this._position.z - (1 / 3));
         this._container.add(model.scene);
 
         return model;
