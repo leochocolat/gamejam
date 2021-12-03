@@ -4,7 +4,7 @@ import { mapGetters } from 'vuex';
 // Components
 import WebGLApplication from '@/components/WebGLApplication';
 import Preloader from '@/components/Preloader';
-import Logo from '@/assets/icons/logo.svg?inline';
+import Logo from '@/assets/icons/logo-v3.svg?inline';
 
 export default {
     watch: {

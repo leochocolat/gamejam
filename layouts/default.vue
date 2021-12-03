@@ -5,7 +5,7 @@
 
         <Nuxt />
 
-        <Logo />
+        <Logo class="logo" />
 
         <Preloader />
 
