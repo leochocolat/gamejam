@@ -187,7 +187,7 @@ export default class WebGLApplication {
     _setupEventListeners() {
         WindowResizeObserver.addEventListener('resize', this._resizeHandler);
         gsap.ticker.add(this._tickHandler);
-        window.addEventListener('mousemove', this._mousemoveHandler);
+        this._canvas.addEventListener('mousemove', this._mousemoveHandler);
         this._canvas.addEventListener('click', this._clickHandler);
         this._dragManager.addEventListener('tap', this._tapHandler);
     }

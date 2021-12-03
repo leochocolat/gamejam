@@ -8,9 +8,8 @@ export default {
     }),
     computed: {},
     methods: {
-
         init() {
-            const interval = 100;
+            const interval = 50;
             let cpt = 0;
             const wars = {
                 war: this.$mapManager.getSettlersWars(),
