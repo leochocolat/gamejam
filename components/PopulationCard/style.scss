@@ -7,8 +7,8 @@
 
     justify-content: space-between;
 
-    width: 370px;
-    height: 90px;
+    width: rem(370px, 'large');;
+    height: rem(90px, 'large');;
 
     font-family: $font-primary;
     color: $color-font-black;
@@ -30,11 +30,11 @@
         width: 32%;
         flex-direction: column;
 
-        margin-left: 5px;
+        margin-left: rem(5px, 'large');;
 
         &--picture{
             position: absolute;
-            top: -20px;
+            top: rem(-20px, 'large');;
 
             width: 120%;
             img{
@@ -44,13 +44,13 @@
         }
         &--name{
             font-weight: 700;
-            font-size: 16px;
+            font-size: rem(16px, 'large');;
         }
         &--line{
             svg{
-                width: 110px;
+                width: rem(110px, 'large');;
 
-                padding-bottom: 5px;
+                padding-bottom: rem(5px, 'large');;
             }
         }
     }
@@ -72,14 +72,14 @@
 
             &--name{
                 font-weight: 100;
-                font-size: 12px;
+                font-size: rem(12px, 'large');;
             }
 
             &--icon{
                 svg{
-                    width: 30px;
+                    width: rem(30px, 'large');;
 
-                    padding-bottom: 2px;
+                    padding-bottom: rem(2px, 'large');;
                 }
             }
         }

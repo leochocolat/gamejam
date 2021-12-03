@@ -4,8 +4,8 @@
 
     justify-content: space-between;
 
-    width: 200px;
-    height: 40px;
+    width: rem(200px, 'large');;
+    height: rem(40px, 'large');;
 
     font-family: $font-primary;
     font-weight: 800;
@@ -21,7 +21,7 @@
     cursor: pointer;
 
     .active{
-        width: 220px;
+        width: rem(220px, 'large');;
     }
 
     &-identity{
@@ -38,13 +38,13 @@
 
             position: relative;
 
-            font-size: 16px;
+            font-size: rem(16px, 'large');;
         }
         &--background{
             position: absolute;
 
             svg{
-                width: 80px
+                width: rem(80px, 'large');
             }
         }
     }
@@ -61,10 +61,10 @@
         &--score{
             z-index: 2;
             p {
-                font-size: 13px;
+                font-size: rem(13px, 'large');;
 
                 span{
-                    font-size: 25px;
+                    font-size: rem(25px, 'large');
                 }
             }
         }
@@ -85,13 +85,13 @@
 
     &-borderConflict{
         position: absolute;
-        top: -8px;
-        right: -4px;
+        top: rem(-8px, 'large');;
+        right: rem(-4px, 'large');;
     }
 }
 
 .active{
-    width: 220px;
+    width: rem(220px, 'large');;
 
     pointer-events: none;
 }

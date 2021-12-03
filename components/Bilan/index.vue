@@ -1,6 +1,6 @@
 <template>
     <div 
-        class="results-modal" 
+        class="bilan" 
         v-if="notClick"
     >
             <div class="results-modal-title">

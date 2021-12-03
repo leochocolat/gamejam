@@ -4,8 +4,8 @@
 
     justify-content: space-between;
 
-    width: 170px;
-    height: 35px;
+    width: rem(170px, 'large');;
+    height: rem(35px, 'large');;
 
     font-family: $font-primary;
     font-weight: 800;
@@ -29,10 +29,10 @@
 
         &--picture{
             position: absolute;
-            top: -25px;
-            left: -10px;
+            top: rem(-25px, 'large');;
+            left: rem(-10px, 'large');;
 
-            width: 40px;
+            width: rem(40px, 'large');;
 
             img{
                 width: 100%;
@@ -45,13 +45,13 @@
 
             position: relative;
 
-            font-size: 16px;
+            font-size: rem(16px, 'large');;
         }
         &--background{
             position: absolute;
 
             svg{
-                width: 80px
+                width: rem(80px, 'large');
             }
         }
     }
@@ -68,10 +68,10 @@
         &--score{
             z-index: 2;
             p {
-                font-size: 13px;
+                font-size: rem(13px, 'large');;
 
                 span{
-                    font-size: 25px;
+                    font-size: rem(25px, 'large');;
                 }
             }
         }
@@ -92,13 +92,13 @@
 
     &-borderConflict{
         position: absolute;
-        top: -8px;
-        right: -4px;
+        top: rem(-8px, 'large');;
+        right: rem(-4px, 'large');;
     }
 }
 
 .active{
-    width: 220px;
+    width: rem(220px, 'large');;
 
     pointer-events: none;
 }
