@@ -45,7 +45,7 @@ export default class Settler {
     }
 
     get targetResourceCount() {
-        return this.resources.filter(resource => resource.id === this._targetResourceId).length;
+        return this.resources.filter(resource => resource && resource.id === this._targetResourceId).length;
     }
 
     /**
