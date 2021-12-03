@@ -1,19 +1,17 @@
-import LineRessource from '@/assets/icons/line-ressource.svg?inline';
+import IconStain from '@/components/IconStain';
+import BorderConflict from '@/assets/icons/borderConflict.svg?inline';
 import gsap from 'gsap';
 
 export default {
     props: {
-        picture: {
-            type: String,
-            default: ""
-        },
-        ressource: {
+        settler : {
             type: Object,
             default:() =>({})
         },
     },
     components: {
-        LineRessource
+        IconStain,
+        BorderConflict
     },
     data: () => ({
      

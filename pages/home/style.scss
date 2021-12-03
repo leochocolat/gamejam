@@ -1,6 +1,9 @@
 .page-home {
     position: relative;
 
+    width: 100vw;
+    height: 100vh;
+
     pointer-events: none;
 
     .settlers{
@@ -17,5 +20,56 @@
 
         flex-direction: column;
         align-self: flex-start;
+    }
+
+    .btn-container{
+        display: flex;
+        position: absolute;
+        bottom: 0;
+
+        justify-content: center;
+        align-content: center;
+
+        width: 100vw;
+        height: 100px;
+        .btn{
+            button{
+                display: inline-block;
+
+                width: fit-content;
+
+                padding: 15px 50px;
+
+                font-family: $font-primary;
+                font-weight: 700;
+                font-size: 18px;
+                color: $color-background-ui;
+                text-align: center;
+                text-decoration: none;
+
+                background-color:#F78A84;
+                border: 2px solid #F78A84;
+                border-radius: 3px;
+
+                cursor: pointer;
+
+                pointer-events: auto;
+            }
+            &-line{
+                z-index: 2;
+                opacity: 1;
+
+                position: absolute;
+                top: -16px;
+            }   
+        }
+    }
+
+    .timerComponent, .resultsComponent{
+        display: flex;
+
+        justify-content: center;
+
+        width: 100vw;
     }
 }
