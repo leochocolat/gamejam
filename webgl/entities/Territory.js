@@ -93,7 +93,7 @@ export default class Territory {
         const occ = {};
         for (let i = 0; i < this._chunks.length; i++) {
             const chunk = this._chunks[i];
-            if (chunk?.population[property])
+            if (chunk?.population && chunk?.population[property])
                 occ[chunk.population[property].name] = (occ[chunk.population[property].name] + 1) || 1;
         }
 
