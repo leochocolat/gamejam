@@ -1,26 +1,26 @@
 <template>
-    <div 
+    <div
         class="settlerMiniCard"
-        :style="`borderColor: ${ settler.colorActive }`"
+        :style="`borderColor: ${ settler.color }`"
     >
         <div class="settlerMiniCard-identity">
             <div class="settlerMiniCard-identity--picture">
                 <img
-                    :src="settler.face"
+                    :src="`pictures/consigne/${settler.id}.png`"
                     alt="Settlers face"
                 >
             </div>
             <div class="settlerMiniCard-identity--background">
-                <IconStain /> 
+                <IconStain />
             </div>
             <div class="settlerMiniCard-identity--name">
-                <p>{{settler.name}}</p>
+                <p>{{ settler.id }}</p>
             </div>
         </div>
         <div class="settlerMiniCard-ressources">
             <div class="settlerMiniCard-ressources--picture">
                 <img
-                    :src="settler.picture"
+                    :src="`pictures/ressources/${settler.targetResourceId}.png`"
                     alt="Settlers ressources"
                 >
             </div>
@@ -32,7 +32,7 @@
             v-if="settler.borderConflict"
             class="settlerMiniCard-borderConflict"
         >
-            <BorderConflict/>
+            <BorderConflict />
         </div>
     </div>
 

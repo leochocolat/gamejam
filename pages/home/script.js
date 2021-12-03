@@ -88,12 +88,6 @@ export default {
             // console.log('transition out');
             if (done) done();
         },
-        onClickSettlers(val) {
-            this.settlers.forEach((element) => {
-                element.active = false;
-            });
-            val.active = true;
-        },
 
         onMouseEnter() {
             gsap.to('.btn-line', { opacity: 1, duration: 0.8 });

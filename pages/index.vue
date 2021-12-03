@@ -27,7 +27,7 @@
         </div>
 
         <HomeModal />
-        <ConsigneModal :settlers="settlers" />
+        <ConsigneModal :settlers="$mapManager.settlers" />
 
         <div class="btn-container">
             <div class="btn">
