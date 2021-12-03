@@ -218,8 +218,10 @@ export default class MapManager extends EventDispatcher {
                                         const otherChunk = otherChunks[y];
                                         if (currChunk.compareChunk && otherChunk.population) {
                                             const { populationWar } = currChunk.compareChunk(otherChunk);
-                                            if (populationWar) {
-                                                wars.push(otherChunk);
+                                            if (populationWar && other.chunks.length >= curr.chunks.length) {
+                                                if (!wars.filter(c => c.id === currChunk.id).length) {
+                                                    wars.push(otherChunk);
+                                                }
                                             }
                                         }
                                     }
