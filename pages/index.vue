@@ -19,6 +19,13 @@
                 :picture="populationPictures[0].picture"
             />
         </div>
+
+        <div class="ressource">
+            <RessourceCard
+                :ressource="$mapManager._resources[0]"
+                :picture="ressourcePictures[0].picture"
+            />
+        </div>
     </div>
 </template>
 
