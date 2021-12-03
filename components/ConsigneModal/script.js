@@ -6,8 +6,8 @@ import gsap from 'gsap';
 export default {
     props: {
         settlers : {
-            type: Object,
-            default:() =>({})
+            type: Array,
+            default:() =>([])
         },
     },
     components: {

@@ -2,6 +2,7 @@
 import seo from '@/mixins/seo';
 import pageTransitions from '@/mixins/pageTransitions';
 import utils from '@/mixins/utils';
+import gsap from 'gsap';
 
 // Components
 import SettlersCard from '@/components/SettlersCard';
@@ -9,6 +10,7 @@ import PopulationCard from '@/components/PopulationCard';
 import RessourceCard from '@/components/RessourceCard';
 import HomeModal from '@/components/HomeModal';``
 import ConsigneModal from '@/components/ConsigneModal';
+import BackgroundButton from '@/assets/icons/background-btn-2.svg?inline';
 
 export default {
     mixins: [seo, pageTransitions, utils],
@@ -17,7 +19,8 @@ export default {
         PopulationCard,
         RessourceCard,
         HomeModal,
-        ConsigneModal
+        ConsigneModal,
+        BackgroundButton
     },
     data: () => ({
         settlers: [
@@ -100,7 +103,8 @@ export default {
             {
                 picture: "pictures/ressources/agriculture.png",
             },
-        ]
+        ],
+        notClick:true,
     }),
     methods: {
         transitionIn(done, routeInfos) {
@@ -118,6 +122,25 @@ export default {
                element.active = false 
             });
             val.active = true;
+        },
+
+        onMouseEnter(){
+            gsap.to(".btn-line", {opacity: 1, duration: .8});
+        },
+
+        onMouseLeave(){
+            gsap.to(".btn-line", {opacity: 0, duration: .8});
+        },
+
+        showWar(){
+            gsap.to(".settlers", {opacity: 0, duration: 1.5});
+            gsap.to(".population", {opacity: 0, duration: 1.5});
+            gsap.to(".ressource", {opacity: 0, duration: 1.5});
+            gsap.to(".btn", {opacity: 0, duration: 1.5});
+
+            setTimeout(() => {
+                this.notClick=false;
+            }, 1600);
         }
     },
     mounted() {
