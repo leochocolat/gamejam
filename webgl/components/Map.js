@@ -87,11 +87,22 @@ export default class Map extends component(Object3D) {
         const chunks = [];
         this._chunkMeshes = [];
 
+        const modelPosition = new Vector3(this._model.position.x, this._model.position.y, this._model.position.z);
+        const scale = this._model.parent.scale.x;
+
+        const container = new Object3D();
+        container.scale.set(scale, scale, scale);
+        this._scene.add(container);
+
         for (let i = 0; i < this._model.children.length; i++) {
             const line = this._model.children[i];
+            const linePosition = new Vector3(line.position.x, line.position.y, line.position.z);
+            linePosition.add(modelPosition);
 
             for (let j = 0; j < line.children.length; j++) {
                 const row = line.children[j];
+                const rowPosition = new Vector3(row.position.x, row.position.y, row.position.z);
+                rowPosition.add(linePosition);
                 const language = row.userData.language !== undefined ? row.userData.language : row.userData.langue;
                 const culture = row.userData.culture !== undefined ? row.userData.culture : row.userData.coutume;
                 const populationData = { religion: row.userData.religion, language, culture };
@@ -101,7 +112,7 @@ export default class Map extends component(Object3D) {
                     resource: this._mapManager.resources[Math.round(Math.random() * (this._mapManager.resources.length - 1))],
                     population: this._mapManager.getPopulationWithData(populationData),
                     isWater: row.userData.state === 0,
-                    mesh: new ChunkMesh({ mesh: row }),
+                    mesh: new ChunkMesh({ mesh: row, container, position: rowPosition, scale }),
                 });
                 chunks.push(chunk);
                 const tailMesh = row.isMesh ? row : row.children[0];
