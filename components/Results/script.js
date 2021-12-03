@@ -4,34 +4,34 @@ import gsap from 'gsap';
 
 export default {
     props: {
-        war : {
+        war: {
             type: Object,
-            default:() =>({})
-        }
+            default: () => ({}),
+        },
     },
     components: {
         BackgroundButton1,
-        BackgroundButton2
+        BackgroundButton2,
     },
     data: () => ({
-        notClick:true,
+        notClick: true,
     }),
     computed: {},
     methods: {
-        onMouseEnter(){
-            gsap.to(".results-modal-btn-line", {opacity: 1, duration: .8});
+        onMouseEnter() {
+            gsap.to('.results-modal-btn-line', { opacity: 1, duration: 0.8 });
         },
-        onMouseLeave(){
-            gsap.to(".results-modal-btn-line", {opacity: 0, duration: .8});
+        onMouseLeave() {
+            gsap.to('.results-modal-btn-line', { opacity: 0, duration: 0.8 });
         },
-        closeModal(){
-            gsap.to(".results-modal", {opacity: 0, duration: 1.5});
+        closeModal() {
+            gsap.to('.results-modal', { opacity: 0, duration: 1.5 });
 
             setTimeout(() => {
-                this.notClick=false;
+                this.notClick = false;
             }, 1600);
-        }
+        },
     },
     watch: {},
-    mounted() {}
-}
+    mounted() {},
+};

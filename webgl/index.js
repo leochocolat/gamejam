@@ -141,7 +141,8 @@ export default class WebGLApplication {
     _resize() {
         this._width = WindowResizeObserver.width;
         this._height = WindowResizeObserver.height;
-        this._dpr = Math.max(1.5, device.dpr());
+        // this._dpr = Math.max(1.5, device.dpr());
+        this._dpr = Math.max(1, device.dpr());
 
         this._resizeCanvas();
         this._resizeRenderer();

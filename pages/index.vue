@@ -1,40 +1,38 @@
 <template>
     <div class="page-home">
-
-        <div class="settlers" v-if="notClick">
-            <div 
+        <div v-if="notClick" class="settlers">
+            <div
+                v-for="(settler, i) in $mapManager.settlers"
+                :key="i"
                 class="settler"
-                v-for="(settler, i) in settlers"
-                    :key="i"
             >
-                <SettlersCard 
+                <SettlersCard
                     :settler="settler"
-                    @on-click="onClickSettlers"
                 />
             </div>
         </div>
 
-        <div class="population" v-if="notClick">
+        <div v-if="notClick" class="population">
             <PopulationCard
                 :population="$mapManager.populations[0]"
                 :picture="populationPictures[0].picture"
             />
         </div>
 
-        <div class="ressource" v-if="notClick">
+        <div v-if="notClick" class="ressource">
             <RessourceCard
                 :ressource="$mapManager._resources[0]"
                 :picture="ressourcePictures[0].picture"
             />
         </div>
 
-        <HomeModal/>
-        <ConsigneModal :settlers="settlers"/>
+        <HomeModal />
+        <ConsigneModal :settlers="$mapManager.settlers" />
 
         <div class="btn-container">
             <div class="btn">
-                <BackgroundButton class="btn-line"/>
-                <button 
+                <BackgroundButton class="btn-line" />
+                <button
                     class="btn"
                     type="button"
                     @mouseenter="onMouseEnter()"
@@ -47,15 +45,15 @@
         </div>
 
         <div class="timerComponent">
-            <Timer 
+            <Timer
                 v-if="!notClick"
                 @on-ended="showResults"
             />
         </div>
 
-         <div class="resultsComponent">
-            <ResultsModal :war="war" v-if="results"/>
-         </div>
+        <div class="resultsComponent">
+            <ResultsModal v-if="results" :war="war" />
+        </div>
     </div>
 </template>
 

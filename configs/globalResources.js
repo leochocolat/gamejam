@@ -6,20 +6,25 @@ const textures = [
     // },
 ];
 const models = [
+    // {
+    //     name: 'gamejam_test',
+    //     type: 'gltf',
+    //     path: '/models/gamejam_test.gltf',
+    // },
+    // {
+    //     name: 'map-test-materials',
+    //     type: 'gltf',
+    //     path: '/models/map-test-v4.gltf',
+    // },
+    // {
+    //     name: 'map-test-perso',
+    //     type: 'gltf',
+    //     path: '/models/map-test-perso-v2.gltf',
+    // },
     {
-        name: 'gamejam_test',
+        name: 'map',
         type: 'gltf',
-        path: '/models/gamejam_test.gltf',
-    },
-    {
-        name: 'map-test-materials',
-        type: 'gltf',
-        path: '/models/map-test-v4.gltf',
-    },
-    {
-        name: 'map-test-perso',
-        type: 'gltf',
-        path: '/models/map-test-perso-v2.gltf',
+        path: '/models/map-v5.gltf',
     },
     // War items
     {

@@ -1,42 +1,42 @@
 <template>
-    <div 
+    <div
         :class="[
-                    'settlerCard',
-                    `card-${settler.name}`,
-                    {'active' : settler.active === true},
-                ]"
-        :style="`borderColor: ${ settler.colorActive }`"
-        @mouseenter="onMouseEnter(settler.name,settler.active)"
-        @mouseleave="onMouseLeave(settler.name,settler.active)"
+            'settlerCard',
+            `card-${settler.id}`,
+            {'active' : !!activeSettler && settler.id === activeSettler.id},
+        ]"
+        :style="`borderColor: ${ settler.color }`"
         @click="onClick(settler)"
     >
         <div class="settlerCard-identity">
             <div class="settlerCard-identity--background">
-                <IconStain 
-                    v-if="settler.active"
-                    :color="settler.colorActive"/> 
-                <IconStain v-else/> 
+                <IconStain
+                    v-if="!!activeSettler && settler.id === activeSettler.id"
+                    :color="settler.color"
+                />
+                <IconStain v-else />
             </div>
             <div class="settlerCard-identity--name">
-                <p>{{settler.name}}</p>
+                <p>{{ settler.id }}</p>
             </div>
         </div>
         <div class="settlerCard-ressources">
             <div class="settlerCard-ressources--picture">
                 <img
-                    :src="settler.picture"
+                    :src="`pictures/ressources/${settler.targetResourceId}.png`"
                     alt="Settlers ressources"
                 >
             </div>
             <div class="settlerCard-ressources--score">
-                <p><span>{{settler.score}}</span>/4</p>
+                <p><span>{{ settler.targetResourceCount }}</span>/{{ settler.targetResourceAmount }}</p>
             </div>
         </div>
         <div
             v-if="settler.borderConflict"
+
             class="settlerCard-borderConflict"
         >
-            <BorderConflict/>
+            <BorderConflict />
         </div>
     </div>
 
