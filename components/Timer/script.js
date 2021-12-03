@@ -20,16 +20,17 @@ export default {
 
             Object.keys(wars).forEach((w) => {
                 let index = -1;
+                const arr = wars[w]
                 const loopInterval = setInterval(() => {
                     index++;
-                    if (wars[w][index]) {
-                        wars[w][index].mesh.playPin(w);
+                    if (arr[index]) {
+                        arr[index].mesh.playPin(w);
                     }
 
-                    if (index === wars[w].length) {
+                    if (index === arr.length) {
                         clearInterval(loopInterval);
                     }
-                }, (interval * 100) / wars[w].length);
+                }, (interval * 100) / arr.length);
             });
 
             setInterval(() => {

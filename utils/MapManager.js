@@ -80,7 +80,7 @@ export default class MapManager extends EventDispatcher {
 
     getResourceById(index) {
         if (index === undefined) return;
-        
+
         for (let i = 0; i < this._resources.length; i++) {
             if (this._resources[i].index === index) {
                 return this._resources[i];
@@ -147,7 +147,7 @@ export default class MapManager extends EventDispatcher {
             }
         }
 
-        return wars;
+        return [...(new Map(wars.map(c => [c.id, c]))).values()];
     }
 
     getSettlersIndependenceWar() {
@@ -177,7 +177,7 @@ export default class MapManager extends EventDispatcher {
             }
         }
 
-        return wars;
+        return [...(new Map(wars.map(c => [c.id, c]))).values()];
     }
 
     getPopulationsWars() {
@@ -218,7 +218,7 @@ export default class MapManager extends EventDispatcher {
             }
         }
 
-        return wars;
+        return [...(new Map(wars.map(c => [c.id, c]))).values()];
     }
 
     /**

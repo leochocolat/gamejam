@@ -121,7 +121,7 @@ export default class Settler {
                 // CHECK ONLY IF TERRITORY NEIGHBOUR
                 // if (curr.isNeighbourOf(other)) {
                 // CHECK IF TERRITORY NEIGHBOUR && HAS TARGET RESOURCE
-                if (curr.isNeighbourOf(other) && !!other.resources.filter(r => r.id === this._targetResourceId).length) {
+                if (curr.isNeighbourOf(other) && !!other.resources.filter(r => r && r.id === this._targetResourceId).length) {
                     chunks.push(curr.getNeighbourChunks(other));
                 }
             }
