@@ -1,14 +1,13 @@
 <template>
     <div class="page-home">
         <div class="settlers">
-            <div 
+            <div
+                v-for="(settler, i) in $mapManager.settlers"
+                :key="i"
                 class="settler"
-                v-for="(settler, i) in settlers"
-                    :key="i"
             >
-                <SettlersCard 
+                <SettlersCard
                     :settler="settler"
-                    @on-click="onClickSettlers"
                 />
             </div>
         </div>

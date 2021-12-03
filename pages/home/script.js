@@ -13,86 +13,52 @@ export default {
     components: {
         SettlersCard,
         PopulationCard,
-        RessourceCard
+        RessourceCard,
     },
     data: () => ({
-        settlers: [
+        populationPictures: [
             {
-                name: "pellatarte",
-                colorActive: "#AC79B3",
-                score: 0,
-                picture: "pictures/ressources/bois.png",
-                borderConflict : false,
-                active : true
+                picture: 'pictures/population/choucremien.png',
             },
             {
-                name: "prespuré",
-                colorActive: "#5FB26E",
-                score: 0,
-                picture: "pictures/ressources/betail.png",
-                borderConflict : true,
-                active : false
+                picture: 'pictures/population/baklavien.png',
             },
             {
-                name: "moulacake",
-                colorActive: "#DF8C5D",
-                score: 0,
-                picture: "pictures/ressources/minerais.png",
-                borderConflict : true,
-                active : false
+                picture: 'pictures/population/crumblien.png',
             },
             {
-                name: "spatulia",
-                colorActive: "#989FE1",
-                score: 0,
-                picture: "pictures/ressources/agriculture.png",
-                borderConflict : false,
-                active : false
-            }
-        ],
-        populationPictures :[
-            {
-                picture: "pictures/population/choucremien.png",
+                picture: 'pictures/population/flaonien.png',
             },
             {
-                picture: "pictures/population/baklavien.png",
+                picture: 'pictures/population/kouignien.png',
             },
             {
-                picture: "pictures/population/crumblien.png",
+                picture: 'pictures/population/loukoumien.png',
             },
             {
-                picture: "pictures/population/flaonien.png",
+                picture: 'pictures/population/panettien.png',
             },
             {
-                picture: "pictures/population/kouignien.png",
+                picture: 'pictures/population/spéculien.png',
             },
             {
-                picture: "pictures/population/loukoumien.png",
-            },
-            {
-                picture: "pictures/population/panettien.png",
-            },
-            {
-                picture: "pictures/population/spéculien.png",
-            },
-            {
-                picture: "pictures/population/tartatien.png",
+                picture: 'pictures/population/tartatien.png',
             },
         ],
-        ressourcePictures :[
+        ressourcePictures: [
             {
-                picture: "pictures/ressources/bois.png",
+                picture: 'pictures/ressources/bois.png',
             },
             {
-                picture: "pictures/ressources/betail.png",
+                picture: 'pictures/ressources/betail.png',
             },
             {
-                picture: "pictures/ressources/minerais.png",
+                picture: 'pictures/ressources/minerais.png',
             },
             {
-                picture: "pictures/ressources/agriculture.png",
+                picture: 'pictures/ressources/agriculture.png',
             },
-        ]
+        ],
     }),
     methods: {
         transitionIn(done, routeInfos) {
@@ -104,15 +70,8 @@ export default {
             // console.log('transition out');
             if (done) done();
         },
-
-        onClickSettlers(val){
-            this.settlers.forEach(element => {
-               element.active = false 
-            });
-            val.active = true;
-        }
     },
     mounted() {
-        console.log(this.$mapManager.populations[0])
-    }
+        console.log(this.$mapManager.populations[0]);
+    },
 };
