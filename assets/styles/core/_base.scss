@@ -1,4 +1,6 @@
 html, body {
+    overflow: hidden;
+
     font-family: $font-primary, Arial, Helvetica, sans-serif;
 
     font-size: $font-size-small;
@@ -11,5 +13,9 @@ html, body {
 
     @include respond-to('large') {
         font-size: $font-size-large;
+    }
+
+    * {
+        @include unselectable();
     }
 }

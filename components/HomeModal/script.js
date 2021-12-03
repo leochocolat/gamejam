@@ -1,6 +1,8 @@
 import BackgroundButton from '@/assets/icons/background-btn-1.svg?inline';
 import Logo from '@/assets/icons/logo-2.svg?inline';
 import gsap from 'gsap';
+import AudioManager from '@/utils/AudioManager';
+import ResourceLoader from '@/vendor/resource-loader';
 
 export default {
     props: {},
@@ -21,6 +23,9 @@ export default {
         },
         closeModal(){
             gsap.to(".home", {opacity: 0, duration: 1.5});
+
+            AudioManager.add('background-sound', ResourceLoader.get('background-sound'));
+            AudioManager.play('background-sound', { loop: true });
 
             setTimeout(() => {
                 this.notClick=false;

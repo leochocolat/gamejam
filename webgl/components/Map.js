@@ -103,13 +103,14 @@ export default class Map extends component(Object3D) {
                 const row = line.children[j];
                 const rowPosition = new Vector3(row.position.x, row.position.y, row.position.z);
                 rowPosition.add(linePosition);
+                const resourceId = row.userData.resources;
                 const language = row.userData.language !== undefined ? row.userData.language : row.userData.langue;
                 const culture = row.userData.culture !== undefined ? row.userData.culture : row.userData.coutume;
                 const populationData = { religion: row.userData.religion, language, culture };
                 const chunk = new Chunk({
                     row: i,
                     column: j,
-                    resource: this._mapManager.resources[Math.round(Math.random() * (this._mapManager.resources.length - 1))],
+                    resource: this._mapManager.getResourceById(resourceId),
                     population: this._mapManager.getPopulationWithData(populationData),
                     isWater: row.userData.state === 0,
                     mesh: new ChunkMesh({ mesh: row, container, position: rowPosition, scale }),

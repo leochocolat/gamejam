@@ -8,15 +8,14 @@ export default {
             type: Object,
             default: () => ({}),
         },
+        activeSettler: {
+            type: Object,
+            default: () => ({}),
+        },
     },
     components: {
         IconStain,
         BorderConflict,
-    },
-    computed: {
-        activeSettler() {
-            return this.$mapManager.activeSettler;
-        },
     },
     methods: {
         onClick(settler) {

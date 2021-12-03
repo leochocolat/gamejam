@@ -24,7 +24,7 @@ const models = [
     {
         name: 'map',
         type: 'gltf',
-        path: '/models/map-v5.gltf',
+        path: '/models/map-v6.gltf',
     },
     // War items
     {
@@ -44,6 +44,12 @@ const models = [
     },
 
 ];
-const sounds = [];
+const sounds = [
+    {
+        name: 'background-sound',
+        type: 'audio',
+        path: '/sounds/audio.mp3',
+    },
+];
 
 export default [...textures, ...models, ...sounds];

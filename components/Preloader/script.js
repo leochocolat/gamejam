@@ -3,12 +3,15 @@ import ResourceLoader from '@/vendor/resource-loader';
 import ThreeTextureLoader from '@/vendor/loaders/three-texture-loader';
 import ThreeGLTFLoader from '@/vendor/loaders/three-gltf-loader';
 import ThreeFBXLoader from '@/vendor/loaders/three-fbx-loader';
+import PizzicatoAudioLoader from '@/vendor/loaders/pizzicato-audio-loader';
+
+// Utils
+import AudioManager from '@/utils/AudioManager';
 
 // Resources
 import globalResources from '@/configs/globalResources';
 
 export default {
-
     mounted() {
         this.registerLoaders();
         this.setupResourceLoader();
@@ -29,6 +32,7 @@ export default {
             ResourceLoader.registerLoader(ThreeTextureLoader, 'texture');
             ResourceLoader.registerLoader(ThreeGLTFLoader, 'gltf');
             ResourceLoader.registerLoader(ThreeFBXLoader, 'fbx');
+            ResourceLoader.registerLoader(PizzicatoAudioLoader, 'audio');
         },
 
         setupResourceLoader() {

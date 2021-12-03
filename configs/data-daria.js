@@ -30,10 +30,10 @@ const settlers = [
 ];
 
 const resources = [
-    { id: 'bois', color: '#274213' }, // Vert
-    { id: 'bétail', color: '#899237' }, // Jaune
-    { id: 'minerai', color: '#755447' }, // Marron
-    { id: 'culture', color: '#FFD478' }, // Jaune
+    { id: 'bois', color: '#274213', index: 0 }, // Vert
+    { id: 'bétail', color: '#899237', index: 1 }, // Jaune
+    { id: 'minerai', color: '#755447', index: 2 }, // Marron
+    { id: 'culture', color: '#FFD478', index: 3 }, // Jaune
 ];
 
 // #402e0a : Marron
