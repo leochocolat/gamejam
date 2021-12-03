@@ -94,18 +94,18 @@ export default {
         },
 
         onMouseEnter() {
-            gsap.to('.btn-line', { opacity: 1, duration: 0.8 });
+            gsap.to('.btn-line', { opacity: 1, duration: 0.2, ease: 'sine.inOut' });
         },
 
         onMouseLeave() {
-            gsap.to('.btn-line', { opacity: 0, duration: 0.8 });
+            gsap.to('.btn-line', { opacity: 0, duration: 0.2, ease: 'sine.inOut' });
         },
 
         showWar() {
-            gsap.to('.settlers', { opacity: 0, duration: 1.5 });
-            gsap.to('.population', { opacity: 0, duration: 1.5 });
-            gsap.to('.ressource', { opacity: 0, duration: 1.5 });
-            gsap.to('.btn', { opacity: 0, duration: 1.5 });
+            gsap.to('.settlers', { opacity: 0, duration: 0.5 });
+            gsap.to('.population', { opacity: 0, duration: 0.5 });
+            gsap.to('.ressource', { opacity: 0, duration: 0.5 });
+            gsap.to('.btn', { opacity: 0, duration: 0.2 });
 
             this.war = {
                 diplomatic: this.$mapManager.getSettlersWars().length,

@@ -33,14 +33,9 @@
         width: 100vw;
         height: rem(100px, 'large');
 
-        &::v-deep {
-            .btn-line {
-                opacity: 0;
-            }
-        }
-
-
         .btn{
+            position: relative;
+
             button{
                 display: inline-block;
 
@@ -65,10 +60,14 @@
             }
             &-line{
                 z-index: 2;
+                opacity: 0;
                 // opacity: 1;
 
                 position: absolute;
-                top: rem(-25px, 'large');;
+                top: rem(-25px, 'large');
+
+                width: 100%;
+                height: auto;
             }   
         }
     }

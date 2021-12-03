@@ -91,6 +91,9 @@ export default class WebGLApplication {
     /**
      * Public
      */
+    transitionIn() {
+        this._scene.transitionIn();
+    }
 
     /**
      * This is called when all resources are available
@@ -122,7 +125,9 @@ export default class WebGLApplication {
         const renderer = new WebGLRenderer({
             canvas: this._canvas,
             antialias: true,
+            transparent: false,
         });
+        renderer.setClearColor('0xffffff');
         renderer.outputEncoding = this._encodings[this._settings.encoding];
 
         // renderer.outputEncoding = sRGBEncoding;
@@ -183,7 +188,6 @@ export default class WebGLApplication {
     _resize() {
         this._width = WindowResizeObserver.width;
         this._height = WindowResizeObserver.height;
-        // this._dpr = Math.max(1.5, device.dpr());
         this._dpr = Math.max(1, device.dpr());
 
         this._resizeCanvas();

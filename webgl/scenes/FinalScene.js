@@ -2,6 +2,7 @@
 import { component } from '../vendor/bidello';
 import { AmbientLight, Box3, BoxBufferGeometry, BoxGeometry, CanvasTexture, Color, DirectionalLight, InstancedMesh, Matrix4, Mesh, MeshBasicMaterial, MeshNormalMaterial, Object3D, Raycaster, Scene, Vector2, Vector3 } from 'three';
 import ResourceLoader from '@/vendor/resource-loader';
+import { gsap } from 'gsap';
 
 // Utils
 import math from '@/utils/math';
@@ -62,6 +63,12 @@ export default class FinalScene extends component(Scene) {
     /**
      * Public
      */
+    transitionIn() {
+        const timeline = new gsap.timeline();
+        timeline.fromTo(this.position, { y: -10 }, { duration: 2, y: 0, ease: 'power3.out' }, 0);
+        timeline.fromTo(this.position, { x: 10 }, { duration: 2, x: 0, ease: 'power3.out' }, 0);
+        timeline.fromTo(this.rotation, { y: math.degToRad(360) }, { duration: 3, y: 0, ease: 'power3.out' }, 0);
+    }
 
     /**
      * This is called when all resources are available
@@ -84,11 +91,6 @@ export default class FinalScene extends component(Scene) {
             debugFolder: this._debugFolder,
             mode: this._model,
         });
-
-        // cameras.active.rotation.x = Math.PI * 0.5;
-        // cameras.active.position.y = 3;
-        // cameras.active.lookAt(0, 0, 0);
-        // cameras.active.position.y = 6;
 
         return cameras;
     }
@@ -184,6 +186,7 @@ export default class FinalScene extends component(Scene) {
         if (!this._debugger) return;
 
         const folder = this._debugger.addFolder({ title: 'Scene' });
+        folder.addButton({ title: 'Play animation' }).on('click', () => { this.transitionIn() });
         folder.addInput(this._settings, 'backgroundColor').on('change', () => { this.background.set(this._settings.backgroundColor); });
         const lights = folder.addFolder({ title: 'Lights', expanded: false });
         lights.addInput(this._lights.ambiant, 'intensity', { label: 'ambiant intensity', min: 0, max: 1 });

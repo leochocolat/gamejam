@@ -7,6 +7,8 @@ html, body {
 
     color: white;
 
+    background-color: transparentize($color: #F2C09E, $amount: 0.5);
+
     @include respond-to('medium') {
         font-size: $font-size-medium;
     }

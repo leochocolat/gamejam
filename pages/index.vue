@@ -36,9 +36,9 @@
                 <button
                     class="btn"
                     type="button"
-                    @mouseenter="onMouseEnter()"
-                    @mouseleave="onMouseLeave()"
-                    @click="showWar()"
+                    @mouseenter="onMouseEnter"
+                    @mouseleave="onMouseLeave"
+                    @click="showWar"
                 >
                     valider
                 </button>

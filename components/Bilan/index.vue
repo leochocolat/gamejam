@@ -16,9 +16,9 @@
                 <button 
                     class="btn"
                     type="button"
-                    @mouseenter="onMouseEnter()"
-                    @mouseleave="onMouseLeave()"
-                    @click="closeModal()"
+                    @mouseenter="onMouseEnter"
+                    @mouseleave="onMouseLeave"
+                    @click="closeModal"
                 >
                     suivant
                 </button>

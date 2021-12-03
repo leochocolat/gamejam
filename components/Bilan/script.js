@@ -19,13 +19,13 @@ export default {
     computed: {},
     methods: {
         onMouseEnter(){
-            gsap.to(".results-modal-btn-line", {opacity: 1, duration: .8});
+            gsap.to(".results-modal-btn-line", {opacity: 1, duration: 0.2 });
         },
         onMouseLeave(){
-            gsap.to(".results-modal-btn-line", {opacity: 0, duration: .8});
+            gsap.to(".results-modal-btn-line", {opacity: 0, duration: 0.2 });
         },
         closeModal(){
-            gsap.to(".results-modal", {opacity: 0, duration: 1.5});
+            gsap.to(".results-modal", {opacity: 0, duration: 0.3 });
 
             setTimeout(() => {
                 this.notClick=false;

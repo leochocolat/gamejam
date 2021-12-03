@@ -25,7 +25,7 @@ export default {
             gsap.to('.results-modal-btn-line', { opacity: 0, duration: 0.8 });
         },
         closeModal() {
-            gsap.to('.results-modal', { opacity: 0, duration: 1.5 });
+            gsap.to('.results-modal', { opacity: 0, duration: 0.3 });
 
             setTimeout(() => {
                 this.notClick = false;

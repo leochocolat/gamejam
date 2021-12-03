@@ -13,11 +13,11 @@
                 <button 
                     class="btn"
                     type="button"
-                    @mouseenter="onMouseEnter()"
-                    @mouseleave="onMouseLeave()"
-                    @click="closeModal()"
+                    @mouseenter="onMouseEnter"
+                    @mouseleave="onMouseLeave"
+                    @click="closeModal"
                 >
-                    jouer
+                    Commencer
                 </button>
             </div>
     </div>

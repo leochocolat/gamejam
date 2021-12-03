@@ -21,13 +21,15 @@ export default {
     computed: {},
     methods: {
         onMouseEnter(){
-            gsap.to(".consigne-btn-line", {opacity: 1, duration: .8});
+            gsap.to(".consigne-btn-line", {opacity: 1, duration: 0.2});
         },
         onMouseLeave(){
-            gsap.to(".consigne-btn-line", {opacity: 0, duration: .8});
+            gsap.to(".consigne-btn-line", {opacity: 0, duration: 0.2});
         },
         closeModal(){
-            gsap.to(".consigne", {opacity: 0, duration: 1.5});
+            gsap.to(".consigne", {opacity: 0, duration: 0.3});
+
+            this.$root.startWebGL();
 
             setTimeout(() => {
                 this.notClick=false;
