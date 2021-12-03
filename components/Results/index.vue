@@ -20,7 +20,7 @@
                     @mouseleave="onMouseLeave()"
                     @click="closeModal()"
                 >
-                    jouer
+                    suivant
                 </button>
             </div>
     </div>
