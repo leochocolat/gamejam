@@ -72,7 +72,7 @@ export default {
         ],
         notClick: true,
         war: {
-            diplomatic: 1,
+            diplomatic: 0,
             population: 2,
             strike: 3,
         },
