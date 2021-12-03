@@ -351,6 +351,7 @@ export default class WebGLApplication {
     }
 
     _createStats() {
+        if (!this._isDebug) return;
         const stats = new Stats();
         document.body.appendChild(stats.dom);
 
@@ -364,6 +365,7 @@ export default class WebGLApplication {
     }
 
     _createStatsGpuPanel() {
+        if (!this._stats) return;
         const panel = new GPUStatsPanel(this._renderer.getContext());
         this._stats.addPanel(panel);
         this._stats.showPanel(3);

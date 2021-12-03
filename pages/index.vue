@@ -32,7 +32,7 @@
         <HomeModal />
         <ConsigneModal :settlers="settlers" />
 
-        <div class="btn-container">
+        <div class="btn-container button-validate" ref="validate">
             <div class="btn">
                 <BackgroundButton class="btn-line" />
                 <button

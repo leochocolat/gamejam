@@ -95,6 +95,7 @@ export default {
                 const settler = this.$refs.settler[i];
                 timeline.add(settler.show(), i * 0.05);
             }
+            timeline.to(this.$refs.validate, { duration: 0.5, alpha: 1 }, 0.3);
         },
         transitionIn(done, routeInfos) {
             // console.log('transition in');
