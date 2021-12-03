@@ -86,7 +86,7 @@ export default class Territory {
     getMajorOcc(property) {
         const occ = this.getOcc(property);
 
-        return Object.keys(occ).reduce((a, b) => occ[a] > occ[b] ? a : b);
+        return Object.keys(occ).length ? Object.keys(occ).reduce((a, b) => occ[a] > occ[b] ? a : b) : '';
     }
 
     getOcc(property) {

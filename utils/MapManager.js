@@ -178,14 +178,13 @@ export default class MapManager extends EventDispatcher {
                     const chunk = territory.chunks[k];
                     if (
                         chunk.population &&
-                        chunk.population.religion.name === majorProps.religion &&
-                        chunk.population.language.name === majorProps.language &&
-                        chunk.population.culture.name === majorProps.culture
-                    )
+                        chunk.population.propertiesName.filter(p => Object.values(majorProps).includes(p)).length >= 2
+                    ) {
                         independentists.push(territory.chunks[k]);
+                    }
                 }
 
-                if (independentists.length > Math.floor(territory.chunks.length * 0.5)) {
+                if (independentists.length > Math.floor(territory.chunks.length * 0.75)) {
                     wars = [...independentists.flat()];
                 }
             }
