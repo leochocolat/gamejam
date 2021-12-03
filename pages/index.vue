@@ -26,6 +26,8 @@
                 :picture="ressourcePictures[0].picture"
             />
         </div>
+
+        <HomeModal/>
     </div>
 </template>
 

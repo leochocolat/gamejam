@@ -7,13 +7,15 @@ import utils from '@/mixins/utils';
 import SettlersCard from '@/components/SettlersCard';
 import PopulationCard from '@/components/PopulationCard';
 import RessourceCard from '@/components/RessourceCard';
+import HomeModal from '@/components/HomeModal';
 
 export default {
     mixins: [seo, pageTransitions, utils],
     components: {
         SettlersCard,
         PopulationCard,
-        RessourceCard
+        RessourceCard,
+        HomeModal
     },
     data: () => ({
         settlers: [
