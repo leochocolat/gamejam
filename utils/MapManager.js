@@ -65,8 +65,16 @@ export default class MapManager extends EventDispatcher {
     getResourceByColor(color) {
         for (let i = 0; i < this._resources.length; i++) {
             if (this._resources[i].color === color) {
-                console.log('FOUNED');
+                return this._resources[i];
+            };
+        }
+    }
 
+    getResourceById(index) {
+        if (index === undefined) return;
+        
+        for (let i = 0; i < this._resources.length; i++) {
+            if (this._resources[i].index === index) {
                 return this._resources[i];
             };
         }
@@ -225,7 +233,7 @@ export default class MapManager extends EventDispatcher {
 
         for (let i = 0; i < data.resources.length; i++) {
             const resourceData = data.resources[i];
-            const resource = new Resource({ id: resourceData.id });
+            const resource = new Resource({ id: resourceData.id, index: resourceData.index });
             resources.push(resource);
         }
 

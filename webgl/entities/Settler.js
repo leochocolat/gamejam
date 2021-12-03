@@ -54,7 +54,7 @@ export default class Settler {
     addChunk(chunk) {
         let territory = null;
         let isChunkAdded = false;
-        const error = null;
+        let error = null;
 
         // Try to add the chunk to an existing territory
         // If no territories, create a new one
@@ -88,8 +88,7 @@ export default class Settler {
                 this._mergeTerritories(territory, this._territories[i]);
             } else if (this._territories.length > MAX_TERRITORIES) {
                 isChunkAdded = false;
-                error.id = 1;
-                error.message = 'This settler already has 3 territories';
+                error = { id: 1, message: 'This settler already has 3 territories' };
                 console.error('This settler already has 3 territories');
                 const index = this._territories.indexOf(territory);
                 this._territories.splice(index, 1);

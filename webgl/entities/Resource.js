@@ -1,6 +1,7 @@
 export default class Resource {
-    constructor({ id }) {
+    constructor({ id, index }) {
         this._id = id;
+        this._index = index;
     }
 
     /**
@@ -8,5 +9,9 @@ export default class Resource {
      */
     get id() {
         return this._id;
+    }
+
+    get index() {
+        return this._index;
     }
 }

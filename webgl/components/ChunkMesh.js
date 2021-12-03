@@ -11,19 +11,6 @@ import ResourceLoader from '@/vendor/resource-loader';
 // Utils
 import AnimationManager from '@/utils/AnimationManager';
 
-const names = [
-    'panetttien',
-    'loukoumien',
-    'choucremien',
-    'tartatien',
-    'speculien',
-    'bakelavien',
-    'flaonien',
-    'crumblien',
-    'kouignien',
-    'peau',
-];
-
 export default class ChunkMesh extends component(Object3D) {
     init(options) {
         this._container = options.container;
