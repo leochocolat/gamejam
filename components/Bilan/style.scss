@@ -15,6 +15,7 @@
 
     background-color:#EFEAE1;
 
+
     border: 2px solid #E7DBC6;
     border-left: none;
     border-radius: 3px;
@@ -54,6 +55,7 @@
         position: relative;
 
         margin-top: 40px;
+
         button{
             display: inline-block;
 
@@ -74,6 +76,7 @@
 
             pointer-events: auto;
         }
+
         &-line{
             opacity: 0;
 
@@ -81,7 +84,12 @@
             top: -17px;
             left: 10px;
 
-            width: 150px;
+            width: 100% !important; 
+            height: auto;
+
+            // width: 150px;
+            // width: 100%;
+            
         }
     }
 }

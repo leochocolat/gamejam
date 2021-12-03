@@ -13,6 +13,7 @@ import ConsigneModal from '@/components/ConsigneModal';
 import Timer from '@/components/Timer';
 import BackgroundButton from '@/assets/icons/background-btn-2.svg?inline';
 import ResultsModal from '@/components/Results';
+import Recap from '@/components/Recap';
 
 export default {
     mixins: [seo, pageTransitions, utils],
@@ -25,12 +26,14 @@ export default {
         BackgroundButton,
         Timer,
         ResultsModal,
+        Recap
     },
     data: () => ({
         settlers: [],
         activeSettler: null,
         population: null,
         resource: null,
+        showRecap: false,
         populationPictures: [
             {
                 picture: 'pictures/population/choucremien.png',
@@ -133,6 +136,11 @@ export default {
                 this.results = val;
             }
         },
+
+        showFinal() {
+            this.showRecap = true;
+            gsap.to(this.$refs.recap, { duration: 0.8, x: '0%', ease: 'power3.out' });
+        }
     },
     mounted() {
         this.settlers = this.$mapManager.settlers;

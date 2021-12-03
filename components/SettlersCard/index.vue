@@ -32,7 +32,7 @@
             </div>
         </div>
         <div
-            v-if="settler.borderConflict"
+            v-if="settler.enemy"
 
             class="settlerCard-borderConflict"
         >

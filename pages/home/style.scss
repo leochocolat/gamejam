@@ -80,3 +80,21 @@
         width: 100vw;
     }
 }
+
+.bilan-container {
+    // z-index: 100;
+
+    position: absolute;
+    right: 0;
+    bottom: 0;
+
+    width: rem(520px, 'large');
+    height: 100%;
+
+    padding-top: rem(50px, 'large');
+    padding-bottom: rem(50px, 'large');
+
+    transform: translateX(100%);
+
+    box-sizing: border-box;
+}

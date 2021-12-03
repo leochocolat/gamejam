@@ -57,6 +57,12 @@
         <div class="resultsComponent">
             <ResultsModal v-if="results" :war="war" />
         </div>
+
+        <div class="bilan-container" ref="recap">
+
+            <Recap v-if="showRecap" :war="war" />
+
+        </div>
     </div>
 </template>
 
