@@ -145,6 +145,9 @@ export default {
             if (e.hover) {
                 this.population = e.hover.population || null
                 this.resource = e.hover.resource || null
+            } else {
+                this.population = null
+                this.resource = null
             }
         });
 
