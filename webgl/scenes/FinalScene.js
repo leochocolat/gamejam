@@ -117,6 +117,8 @@ export default class FinalScene extends component(Scene) {
         container.add(model);
         this.add(container);
 
+        container.scale.set(this._settings.model.scale, this._settings.model.scale, this._settings.model.scale);
+
         return container;
     }
 
@@ -131,6 +133,8 @@ export default class FinalScene extends component(Scene) {
             model: this._model.children[0],
             nuxtRoot: this._nuxtRoot,
         });
+
+        this.add(map);
 
         return map;
     }

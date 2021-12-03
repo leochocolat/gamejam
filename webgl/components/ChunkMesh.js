@@ -1,14 +1,21 @@
 // Vendor
 import { component } from '../vendor/bidello';
-import { BoxGeometry, Color, DoubleSide, Mesh, MeshBasicMaterial, MeshNormalMaterial, Object3D, ShaderMaterial, Vector3 } from 'three';
+import { AnimationMixer, BoxGeometry, Color, DoubleSide, Mesh, MeshBasicMaterial, MeshNormalMaterial, Object3D, ShaderMaterial, Vector3 } from 'three';
 import { gsap } from 'gsap';
 
 // Shaders
 import vertex from '@/webgl/shaders/chunk-material/vertex.glsl';
 import fragment from '@/webgl/shaders/chunk-material/fragment.glsl';
+import ResourceLoader from '@/vendor/resource-loader';
+
+// Utils
+import AnimationManager from '@/utils/AnimationManager';
 
 export default class ChunkMesh extends component(Object3D) {
     init(options) {
+        this._container = options.container;
+        this._position = options.position;
+        this._scale = options.scale;
         this._size = options.size;
 
         this._isHovered = false;
@@ -21,11 +28,16 @@ export default class ChunkMesh extends component(Object3D) {
 
         this._material = this._createMaterial();
         this._mesh = options.mesh || this._createMesh();
+        this._pins = this._createPins();
         this._initialPosition = new Vector3(this._mesh.position.x, this._mesh.position.y, this._mesh.position.z);
 
         this._mesh.traverse((child) => {
             if (child.isMesh) child.material = child.material.clone();
         });
+
+        // this.playPin('war');
+        // this.playPin('revolution');
+        // this.playPin('bombe');
     }
 
     /**
@@ -54,7 +66,15 @@ export default class ChunkMesh extends component(Object3D) {
                 child.material.color.set(color);
             }
         });
-        // this._material.uniforms.color.value.set(color);
+    }
+
+    playPin(name) {
+        const pin = this._pins[name];
+
+        for (let i = 0; i < pin.animationManager.animations.length; i++) {
+            const animation = pin.animationManager.animations[i];
+            pin.animationManager.playAnimation({ animation: animation.name, loop: false });
+        }
     }
 
     /**
@@ -79,6 +99,51 @@ export default class ChunkMesh extends component(Object3D) {
         this.add(mesh);
 
         return mesh;
+    }
+
+    _createPins() {
+        const pins = {
+            war: this._createPinWar(),
+            revolution: this._createPinRevolution(),
+            bombe: this._createPinBombe(),
+        };
+
+        // console.log(pins);
+
+        return pins;
+    }
+
+    _createPinWar() {
+        const model = ResourceLoader.get('pin-guerre-anim');
+        model.scene = model.scene.clone();
+        model.animationManager = new AnimationManager({ model, animations: model.animations });
+
+        model.scene.position.set(this._position.x, this._position.y, this._position.z);
+        this._container.add(model.scene);
+
+        return model;
+    }
+
+    _createPinRevolution() {
+        const model = ResourceLoader.get('pin-revolution-anim');
+        model.scene = model.scene.clone();
+        model.animationManager = new AnimationManager({ model, animations: model.animations });
+
+        model.scene.position.set(this._position.x, this._position.y, this._position.z);
+        this._container.add(model.scene);
+
+        return model;
+    }
+
+    _createPinBombe() {
+        const model = ResourceLoader.get('pin-bombe-anim');
+        model.scene = model.scene.clone();
+        model.animationManager = new AnimationManager({ model, animations: model.animations });
+
+        model.scene.position.set(this._position.x, this._position.y, this._position.z);
+        this._container.add(model.scene);
+
+        return model;
     }
 
     /**

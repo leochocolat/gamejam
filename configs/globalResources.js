@@ -21,6 +21,23 @@ const models = [
         type: 'gltf',
         path: '/models/map-test-perso-v2.gltf',
     },
+    // War items
+    {
+        name: 'pin-bombe-anim',
+        type: 'gltf',
+        path: '/models/pin-bombe-anim.glb',
+    },
+    {
+        name: 'pin-revolution-anim',
+        type: 'gltf',
+        path: '/models/pin-revolution-anim.glb',
+    },
+    {
+        name: 'pin-guerre-anim',
+        type: 'gltf',
+        path: '/models/pin-guerre-anim.glb',
+    },
+
 ];
 const sounds = [];
 
