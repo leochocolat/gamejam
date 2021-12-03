@@ -19,12 +19,8 @@ export default {
         },
     },
     methods: {
-        ...mapActions({
-            setSettler: 'webgl/setSettler',
-        }),
         onClick(settler) {
             this.$mapManager.activeSettler = settler;
-            this.setSettler(settler);
         },
     },
     watch: {},

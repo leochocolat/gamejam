@@ -18,7 +18,7 @@ export default class MapManager extends EventDispatcher {
         this._resources = this._createResources();
         this._populations = this._createPopulations();
 
-        this._activeSettler = this._settlers[0];
+        this._activeSettler = null;
 
         this._chunks = [];
 
@@ -49,6 +49,14 @@ export default class MapManager extends EventDispatcher {
 
     set chunks(chunks) {
         this._chunks = chunks;
+    }
+
+    get activeSettler() {
+        return this._activeSettler;
+    }
+
+    set activeSettler(activeSettler) {
+        this._activeSettler = activeSettler;
     }
 
     /**

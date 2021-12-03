@@ -229,8 +229,8 @@ export default class Map extends component(Object3D) {
 
         for (let i = 0; i < this._chunkMeshes.length; i++) {
             const chunkMesh = this._chunkMeshes[i];
-            if (intersects.length > 0 && chunkMesh === intersects[0].object) {
-                this._mapManager.setChunkSettler(this._chunks[i], getSettlerById(this._activeSettler));
+            if (intersects.length > 0 && chunkMesh === intersects[0].object && this._mapManager.activeSettler) {
+                this._mapManager.setChunkSettler(this._chunks[i], getSettlerById(this._mapManager.activeSettler.id));
             }
         }
     }
