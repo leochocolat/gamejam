@@ -19,7 +19,7 @@ const models = [
     {
         name: 'map-test-perso',
         type: 'gltf',
-        path: '/models/map-test-perso-v2.gltf',
+        path: '/models/map-test-perso-v3.gltf',
     },
     // War items
     {
