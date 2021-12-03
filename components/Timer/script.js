@@ -14,12 +14,13 @@ export default {
  
             setInterval(() => {
             if(cpt<100){
-                ++cpt; // décrémente le compteur
+                ++cpt; 
                 document.getElementById("timer").innerHTML = "" + cpt + "" ;
             }
             else
             {
-               setTimeout(() => {
+                this.$emit('on-ended', true)
+                setTimeout(() => {
                     this.notFinish=false;
                 }, 600);
             }}, 100);

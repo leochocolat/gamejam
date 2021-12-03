@@ -47,8 +47,15 @@
         </div>
 
         <div class="timerComponent">
-            <Timer v-if="!notClick"/>
+            <Timer 
+                v-if="!notClick"
+                @on-ended="showResults"
+            />
         </div>
+
+         <div class="resultsComponent">
+            <ResultsModal :war="war" v-if="results"/>
+         </div>
     </div>
 </template>
 

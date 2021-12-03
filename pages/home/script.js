@@ -12,6 +12,7 @@ import HomeModal from '@/components/HomeModal';``
 import ConsigneModal from '@/components/ConsigneModal';
 import Timer from '@/components/Timer';
 import BackgroundButton from '@/assets/icons/background-btn-2.svg?inline';
+import ResultsModal from '@/components/Results';
 
 export default {
     mixins: [seo, pageTransitions, utils],
@@ -22,7 +23,8 @@ export default {
         HomeModal,
         ConsigneModal,
         BackgroundButton,
-        Timer
+        Timer,
+        ResultsModal
     },
     data: () => ({
         settlers: [
@@ -107,6 +109,12 @@ export default {
             },
         ],
         notClick:true,
+        war : {
+                diplomatic : 1,
+                population : 2,
+                strike : 3
+        },
+        results:false
     }),
     methods: {
         transitionIn(done, routeInfos) {
@@ -143,9 +151,15 @@ export default {
             setTimeout(() => {
                 this.notClick=false;
             }, 1600);
-        }
+        },
+
+       showResults(val){
+           if(val === true){
+               this.results=val;
+           }
+       }
     },
     mounted() {
-        console.log(this.$mapManager.populations[0])
+        console.log(this.$mapManager)
     }
 };
