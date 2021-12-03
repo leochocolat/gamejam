@@ -3,16 +3,7 @@ import Logo from '@/assets/icons/logo-2.svg?inline';
 import gsap from 'gsap';
 
 export default {
-    props: {
-        picture: {
-            type: String,
-            default: ""
-        },
-        ressource: {
-            type: Object,
-            default:() =>({})
-        },
-    },
+    props: {},
     components: {
         BackgroundButton,
         Logo
@@ -29,7 +20,11 @@ export default {
             gsap.to(".home-btn", {opacity: 1, duration: 0.3});
         },
         closeModal(){
-            this.notClick=false
+            gsap.to(".home", {opacity: 0, duration: 1.5});
+
+            setTimeout(() => {
+                this.notClick=false;
+            }, 1600);
         }
     },
     watch: {},

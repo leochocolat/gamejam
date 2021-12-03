@@ -7,7 +7,8 @@ import utils from '@/mixins/utils';
 import SettlersCard from '@/components/SettlersCard';
 import PopulationCard from '@/components/PopulationCard';
 import RessourceCard from '@/components/RessourceCard';
-import HomeModal from '@/components/HomeModal';
+import HomeModal from '@/components/HomeModal';``
+import ConsigneModal from '@/components/ConsigneModal';
 
 export default {
     mixins: [seo, pageTransitions, utils],
@@ -15,7 +16,8 @@ export default {
         SettlersCard,
         PopulationCard,
         RessourceCard,
-        HomeModal
+        HomeModal,
+        ConsigneModal
     },
     data: () => ({
         settlers: [
@@ -25,7 +27,8 @@ export default {
                 score: 0,
                 picture: "pictures/ressources/bois.png",
                 borderConflict : false,
-                active : true
+                active : true,
+                face:"pictures/consigne/pellatarte.png",
             },
             {
                 name: "prespuré",
@@ -33,7 +36,8 @@ export default {
                 score: 0,
                 picture: "pictures/ressources/betail.png",
                 borderConflict : true,
-                active : false
+                active : false,
+                face:"pictures/consigne/presspuré.png",
             },
             {
                 name: "moulacake",
@@ -41,7 +45,8 @@ export default {
                 score: 0,
                 picture: "pictures/ressources/minerais.png",
                 borderConflict : true,
-                active : false
+                active : false,
+                face:"pictures/consigne/moulacake.png",
             },
             {
                 name: "spatulia",
@@ -49,7 +54,8 @@ export default {
                 score: 0,
                 picture: "pictures/ressources/agriculture.png",
                 borderConflict : false,
-                active : false
+                active : false,
+                face:"pictures/consigne/spatulia.png",
             }
         ],
         populationPictures :[

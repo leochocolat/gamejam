@@ -28,6 +28,7 @@
         </div>
 
         <HomeModal/>
+        <ConsigneModal :settlers="settlers"/>
     </div>
 </template>
 

@@ -10,17 +10,16 @@
             </div>
             <div class="home-btn">
                  <BackgroundButton/>
-            <button 
-                class="btn"
-                type="button"
-                @mouseenter="onMouseEnter()"
-                @mouseleave="onMouseLeave()"
-                @click="closeModal()"
-            >
-                jouer
-            </button>
-           
-        </div>
+                <button 
+                    class="btn"
+                    type="button"
+                    @mouseenter="onMouseEnter()"
+                    @mouseleave="onMouseLeave()"
+                    @click="closeModal()"
+                >
+                    jouer
+                </button>
+            </div>
     </div>
 
 </template>

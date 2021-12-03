@@ -1,0 +1,125 @@
+.consigne{
+    z-index: 7;
+
+    display: flex;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    width: 100vw;
+    height: 100vh;
+
+    background-image: url('../../static/pictures/background.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    
+    p{
+        width: 60%;
+
+        font-family: $font-primary;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 1.5;
+        color: black;
+        text-align: center;
+
+        .pellatarte{
+            font-weight: 700;
+            color: #AC79B3;
+        }
+        .prespure{
+            font-weight: 700;
+            color: #5FB26E;
+        }
+        .moulacake{
+            font-weight: 700;
+            color: #DF8C5D;
+        }
+        .spatulia{
+            font-weight: 700;
+            color: #989FE1;
+        }
+    }
+
+    &-settlers{
+        display: flex;
+
+        justify-content: space-between;
+        align-items: center;
+
+        width: 70%;
+
+        margin-top: 40px;
+
+        margin-bottom: 10px;
+    }
+
+    &-conflict{
+        display: flex;
+
+        justify-content: center;
+        align-items: center;
+
+        margin-bottom: 30px;
+        
+        p{
+            width: fit-content;
+
+            margin-left: 10px;
+
+            font-weight: bold;
+            font-size: 12px;
+        }
+    }
+
+    &-img{
+        width: 20%;
+
+        margin: 25px 0;
+
+        img{
+            width: 100%;
+            object-fit: contain;
+        }
+    }
+    
+    &-btn{
+        position: relative;
+        button{
+            display: inline-block;
+
+            padding: 15px 60px;
+
+            font-family: $font-primary;
+            font-weight: 700;
+            font-size: 18px;
+            color: $color-background-ui;
+            text-align: center;
+            text-decoration: none;
+
+            background-color:#053D4C;
+            border: 2px solid $color-font-black;
+            border-radius: 3px;
+
+            cursor: pointer;
+
+            pointer-events: auto;
+        }
+        &-line{
+            opacity: 1;
+
+            position: absolute;
+            top: -17px;
+            left: 10px;
+
+            width: 150px;
+        }
+    }
+}
