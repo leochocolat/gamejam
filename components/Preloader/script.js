@@ -1,4 +1,5 @@
 // Vendor
+import { gsap } from 'gsap';
 import ResourceLoader from '@/vendor/resource-loader';
 import ThreeTextureLoader from '@/vendor/loaders/three-texture-loader';
 import ThreeGLTFLoader from '@/vendor/loaders/three-gltf-loader';
@@ -25,7 +26,8 @@ export default {
 
     methods: {
         transitionOut() {
-            this.$el.style.display = 'none';
+            const timeline = new gsap.timeline();
+            timeline.to(this.$el, { duration: 0.5, autoAlpha: 0, ease: 'sine.inOut' }, 1);
         },
 
         registerLoaders() {

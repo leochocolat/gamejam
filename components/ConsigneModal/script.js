@@ -30,6 +30,7 @@ export default {
             gsap.to(".consigne", {opacity: 0, duration: 0.3});
 
             this.$root.startWebGL();
+            this.$root.startHome();
 
             setTimeout(() => {
                 this.notClick=false;

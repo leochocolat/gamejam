@@ -18,10 +18,12 @@
     border-radius: 3px;
     box-shadow: 0 5px 10px 0px rgba(black, .25);
 
+    transform: translateX(-100%);
+
     transition: width $expo-out 300ms;
-    will-change: width;
 
     cursor: pointer;
+    will-change: width;
 
     &:hover,
     .active{

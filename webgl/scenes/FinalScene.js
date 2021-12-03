@@ -68,6 +68,7 @@ export default class FinalScene extends component(Scene) {
         timeline.fromTo(this.position, { y: -10 }, { duration: 2, y: 0, ease: 'power3.out' }, 0);
         timeline.fromTo(this.position, { x: 10 }, { duration: 2, x: 0, ease: 'power3.out' }, 0);
         timeline.fromTo(this.rotation, { y: math.degToRad(360) }, { duration: 3, y: 0, ease: 'power3.out' }, 0);
+        return timeline;
     }
 
     /**

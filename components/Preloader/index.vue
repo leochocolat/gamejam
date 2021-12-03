@@ -3,7 +3,7 @@
 
         <div class="container">
 
-            <div class="loading-message">
+            <div class="loading-message" ref="message">
                 Loading...
             </div>
 

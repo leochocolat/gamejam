@@ -33,5 +33,9 @@ export default {
         }
     },
     watch: {},
-    mounted() {}
+    mounted() {
+        const timeline = new gsap.timeline();
+        timeline.fromTo(this.$refs.logo, { alpha: 0 }, { duration: 0.5, alpha: 1, ease: 'sine.inOut' }, 0);
+        timeline.fromTo(this.$refs.logo, { alpha: 0 }, { duration: 0.5, alpha: 1, ease: 'sine.inOut' }, 0.2);
+    }
 }

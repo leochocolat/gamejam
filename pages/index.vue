@@ -9,6 +9,8 @@
                 <SettlersCard
                     :active-settler="activeSettler"
                     :settler="settler"
+                    :index="i"
+                    ref="settler"
                 />
             </div>
         </div>

@@ -3,12 +3,12 @@
         class="home" id="home"
         v-if="notClick"
     >
-            <div class="home-logo">
+            <div class="home-logo" ref="logo">
                 <div class="home-logo--image">
                     <Logo/>
                 </div>
             </div>
-            <div class="home-btn">
+            <div class="home-btn" ref="button">
                  <BackgroundButton class="home-button-background"/>
                 <button 
                     class="btn"

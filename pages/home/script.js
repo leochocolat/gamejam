@@ -82,7 +82,17 @@ export default {
         },
         results: false,
     }),
+    created() {
+        this.$root.startHome = this.startHome;
+    },
     methods: {
+        startHome() {
+            const timeline = new gsap.timeline({ delay: 1.5 });
+            for (let i = 0; i < this.$refs.settler.length; i++) {
+                const settler = this.$refs.settler[i];
+                timeline.add(settler.show(), i * 0.05);
+            }
+        },
         transitionIn(done, routeInfos) {
             // console.log('transition in');
             if (done) done();
@@ -150,7 +160,5 @@ export default {
                 this.resource = null
             }
         });
-
-        console.log();
     },
 };
