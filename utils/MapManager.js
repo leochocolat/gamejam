@@ -119,6 +119,36 @@ export default class MapManager extends EventDispatcher {
         return wars;
     }
 
+    getSettlersIndependenceWar() {
+        const wars = {};
+        for (let i = 0; i < this.settlers.length; i++) {
+            const settler = this.settlers[i];
+            wars[settler.id] = {};
+            for (let j = 0; j < settler.territories.length; j++) {
+                const territory = settler.territories[j];
+                const majorProps = territory.majorProperties;
+                const independentists = [];
+                wars[settler.id][j] = [];
+
+                for (let k = 0; k < territory.chunks.length; k++) {
+                    const chunk = territory.chunks[k];
+                    if (
+                        chunk.population &&
+                        chunk.population.religion.name === majorProps.religion &&
+                        chunk.population.language.name === majorProps.language &&
+                        chunk.population.culture.name === majorProps.culture
+                    )
+                        independentists.push(territory.chunks[k]);
+                }
+
+                if (independentists.length > Math.floor(territory.chunks.length * 0.75))
+                    wars[settler.id][j] = independentists;
+            }
+        }
+
+        return wars;
+    }
+
     /**
      * Private
      */

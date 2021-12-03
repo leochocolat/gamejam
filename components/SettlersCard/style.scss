@@ -1,0 +1,96 @@
+.settlerCard{
+    display: flex;
+    position: relative;
+
+    justify-content: space-between;
+
+    width: 200px;
+    height: 40px;
+
+    font-family: "Millimetre", sans-serif;
+    font-weight: 800;
+    color: #053D4C;
+
+    background-color: #EFEAE1;
+
+    border: 2px solid black;
+    border-left: none;
+    box-shadow: 0 5px 10px 0px rgba(black, .25);
+
+    cursor: pointer;
+
+    .active{
+        width: 220px;
+    }
+
+    &-identity{
+        display: flex;
+        position: relative;
+
+        justify-content: center;
+        align-items: center;
+
+        width: 65%;
+
+        &--name{
+            z-index: 2;
+
+            position: relative;
+
+            font-size: 16px;
+        }
+        &--background{
+            position: absolute;
+
+            svg{
+                width: 80px
+            }
+        }
+    }
+
+    &-ressources{
+        display: flex;
+        position: relative;
+
+        justify-content: center;
+        align-items: center;
+
+        width: 35%;
+
+        &--score{
+            z-index: 2;
+            p {
+                font-size: 13px;
+
+                span{
+                    font-size: 25px;
+                }
+            }
+        }
+
+        &--picture{
+            opacity: 0.5;
+
+            position: absolute;
+
+            width: 140%;
+
+            img{
+                width: 100%;
+                object-fit: contain;
+            }
+        }
+    }
+
+    &-borderConflict{
+        position: absolute;
+        top: -8px;
+        right: -4px;
+    }
+}
+
+.active{
+    width: 220px;
+
+    pointer-events: none;
+}

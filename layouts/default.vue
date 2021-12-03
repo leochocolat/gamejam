@@ -5,6 +5,8 @@
 
         <Nuxt />
 
+        <Logo />
+
         <Preloader />
 
     </div>

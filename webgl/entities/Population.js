@@ -15,6 +15,18 @@ export default class Population {
         return this._properties;
     }
 
+    get religion() {
+        return this._properties.religion;
+    }
+
+    get culture() {
+        return this._properties.culture;
+    }
+
+    get language() {
+        return this._properties.language;
+    }
+
     /**
      * Private
      */
