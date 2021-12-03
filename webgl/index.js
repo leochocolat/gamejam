@@ -1,5 +1,5 @@
 // Vendor
-import { WebGLRenderer, Clock, Vector2 } from 'three';
+import { WebGLRenderer, Clock, Vector2, sRGBEncoding, GammaEncoding, LinearEncoding, RGBEEncoding, RGBM7Encoding, RGBM16Encoding, RGBDEncoding, BasicDepthPacking, RGBADepthPacking, GreaterEqualDepth } from 'three';
 import Stats from 'three/examples/jsm/libs/stats.module.js';
 import { GPUStatsPanel } from '@/webgl/vendor/GPUStatsPanel.js';
 import bidello from './vendor/bidello';
@@ -12,6 +12,7 @@ import device from '@/utils/device';
 
 // Modules
 import SceneManager from './modules/SceneManager';
+import DragManager from '@/utils/DragManager';
 
 // Scenes
 // import MainScene from './scenes/MainScene';
@@ -28,13 +29,53 @@ export default class WebGLApplication {
         this._sceneName = options.sceneName;
 
         // Setup
-        this._width = null;
-        this._height = null;
+
+        // THREE.LinearEncoding
+        // THREE.sRGBEncoding
+        // THREE.GammaEncoding
+        // THREE.RGBEEncoding
+        // THREE.RGBM7Encoding
+        // THREE.RGBM16Encoding
+        // THREE.RGBDEncoding
+        // THREE.BasicDepthPacking
+        // THREE.RGBADepthPacking
+
+        this._encodings = {
+            linearEncoding: LinearEncoding,
+            sRGBEncoding: sRGBEncoding,
+            gammaEncoding: GammaEncoding,
+            RGBEEncoding: RGBEEncoding,
+            RGBM7Encoding: RGBM7Encoding,
+            RGBM16Encoding: RGBM16Encoding,
+            RGBDEncoding: RGBDEncoding,
+            BasicDepthPacking: BasicDepthPacking,
+            RGBADepthPacking: RGBADepthPacking,
+        }
+
+        this._settings = { 
+            encoding: 'sRGBEncoding', 
+            encodingOptions: {
+                LinearEncoding: 'LinearEncoding',
+                sRGBEncoding: 'sRGBEncoding',
+                GammaEncoding: 'GammaEncoding',
+                RGBEEncoding: 'RGBEEncoding',
+                RGBM7Encoding: 'RGBM7Encoding',
+                RGBM16Encoding: 'RGBM16Encoding',
+                RGBDEncoding: 'RGBDEncoding',
+                BasicDepthPacking: 'BasicDepthPacking',
+                RGBADepthPacking: 'RGBADepthPacking',
+            }
+        };
+
+        this._width = WindowResizeObserver.width;
+        this._height = WindowResizeObserver.height;
         this._clock = this._createClock();
         this._debugger = this._createDebugger();
         this._renderer = this._createRenderer();
         this._scene = this._createScene();
+        this._dragManager = new DragManager({ el: this._canvas });
 
+        this._allowMouseInteractions = false;
         this._mousePosition = new Vector2();
         this._normalizedMousePosition = new Vector2();
         this._centeredMousePosition = new Vector2();
@@ -53,6 +94,11 @@ export default class WebGLApplication {
     /**
      * Public
      */
+    transitionIn() {
+        const timeline = new gsap.timeline();
+        timeline.add(this._scene.transitionIn(), 0);
+        timeline.call(() => { this._allowMouseInteractions = true }, null, 2);
+    }
 
     /**
      * This is called when all resources are available
@@ -67,6 +113,8 @@ export default class WebGLApplication {
         this._removeStats();
         this._clock.stop();
         this._renderer.dispose();
+        this._dragManager.close();
+        if (this._scene.destroy) this._scene.destroy();
     }
 
     /**
@@ -82,7 +130,13 @@ export default class WebGLApplication {
         const renderer = new WebGLRenderer({
             canvas: this._canvas,
             antialias: true,
+            transparent: false,
         });
+        renderer.setClearColor('0xffffff');
+        renderer.outputEncoding = this._encodings[this._settings.encoding];
+
+        // renderer.outputEncoding = sRGBEncoding;
+        // renderer.outputEncoding = GammaEncoding;
 
         return renderer;
     }
@@ -91,6 +145,7 @@ export default class WebGLApplication {
         const sceneManager = new SceneManager({
             sceneName: this._sceneName,
             root: this,
+            nuxtRoot: this._nuxtRoot,
             renderer: this._renderer,
             width: this._width,
             height: this._height,
@@ -138,7 +193,7 @@ export default class WebGLApplication {
     _resize() {
         this._width = WindowResizeObserver.width;
         this._height = WindowResizeObserver.height;
-        this._dpr = Math.max(2, device.dpr());
+        this._dpr = Math.max(1, device.dpr());
 
         this._resizeCanvas();
         this._resizeRenderer();
@@ -176,18 +231,23 @@ export default class WebGLApplication {
         this._resizeHandler = this._resizeHandler.bind(this);
         this._tickHandler = this._tickHandler.bind(this);
         this._mousemoveHandler = this._mousemoveHandler.bind(this);
+        this._clickHandler = this._clickHandler.bind(this);
+        this._tapHandler = this._tapHandler.bind(this);
     }
 
     _setupEventListeners() {
         WindowResizeObserver.addEventListener('resize', this._resizeHandler);
         gsap.ticker.add(this._tickHandler);
-        window.addEventListener('mousemove', this._mousemoveHandler);
+        this._canvas.addEventListener('mousemove', this._mousemoveHandler);
+        this._canvas.addEventListener('click', this._clickHandler);
+        this._dragManager.addEventListener('tap', this._tapHandler);
     }
 
     _removeEventListeners() {
         WindowResizeObserver.removeEventListener('resize', this._resizeHandler);
         gsap.ticker.remove(this._tickHandler);
         window.removeEventListener('mousemove', this._mousemoveHandler);
+        this._canvas.removeEventListener('click', this._clickHandler);
     }
 
     _resizeHandler() {
@@ -199,6 +259,8 @@ export default class WebGLApplication {
     }
 
     _mousemoveHandler(e) {
+        if (!this._allowMouseInteractions) return;
+
         this._mousePosition.x = e.clientX;
         this._mousePosition.y = e.clientY;
 
@@ -221,6 +283,54 @@ export default class WebGLApplication {
         );
     }
 
+    _clickHandler(e) {
+        // this._mousePosition.x = e.clientX;
+        // this._mousePosition.y = e.clientY;
+
+        // this._normalizedMousePosition.x = this._mousePosition.x / this._width;
+        // this._normalizedMousePosition.y = 1.0 - this._mousePosition.y / this._height;
+
+        // this._centeredMousePosition.x = (this._mousePosition.x / this._width) * 2 - 1;
+        // this._centeredMousePosition.y = -(this._mousePosition.y / this._height) * 2 + 1;
+
+        // bidello.trigger(
+        //     {
+        //         name: 'click',
+        //         fireAtStart: false,
+        //     },
+        //     {
+        //         mousePosition: this._mousePosition,
+        //         normalizedMousePosition: this._normalizedMousePosition,
+        //         centeredMousePosition: this._centeredMousePosition,
+        //     },
+        // );
+    }
+
+    _tapHandler(e) {
+        if (!this._allowMouseInteractions) return;
+
+        this._mousePosition.x = e.position.x;
+        this._mousePosition.y = e.position.y;
+
+        this._normalizedMousePosition.x = this._mousePosition.x / this._width;
+        this._normalizedMousePosition.y = 1.0 - this._mousePosition.y / this._height;
+
+        this._centeredMousePosition.x = (this._mousePosition.x / this._width) * 2 - 1;
+        this._centeredMousePosition.y = -(this._mousePosition.y / this._height) * 2 + 1;
+
+        bidello.trigger(
+            {
+                name: 'click',
+                fireAtStart: false,
+            },
+            {
+                mousePosition: this._mousePosition,
+                normalizedMousePosition: this._normalizedMousePosition,
+                centeredMousePosition: this._centeredMousePosition,
+            },
+        );
+    }
+
     /**
      * Debugger
      */
@@ -231,6 +341,10 @@ export default class WebGLApplication {
             title: 'Debugger',
         });
 
+        debug.addInput(this._settings, 'encoding', { options: this._settings.encodingOptions }).on('change', () => {
+            this._renderer.outputEncoding = this._encodings[this._settings.encoding];
+        });
+
         return debug;
     }
 
@@ -239,6 +353,7 @@ export default class WebGLApplication {
     }
 
     _createStats() {
+        if (!this._isDebug) return;
         const stats = new Stats();
         document.body.appendChild(stats.dom);
 
@@ -252,6 +367,7 @@ export default class WebGLApplication {
     }
 
     _createStatsGpuPanel() {
+        if (!this._stats) return;
         const panel = new GPUStatsPanel(this._renderer.getContext());
         this._stats.addPanel(panel);
         this._stats.showPanel(3);

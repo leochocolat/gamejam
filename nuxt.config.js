@@ -43,6 +43,7 @@ export default {
     plugins: [
         '@/plugins/context.js',
         '@/plugins/init.client.js',
+        '@/plugins/map.js',
     ],
 
     router: {

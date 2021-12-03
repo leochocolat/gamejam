@@ -74,6 +74,7 @@ class WindowResizeObserver extends EventDispatcher {
         element.style.top = 0;
         element.style.left = 0;
         element.style.pointerEvents = 'none';
+
         return element;
     }
 

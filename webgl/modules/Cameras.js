@@ -1,6 +1,7 @@
 // Vendor
 import { PerspectiveCamera } from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import MainCamera from './MainCamera';
 
 class Cameras {
     constructor(options) {
@@ -9,15 +10,16 @@ class Cameras {
         this._height = options.height;
         this._debugFolder = options.debugFolder;
 
+        // this._isDebug = !!this._debugFolder;
+        this._isDebug = false;
+
+        this._cameraDebugFolder = this._createDebugFolder();
+
         this._mainCamera = this._createMainCamera();
         this._debugCamera = this._createDebugCamera();
 
-        this._isDebug = !!this._debugFolder;
-
-        this._active = this._isDebug ? this._debugCamera : this._mainCamera;
+        this._active = this._isDebug ? this._debugCamera : this._mainCamera.camera;
         this._orbitControls = this._createOrbitControls();
-
-        this._setupDebug();
     }
 
     /**
@@ -28,7 +30,7 @@ class Cameras {
     }
 
     get main() {
-        return this._mainCamera;
+        return this._mainCamera.camera;
     }
 
     get debug() {
@@ -47,8 +49,12 @@ class Cameras {
      * Private
      */
     _createMainCamera() {
-        const camera = new PerspectiveCamera(75, this._width / this._height, 0.01, 10000);
-        camera.position.z = 5;
+        const camera = new MainCamera({
+            renderer: this._renderer,
+            width: this._width,
+            height: this._height,
+            debugFolder: this._cameraDebugFolder,
+        });
 
         return camera;
     }
@@ -68,7 +74,7 @@ class Cameras {
     }
 
     _setActiveCamera() {
-        this._active = this._isDebug ? this._debugCamera : this._mainCamera;
+        this._active = this._isDebug ? this._debugCamera : this._mainCamera.camera;
         this._orbitControls.enabled = this._isDebug;
     }
 
@@ -79,17 +85,23 @@ class Cameras {
         this._width = width;
         this._height = height;
 
-        this._mainCamera.aspect = this._width / this._height;
-        this._mainCamera.updateProjectionMatrix();
+        this._mainCamera.resize({ width, height });
 
         this._debugCamera.aspect = this._width / this._height;
         this._debugCamera.updateProjectionMatrix();
     }
 
     /**
+     * Update
+     */
+    update({ time, delta }) {
+        this._mainCamera.update({ time, delta });
+    }
+
+    /**
      * Debug
      */
-    _setupDebug() {
+    _createDebugFolder() {
         if (!this._debugFolder) return;
 
         const debugFolder = this._debugFolder.addFolder({ title: 'Cameras', expanded: true });

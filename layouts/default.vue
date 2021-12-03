@@ -1,9 +1,11 @@
 <template>
-    <div class="default">
+    <div class="default js-default">
 
         <WebGLApplication />
 
         <Nuxt />
+
+        <Logo class="logo" />
 
         <Preloader />
 

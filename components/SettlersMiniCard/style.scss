@@ -1,0 +1,103 @@
+.settlerMiniCard{
+    display: flex;
+    position: relative;
+
+    justify-content: space-between;
+
+    width: rem(170px, 'large');;
+    height: rem(35px, 'large');;
+
+    font-family: $font-primary;
+    font-weight: 800;
+    color: $color-font-black;
+
+    background-color: $color-background-ui;
+
+    border: 2px solid black;
+    border-radius: 3px;
+    box-shadow: 0 5px 10px 0px rgba(black, .25);
+
+    &-identity{
+        display: flex;
+        position: relative;
+
+        justify-content: flex-end;
+        align-items: center;
+
+        width: 60%;
+
+        &--picture{
+            position: absolute;
+            top: rem(-25px, 'large');;
+            left: rem(-10px, 'large');;
+
+            width: rem(40px, 'large');;
+
+            img{
+                width: 100%;
+                object-fit: contain;
+            }
+        }
+
+        &--name{
+            z-index: 2;
+
+            position: relative;
+
+            font-size: rem(16px, 'large');;
+        }
+        &--background{
+            position: absolute;
+
+            svg{
+                width: rem(80px, 'large');
+            }
+        }
+    }
+
+    &-ressources{
+        display: flex;
+        position: relative;
+
+        justify-content: center;
+        align-items: center;
+
+        width: 35%;
+
+        &--score{
+            z-index: 2;
+            p {
+                font-size: rem(13px, 'large');;
+
+                span{
+                    font-size: rem(25px, 'large');;
+                }
+            }
+        }
+
+        &--picture{
+            opacity: 0.5;
+
+            position: absolute;
+
+            width: 140%;
+
+            img{
+                width: 100%;
+                object-fit: contain;
+            }
+        }
+    }
+
+    &-borderConflict{
+        position: absolute;
+        top: rem(-8px, 'large');;
+        right: rem(-4px, 'large');;
+    }
+}
+
+.active{
+    width: rem(220px, 'large');;
+
+    pointer-events: none;
+}

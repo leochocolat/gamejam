@@ -1,4 +1,5 @@
 // Vendor
+import { gsap } from 'gsap';
 import { mapGetters } from 'vuex';
 
 // WebGL
@@ -13,6 +14,10 @@ export default {
             // Preloader
             isLoadingCompleted: 'preloader/isLoadingCompleted',
         }),
+    },
+
+    created() {
+        this.$root.startWebGL = this.start;
     },
 
     watch: {
@@ -42,5 +47,10 @@ export default {
 
             if (this.isLoadingCompleted) this.$root.webglApp.setup();
         },
+
+        start() {
+            gsap.to(this.$el, { duration: 1, alpha: 1, ease: 'sine.inOut' });
+            this.$root.webglApp.transitionIn();
+        }
     },
 };

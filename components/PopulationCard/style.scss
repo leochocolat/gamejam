@@ -1,0 +1,87 @@
+.population{
+    display: flex;
+    position: absolute;
+    top: 20%;
+    right: 0;
+
+
+    justify-content: space-between;
+
+    width: rem(370px, 'large');;
+    height: rem(90px, 'large');;
+
+    font-family: $font-primary;
+    color: $color-font-black;
+
+    background-color: $color-background-ui;
+
+    border: 2px solid #E7DBC6;
+    border-right: none;
+    border-radius: 3px;
+    box-shadow: 0 5px 10px 0px rgba(black, .25);
+
+    &-identity{
+        display: flex;
+        position: relative;
+
+        justify-content: flex-end;
+        align-items: center;
+
+        width: 32%;
+        flex-direction: column;
+
+        margin-left: rem(5px, 'large');;
+
+        &--picture{
+            position: absolute;
+            top: rem(-20px, 'large');;
+
+            width: 120%;
+            img{
+                width: 100%;
+                object-fit: contain;
+            }
+        }
+        &--name{
+            font-weight: 700;
+            font-size: rem(16px, 'large');;
+        }
+        &--line{
+            svg{
+                width: rem(110px, 'large');;
+
+                padding-bottom: rem(5px, 'large');;
+            }
+        }
+    }
+
+    &-properties{
+        display: flex;
+
+        justify-content: space-around;
+        align-items: center;
+
+        width: 60%;
+
+        &-language, &-religion, &-culture{
+            display: flex;
+            flex-direction: column;
+
+            justify-content: center;
+            align-items: center;
+
+            &--name{
+                font-weight: 100;
+                font-size: rem(12px, 'large');;
+            }
+
+            &--icon{
+                svg{
+                    width: rem(30px, 'large');;
+
+                    padding-bottom: rem(2px, 'large');;
+                }
+            }
+        }
+    }
+}

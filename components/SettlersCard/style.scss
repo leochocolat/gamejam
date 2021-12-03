@@ -1,0 +1,103 @@
+.settlerCard{
+    display: flex;
+    position: relative;
+
+    justify-content: space-between;
+
+    width: rem(200px, 'large');;
+    height: rem(40px, 'large');;
+
+    font-family: $font-primary;
+    font-weight: 800;
+    color: $color-font-black;
+
+    background-color: $color-background-ui;
+
+    border: 2px solid black;
+    border-left: none;
+    border-radius: 3px;
+    box-shadow: 0 5px 10px 0px rgba(black, .25);
+
+    transform: translateX(-100%);
+
+    transition: width $expo-out 300ms;
+
+    cursor: pointer;
+    will-change: width;
+
+    &:hover,
+    .active{
+        width: rem(220px, 'large');;
+    }
+
+    &-identity{
+        display: flex;
+        position: relative;
+
+        justify-content: center;
+        align-items: center;
+
+        width: 65%;
+
+        &--name{
+            z-index: 2;
+
+            position: relative;
+
+            font-size: rem(16px, 'large');;
+        }
+        &--background{
+            position: absolute;
+
+            svg{
+                width: rem(80px, 'large');
+            }
+        }
+    }
+
+    &-ressources{
+        display: flex;
+        position: relative;
+
+        justify-content: center;
+        align-items: center;
+
+        width: 35%;
+
+        &--score{
+            z-index: 2;
+            p {
+                font-size: rem(13px, 'large');;
+
+                span{
+                    font-size: rem(25px, 'large');
+                }
+            }
+        }
+
+        &--picture{
+            opacity: 0.5;
+
+            position: absolute;
+
+            width: 140%;
+
+            img{
+                width: 100%;
+                object-fit: contain;
+            }
+        }
+    }
+
+    &-borderConflict{
+        position: absolute;
+        top: rem(-8px, 'large');;
+        right: rem(-4px, 'large');;
+    }
+}
+
+.active{
+    width: rem(220px, 'large');;
+
+    pointer-events: none;
+}

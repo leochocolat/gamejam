@@ -5,6 +5,7 @@ import distance from './distance';
 import angle from './angle';
 import randomArbitrary from './randomArbitrary';
 import randomInt from './randomInt';
+import degToRad from './degToRad';
 
 export default {
     clamp,
@@ -14,4 +15,5 @@ export default {
     angle,
     randomArbitrary,
     randomInt,
+    degToRad,
 };

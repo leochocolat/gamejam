@@ -1,9 +1,12 @@
 @use "sass:math";
 
 // Colors
+$color-background: #ECDCD0;
+$color-font-black : #053D4C;
+$color-background-ui : #EFEAE1;
 
 // Fonts
-$font-primary: Arial;
+$font-primary: "Millimetre", sans-serif;
 
 // Misc
 
@@ -15,7 +18,7 @@ $font-size-large: 1vw;
 // Fluid type
 $viewport-width-small: 375px;
 $viewport-width-medium: 768px;
-$viewport-width-large: 1920px;
+$viewport-width-large: 1440px;
 
 // Max width
 $max-width-medium: 600px;

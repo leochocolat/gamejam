@@ -1,5 +1,5 @@
 <template>
-    <canvas></canvas>
+    <canvas class="canvas-webgl"></canvas>
 </template>
 
 <script src="./script.js"></script>

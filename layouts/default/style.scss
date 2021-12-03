@@ -1,0 +1,16 @@
+
+.logo{
+    z-index: 7;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: rem(184px, 'large');
+    height: auto;
+
+    margin-top: rem(40px, 'large');
+    margin-left: rem(30px, 'large');
+
+    pointer-events: none;
+}

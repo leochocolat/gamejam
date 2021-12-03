@@ -19,3 +19,12 @@
         -moz-osx-font-smoothing: grayscale;
 	}
 }
+
+//StarlitDrive
+@include font-face('Starlit', 400, 'normal', 'fonts/StarlitDrive/StarlitDrive');
+
+//Millimetre
+@include font-face('Millimetre', 300, 'light', 'fonts/Millimetre/Light/Millimetre-Light_web');
+@include font-face('Millimetre', 400, 'normal', 'fonts/Millimetre/Regular/Millimetre-Regular_web');
+@include font-face('Millimetre', 700, 'bold', 'fonts/Millimetre/Bold/Millimetre-Bold_web');
+@include font-face('Millimetre', 800, 'extra-bold', 'fonts/Millimetre/Extrablack/Millimetre-Extrablack_web');

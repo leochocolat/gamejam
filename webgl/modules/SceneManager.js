@@ -4,6 +4,7 @@ import sceneFactory from '../scenes/sceneFactory';
 export default class SceneManager {
     constructor(options = {}) {
         this._sceneName = options.sceneName || 'main';
+        this._root = options.root;
         this._nuxtRoot = options.nuxtRoot;
         this._renderer = options.renderer;
         this._width = options.width;
@@ -30,11 +31,12 @@ export default class SceneManager {
         }
 
         const scene = new constructor({
-            root: this._nuxtRoot,
+            root: this._root,
             renderer: this._renderer,
             width: this._width,
             height: this._height,
             debugger: this._debugger,
+            nuxtRoot: this._nuxtRoot,
         });
 
         return scene;
