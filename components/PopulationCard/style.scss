@@ -1,0 +1,87 @@
+.population{
+    display: flex;
+    position: absolute;
+    top: 20%;
+    right: 0;
+
+
+    justify-content: space-between;
+
+    width: 370px;
+    height: 90px;
+
+    font-family: $font-primary;
+    color: $color-font-black;
+
+    background-color: $color-background-ui;
+
+    border: 2px solid #E7DBC6;
+    border-right: none;
+    border-radius: 3px;
+    box-shadow: 0 5px 10px 0px rgba(black, .25);
+
+    &-identity{
+        display: flex;
+        position: relative;
+
+        justify-content: flex-end;
+        align-items: center;
+
+        width: 32%;
+        flex-direction: column;
+
+        margin-left: 5px;
+
+        &--picture{
+            position: absolute;
+            top: -20px;
+
+            width: 120%;
+            img{
+                width: 100%;
+                object-fit: contain;
+            }
+        }
+        &--name{
+            font-weight: 700;
+            font-size: 16px;
+        }
+        &--line{
+            svg{
+                width: 110px;
+
+                padding-bottom: 5px;
+            }
+        }
+    }
+
+    &-properties{
+        display: flex;
+
+        justify-content: space-around;
+        align-items: center;
+
+        width: 60%;
+
+        &-language, &-religion, &-culture{
+            display: flex;
+            flex-direction: column;
+
+            justify-content: center;
+            align-items: center;
+
+            &--name{
+                font-weight: 100;
+                font-size: 12px;
+            }
+
+            &--icon{
+                svg{
+                    width: 30px;
+
+                    padding-bottom: 2px;
+                }
+            }
+        }
+    }
+}

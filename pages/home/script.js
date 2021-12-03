@@ -5,12 +5,14 @@ import utils from '@/mixins/utils';
 
 // Components
 import SettlersCard from '@/components/SettlersCard';
+import PopulationCard from '@/components/PopulationCard';
 
 
 export default {
     mixins: [seo, pageTransitions, utils],
     components: {
-        SettlersCard
+        SettlersCard,
+        PopulationCard
     },
     data: () => ({
         settlers: [
@@ -47,6 +49,35 @@ export default {
                 active : false
             }
         ],
+        populationPictures :[
+            {
+                picture: "pictures/population/choucremien.png",
+            },
+            {
+                picture: "pictures/population/baklavien.png",
+            },
+            {
+                picture: "pictures/population/crumblien.png",
+            },
+            {
+                picture: "pictures/population/flaonien.png",
+            },
+            {
+                picture: "pictures/population/kouignien.png",
+            },
+            {
+                picture: "pictures/population/loukoumien.png",
+            },
+            {
+                picture: "pictures/population/panettien.png",
+            },
+            {
+                picture: "pictures/population/spéculien.png",
+            },
+            {
+                picture: "pictures/population/tartatien.png",
+            },
+        ]
     }),
     methods: {
         transitionIn(done, routeInfos) {
@@ -66,5 +97,7 @@ export default {
             val.active = true;
         }
     },
-    mounted() {}
+    mounted() {
+        console.log(this.$mapManager)
+    }
 };

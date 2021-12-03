@@ -12,6 +12,13 @@
                 />
             </div>
         </div>
+
+        <div class="population">
+            <PopulationCard
+                :population="$mapManager.populations[0]"
+                :picture="populationPictures[0].picture"
+            />
+        </div>
     </div>
 </template>
 

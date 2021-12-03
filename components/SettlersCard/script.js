@@ -41,9 +41,5 @@ export default {
         }
     },
     watch: {},
-    mounted() {
-        console.log(this.$mapManager);
-        console.log(document.getElementsByClassName("settlerCard"))
-
-    }
+    mounted() {}
 }
