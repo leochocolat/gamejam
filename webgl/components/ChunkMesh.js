@@ -104,9 +104,9 @@ export default class ChunkMesh extends component(Object3D) {
 
     _createPins() {
         const pins = {
-            war: this._createPinWar(),
+            war: this._createPinBombe(),
             revolution: this._createPinRevolution(),
-            bombe: this._createPinBombe(),
+            bombe: this._createPinWar(),
         };
 
         // console.log(pins);
