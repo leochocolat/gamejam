@@ -1,10 +1,12 @@
 <template>
-    <div 
-        class="timer-modal" 
+    <div
         v-if="notFinish"
+        class="timer-modal"
     >
-            <div id="timer" class="timer">0</div>
-            <p>ans plus tard</p>
+        <div id="timer" class="timer">
+            0
+        </div>
+        <p>ans plus tard</p>
     </div>
 
 </template>

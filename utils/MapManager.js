@@ -117,16 +117,15 @@ export default class MapManager extends EventDispatcher {
     }
 
     getSettlersWars() {
-        const wars = {};
+        let wars = [];
+
         for (let i = 0; i < this.settlers.length; i++) {
             const curr = this.settlers[i];
-            wars[curr.id] = {};
             for (let j = 0; j < this.settlers.length; j++) {
                 const other = this.settlers[j];
                 if (curr.isInWarWith(other)) {
                     const chunks = curr.getWarChunks(other);
-                    chunks.flat().forEach(c => c.mesh.playPin('war'));
-                    wars[curr.id][other.id] = chunks;
+                    wars = [...chunks.flat()];
                 }
             }
         }
@@ -135,15 +134,14 @@ export default class MapManager extends EventDispatcher {
     }
 
     getSettlersIndependenceWar() {
-        const wars = {};
+        let wars = [];
+
         for (let i = 0; i < this.settlers.length; i++) {
             const settler = this.settlers[i];
-            wars[settler.id] = {};
             for (let j = 0; j < settler.territories.length; j++) {
                 const territory = settler.territories[j];
                 const majorProps = territory.majorProperties;
                 const independentists = [];
-                wars[settler.id][j] = [];
 
                 for (let k = 0; k < territory.chunks.length; k++) {
                     const chunk = territory.chunks[k];
@@ -157,8 +155,7 @@ export default class MapManager extends EventDispatcher {
                 }
 
                 if (independentists.length > Math.floor(territory.chunks.length * 0.5)) {
-                    independentists.forEach(c => c.mesh.playPin('revolution'));
-                    wars[settler.id][j] = independentists;
+                    wars = [...independentists.flat()];
                 }
             }
         }
@@ -167,7 +164,7 @@ export default class MapManager extends EventDispatcher {
     }
 
     getPopulationsWars() {
-        const wars = {};
+        const wars = [];
 
         const territories = this.settlers.map(s => s.territories).flat();
 
@@ -189,10 +186,11 @@ export default class MapManager extends EventDispatcher {
                                 if (Object.values(currProperties).filter(p => currPopulationsProps.includes(p)).length >= 2) {
                                     for (let y = 0; y < otherChunks.length; y++) {
                                         const otherChunk = otherChunks[y];
-                                        const { populationWar } = currChunk.compareChunk(otherChunk);
-                                        if (populationWar) {
-                                            otherChunk.mesh.playPin('bombe');
-                                            wars[currChunk.population.id] = [...(wars[currChunk.population.id] || []), otherChunk];
+                                        if (currChunk.compareChunk && otherChunk.population) {
+                                            const { populationWar } = currChunk.compareChunk(otherChunk);
+                                            if (populationWar) {
+                                                wars.push(otherChunk);
+                                            }
                                         }
                                     }
                                 }

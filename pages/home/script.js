@@ -103,6 +103,12 @@ export default {
             gsap.to('.ressource', { opacity: 0, duration: 1.5 });
             gsap.to('.btn', { opacity: 0, duration: 1.5 });
 
+            this.war = {
+                diplomatic: this.$mapManager.getSettlersWars().length,
+                population: this.$mapManager.getPopulationsWars().length,
+                strike: this.$mapManager.getSettlersIndependenceWar().length,
+            };
+
             setTimeout(() => {
                 this.notClick = false;
             }, 1600);
