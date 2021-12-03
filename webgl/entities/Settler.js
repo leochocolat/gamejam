@@ -36,6 +36,14 @@ export default class Settler {
         return this.territories.map(territory => territory.resources).flat();
     }
 
+    get targetResourceId() {
+        return this._targetResourceId;
+    }
+
+    get targetResourceAmount() {
+        return this._targetResourceAmount;
+    }
+
     get targetResourceCount() {
         return this.resources.filter(resource => resource.id === this._targetResourceId).length;
     }
