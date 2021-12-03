@@ -31,7 +31,15 @@
         align-content: center;
 
         width: 100vw;
-        height: rem(100px, 'large');;
+        height: rem(100px, 'large');
+
+        &::v-deep {
+            .btn-line {
+                opacity: 0;
+            }
+        }
+
+
         .btn{
             button{
                 display: inline-block;
@@ -57,7 +65,7 @@
             }
             &-line{
                 z-index: 2;
-                opacity: 1;
+                // opacity: 1;
 
                 position: absolute;
                 top: rem(-16px, 'large');;

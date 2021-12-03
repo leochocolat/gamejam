@@ -1,5 +1,5 @@
 import BackgroundButton from '@/assets/icons/background-btn-1.svg?inline';
-import Logo from '@/assets/icons/logo-2.svg?inline';
+import Logo from '@/assets/icons/logo-v3.svg?inline';
 import gsap from 'gsap';
 import AudioManager from '@/utils/AudioManager';
 import ResourceLoader from '@/vendor/resource-loader';

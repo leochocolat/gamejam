@@ -9,7 +9,7 @@
                 </div>
             </div>
             <div class="home-btn">
-                 <BackgroundButton/>
+                 <BackgroundButton class="home-button-background"/>
                 <button 
                     class="btn"
                     type="button"

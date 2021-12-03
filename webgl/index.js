@@ -1,5 +1,5 @@
 // Vendor
-import { WebGLRenderer, Clock, Vector2 } from 'three';
+import { WebGLRenderer, Clock, Vector2, sRGBEncoding, GammaEncoding, LinearEncoding, RGBEEncoding, RGBM7Encoding, RGBM16Encoding, RGBDEncoding, BasicDepthPacking, RGBADepthPacking } from 'three';
 import Stats from 'three/examples/jsm/libs/stats.module.js';
 import { GPUStatsPanel } from '@/webgl/vendor/GPUStatsPanel.js';
 import bidello from './vendor/bidello';
@@ -27,6 +27,44 @@ export default class WebGLApplication {
         this._sceneName = options.sceneName;
 
         // Setup
+
+        // THREE.LinearEncoding
+        // THREE.sRGBEncoding
+        // THREE.GammaEncoding
+        // THREE.RGBEEncoding
+        // THREE.RGBM7Encoding
+        // THREE.RGBM16Encoding
+        // THREE.RGBDEncoding
+        // THREE.BasicDepthPacking
+        // THREE.RGBADepthPacking
+
+        this._encodings = {
+            linearEncoding: LinearEncoding,
+            sRGBEncoding: sRGBEncoding,
+            gammaEncoding: GammaEncoding,
+            RGBEEncoding: RGBEEncoding,
+            RGBM7Encoding: RGBM7Encoding,
+            RGBM16Encoding: RGBM16Encoding,
+            RGBDEncoding: RGBDEncoding,
+            BasicDepthPacking: BasicDepthPacking,
+            RGBADepthPacking: RGBADepthPacking,
+        }
+
+        this._settings = { 
+            encoding: 'sRGBEncoding', 
+            encodingOptions: {
+                LinearEncoding: 'LinearEncoding',
+                sRGBEncoding: 'sRGBEncoding',
+                GammaEncoding: 'GammaEncoding',
+                RGBEEncoding: 'RGBEEncoding',
+                RGBM7Encoding: 'RGBM7Encoding',
+                RGBM16Encoding: 'RGBM16Encoding',
+                RGBDEncoding: 'RGBDEncoding',
+                BasicDepthPacking: 'BasicDepthPacking',
+                RGBADepthPacking: 'RGBADepthPacking',
+            }
+        };
+
         this._width = WindowResizeObserver.width;
         this._height = WindowResizeObserver.height;
         this._clock = this._createClock();
@@ -85,6 +123,10 @@ export default class WebGLApplication {
             canvas: this._canvas,
             antialias: true,
         });
+        renderer.outputEncoding = this._encodings[this._settings.encoding];
+
+        // renderer.outputEncoding = sRGBEncoding;
+        // renderer.outputEncoding = GammaEncoding;
 
         return renderer;
     }
@@ -284,6 +326,10 @@ export default class WebGLApplication {
 
         const debug = new Debugger({
             title: 'Debugger',
+        });
+
+        debug.addInput(this._settings, 'encoding', { options: this._settings.encodingOptions }).on('change', () => {
+            this._renderer.outputEncoding = this._encodings[this._settings.encoding];
         });
 
         return debug;

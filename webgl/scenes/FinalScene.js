@@ -1,6 +1,6 @@
 // Vendor
 import { component } from '../vendor/bidello';
-import { AmbientLight, Box3, BoxBufferGeometry, BoxGeometry, Color, DirectionalLight, InstancedMesh, Matrix4, Mesh, MeshBasicMaterial, MeshNormalMaterial, Object3D, Raycaster, Scene, Vector2, Vector3 } from 'three';
+import { AmbientLight, Box3, BoxBufferGeometry, BoxGeometry, CanvasTexture, Color, DirectionalLight, InstancedMesh, Matrix4, Mesh, MeshBasicMaterial, MeshNormalMaterial, Object3D, Raycaster, Scene, Vector2, Vector3 } from 'three';
 import ResourceLoader from '@/vendor/resource-loader';
 
 // Utils
@@ -10,6 +10,7 @@ import math from '@/utils/math';
 import Cameras from '../modules/Cameras';
 
 // Components
+import CanvasBackground from '../components/CanvasBackground';
 import Map from '../components/Map';
 
 const matrix = new Matrix4();
@@ -39,7 +40,8 @@ export default class FinalScene extends component(Scene) {
             },
         };
 
-        this.background = new Color(this._settings.backgroundColor);
+        this._canvasBackground = new CanvasBackground({ width: this._width, height: this._height });
+        this.background = new CanvasTexture(this._canvasBackground.canvas);
 
         this._lights = this._createLights();
         this._debugFolder = this._createDebugFolder();

@@ -19,17 +19,24 @@
     background-attachment: fixed;
     background-position: center;
     background-size: cover;
+
+    .home-logo {
+        margin-bottom: rem(100px, 'large');
+    }
     
     &-logo{
         &--image{
             svg{
-                width: rem(230px, 'large');;
+                width: rem(500px, 'large');
+                height: auto;
             }
         }
     }
 
     &-btn{
         position: relative;
+
+
         button{
             display: inline-block;
 
@@ -54,7 +61,7 @@
             z-index: -1;
 
             position: absolute;
-            top: rem(-15px, 'large');;
+            top: rem(-15px, 'large');
             left: rem(-20px, 'large');
         }
     }
