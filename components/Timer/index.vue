@@ -1,6 +1,5 @@
 <template>
     <div
-        v-if="notFinish"
         class="timer-modal"
     >
         <div id="timer" class="timer">

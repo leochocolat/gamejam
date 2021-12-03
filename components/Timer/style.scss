@@ -3,6 +3,8 @@
     position: absolute;
     bottom: 0;
 
+    will-change: transform;
+
     justify-content: center;
     align-items: center;
 
@@ -20,6 +22,8 @@
     border-radius: 3px;
     box-shadow: 0 5px 10px 0px rgba(black, .25);
     flex-direction: column;
+
+    transform: translateY(100%);
 
     #timer{
         font-size: rem(90px, 'large');;

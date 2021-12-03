@@ -1,6 +1,5 @@
 <template>
     <div
-        v-if="notClick"
         class="results-modal"
     >
         <div class="results-modal-title">

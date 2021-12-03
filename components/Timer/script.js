@@ -9,7 +9,10 @@ export default {
     computed: {},
     methods: {
         init() {
-            const interval = 50;
+            gsap.to(this.$el, { duration: 0.5, y: '0%', ease: 'power3.out' });
+
+            // const interval = 10;
+            const interval = 10;
             let cpt = 0;
             const wars = {
                 war: this.$mapManager.getSettlersWars(),
@@ -39,12 +42,18 @@ export default {
                 } else {
                     this.$emit('on-ended', true);
                     setTimeout(() => {
+                        this.hide();
                         this.notFinish = false;
                     }, 600);
                 }
             }, interval);
         },
 
+
+        hide() {
+            if (!this.notFinish) return;
+            gsap.to(this.$el, { duration: 0.5, y: '100%', ease: 'power3.inOut' });
+        }
     },
     watch: {},
     mounted() {

@@ -33,5 +33,7 @@ export default {
         },
     },
     watch: {},
-    mounted() {},
+    mounted() {
+        gsap.to(this.$el, { duration: 0.5, y: '0%', ease: 'power3.inOut', delay: 1 });
+    },
 };

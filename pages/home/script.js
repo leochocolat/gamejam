@@ -12,7 +12,7 @@ import HomeModal from '@/components/HomeModal';
 import ConsigneModal from '@/components/ConsigneModal';
 import Timer from '@/components/Timer';
 import BackgroundButton from '@/assets/icons/background-btn-2.svg?inline';
-import ResultsModal from '@/components/Results'; '';
+import ResultsModal from '@/components/Results';
 
 export default {
     mixins: [seo, pageTransitions, utils],
@@ -115,7 +115,7 @@ export default {
 
             setTimeout(() => {
                 this.notClick = false;
-            }, 1600);
+            }, 500);
         },
 
         showResults(val) {
