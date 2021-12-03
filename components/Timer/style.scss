@@ -1,0 +1,27 @@
+.timer-modal{
+    display: flex;
+    position: absolute;
+    bottom: 0;
+
+    justify-content: center;
+    align-items: center;
+
+    width: 250px;   
+    height: 150px;
+
+    font-weight: bold;
+
+    color: $color-font-black;
+
+    background-color:#EFEAE1;
+
+    border: 2px solid #E7DBC6;
+    border-left: none;
+    border-radius: 3px;
+    box-shadow: 0 5px 10px 0px rgba(black, .25);
+    flex-direction: column;
+
+    #timer{
+        font-size: 90px;
+    }
+}

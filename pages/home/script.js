@@ -10,6 +10,7 @@ import PopulationCard from '@/components/PopulationCard';
 import RessourceCard from '@/components/RessourceCard';
 import HomeModal from '@/components/HomeModal';``
 import ConsigneModal from '@/components/ConsigneModal';
+import Timer from '@/components/Timer';
 import BackgroundButton from '@/assets/icons/background-btn-2.svg?inline';
 
 export default {
@@ -20,7 +21,8 @@ export default {
         RessourceCard,
         HomeModal,
         ConsigneModal,
-        BackgroundButton
+        BackgroundButton,
+        Timer
     },
     data: () => ({
         settlers: [

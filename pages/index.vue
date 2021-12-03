@@ -31,17 +31,23 @@
         <HomeModal/>
         <ConsigneModal :settlers="settlers"/>
 
-        <div class="btn">
-            <BackgroundButton class="btn-line"/>
-            <button 
-                class="btn"
-                type="button"
-                @mouseenter="onMouseEnter()"
-                @mouseleave="onMouseLeave()"
-                @click="showWar()"
-            >
-                valider
-            </button>
+        <div class="btn-container">
+            <div class="btn">
+                <BackgroundButton class="btn-line"/>
+                <button 
+                    class="btn"
+                    type="button"
+                    @mouseenter="onMouseEnter()"
+                    @mouseleave="onMouseLeave()"
+                    @click="showWar()"
+                >
+                    valider
+                </button>
+            </div>
+        </div>
+
+        <div class="timerComponent">
+            <Timer v-if="!notClick"/>
         </div>
     </div>
 </template>
