@@ -57,6 +57,14 @@ export default class MapManager extends EventDispatcher {
 
     set activeSettler(activeSettler) {
         this._activeSettler = activeSettler;
+
+        this.dispatchEvent('change', {
+            settlers: this._settlers,
+            resources: this._resources,
+            populations: this._populations,
+            chunks: this._chunks,
+            activeSettler: this._activeSettler,
+        });
     }
 
     /**
@@ -112,6 +120,7 @@ export default class MapManager extends EventDispatcher {
                 resources: this._resources,
                 populations: this._populations,
                 chunks: this._chunks,
+                activeSettler: this._activeSettler,
             });
         }
     }

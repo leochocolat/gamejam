@@ -2,11 +2,12 @@
     <div class="page-home">
         <div v-if="notClick" class="settlers">
             <div
-                v-for="(settler, i) in $mapManager.settlers"
+                v-for="(settler, i) in settlers"
                 :key="i"
                 class="settler"
             >
                 <SettlersCard
+                    :active-settler="activeSettler"
                     :settler="settler"
                 />
             </div>
@@ -27,7 +28,7 @@
         </div>
 
         <HomeModal />
-        <ConsigneModal :settlers="$mapManager.settlers" />
+        <ConsigneModal :settlers="settlers" />
 
         <div class="btn-container">
             <div class="btn">
