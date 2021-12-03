@@ -199,16 +199,21 @@ export default class Map extends component(Object3D) {
         this._raycaster.setFromCamera(this._centeredMousePosition, this._scene.camera);
         const intersects = this._raycaster.intersectObjects(this._chunkMeshes);
 
+        let chunk = null
+
         for (let i = 0; i < this._chunkMeshes.length; i++) {
             const chunkMesh = this._chunkMeshes[i];
             const mesh = this._chunks[i].mesh;
             const isWater = intersects[0] && intersects[0].object.userData.state === 0;
             if (intersects.length > 0 && chunkMesh === intersects[0].object && !isWater) {
                 mesh.isHovered = true;
+                chunk = this._chunks[i]
             } else {
                 mesh.isHovered = false;
             }
         }
+
+        this._mapManager.hover = chunk
     }
 
     onClick({ centeredMousePosition }) {

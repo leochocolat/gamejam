@@ -13,17 +13,17 @@
             </div>
         </div>
 
-        <div v-if="notClick" class="population">
+        <div v-if="notClick && population" class="population">
             <PopulationCard
-                :population="$mapManager.populations[0]"
-                :picture="populationPictures[0].picture"
+                :population="population"
+                :picture="`pictures/population/${population.id}.png`"
             />
         </div>
 
-        <div v-if="notClick" class="ressource">
+        <div v-if="notClick && resource" class="ressource">
             <RessourceCard
-                :ressource="$mapManager._resources[0]"
-                :picture="ressourcePictures[0].picture"
+                :ressource="resource"
+                :picture="`pictures/ressources/${resource.id}.png`"
             />
         </div>
 

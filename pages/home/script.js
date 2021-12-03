@@ -29,6 +29,8 @@ export default {
     data: () => ({
         settlers: [],
         activeSettler: null,
+        population: null,
+        resource: null,
         populationPictures: [
             {
                 picture: 'pictures/population/choucremien.png',
@@ -126,12 +128,24 @@ export default {
         this.settlers = this.$mapManager.settlers;
         this.activeSettler = this.$mapManager.activeSettler;
 
+        if (this.$mapManager.hover) {
+            this.population = this.$mapManager.hover.population || null
+            this.resource = this.$mapManager.hover.resource || null
+        }
+
         this.$mapManager.addEventListener('change', (e) => {
             this.settlers = e.settlers;
             this.activeSettler = e.activeSettler;
             const resources = e.resources;
             const populations = e.populations;
             const chunks = e.chunks;
+        });
+
+        this.$mapManager.addEventListener('hover', (e) => {
+            if (e.hover) {
+                this.population = e.hover.population || null
+                this.resource = e.hover.resource || null
+            }
         });
 
         console.log();

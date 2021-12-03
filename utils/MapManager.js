@@ -20,6 +20,8 @@ export default class MapManager extends EventDispatcher {
 
         this._activeSettler = null;
 
+        this._hover = null
+
         this._chunks = [];
 
         // PLAY
@@ -49,6 +51,18 @@ export default class MapManager extends EventDispatcher {
 
     set chunks(chunks) {
         this._chunks = chunks;
+    }
+
+    get hover() {
+        return this._hover
+    }
+
+    set hover(hover) {
+        this._hover = hover
+
+        this.dispatchEvent('hover', {
+            hover
+        })
     }
 
     get activeSettler() {
