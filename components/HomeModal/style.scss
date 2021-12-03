@@ -23,7 +23,7 @@
     &-logo{
         &--image{
             svg{
-                width: 230px;
+                width: rem(230px, 'large');;
             }
         }
     }
@@ -33,11 +33,11 @@
         button{
             display: inline-block;
 
-            padding: 15px 60px;
+            padding: rem(15px, 'large')rem(60px, 'large');;
 
             font-family: $font-primary;
             font-weight: 700;
-            font-size: 32px;
+            font-size: rem(32px, 'large');;
             color: $color-background-ui;
             text-align: center;
             text-decoration: none;
@@ -46,7 +46,7 @@
             border: 2px solid $color-font-black;
             border-radius: 3px;
 
-cursor: pointer;
+            cursor: pointer;
 
             pointer-events: auto;
         }
@@ -54,8 +54,8 @@ cursor: pointer;
             z-index: -1;
 
             position: absolute;
-            top: -15px;
-            left: -20px;
+            top: rem(-15px, 'large');;
+            left: rem(-20px, 'large');
         }
     }
 }

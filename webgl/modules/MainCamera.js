@@ -1,6 +1,9 @@
 import { Object3D, PerspectiveCamera, Box3 } from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
+// Data
+import cameraState from './cameraState';
+
 export default class MainCamera extends Object3D {
     constructor(options = {}) {
         super();
@@ -13,6 +16,10 @@ export default class MainCamera extends Object3D {
         this._camera = this._createCamera();
         this._controls = this._createControls();
         this._debugFolder = this._createDebugFolder();
+
+        // this._controls.addEventListener('change', () => {
+        //     console.log(this._controls);
+        // });
     }
 
     /**
@@ -24,7 +31,9 @@ export default class MainCamera extends Object3D {
 
     _createCamera() {
         const camera = new PerspectiveCamera(75, this._width / this._height, 0.01, 10000);
-        camera.position.z = 5;
+        camera.position.set(cameraState.position.x, cameraState.position.y, cameraState.position.z);
+        camera.rotation.set(cameraState.rotation.x, cameraState.rotation.y, cameraState.rotation.z);
+        camera.fov = 20;
 
         return camera;
     }
@@ -32,6 +41,10 @@ export default class MainCamera extends Object3D {
     _createControls() {
         const controls = new OrbitControls(this._camera, this._renderer.domElement);
         controls.enableDamping = true;
+        controls.maxPolarAngle = 1.47;
+        controls.minDistance = 6;
+        controls.maxDistance = 18.30;
+        controls.zoomSpeed = 0.8;
 
         return controls;
     }
@@ -39,7 +52,7 @@ export default class MainCamera extends Object3D {
     _createDebugFolder() {
         if (!this._debugFolder) return;
 
-        const mainCamera = this._debugFolder.addFolder({ title: 'Main Camera', expanded: false });
+        const mainCamera = this._debugFolder.addFolder({ title: 'Main Camera', expanded: true });
 
         const deplacementFolder = mainCamera.addFolder({ title: 'Deplacement' });
         deplacementFolder.addInput(this._controls, 'minDistance', {
@@ -57,16 +70,16 @@ export default class MainCamera extends Object3D {
             min: 0,
             max: 5,
         });
-        deplacementFolder.addInput(this._controls, 'minAzimuthAngle', {
-            step: 0.01,
-            min: -3,
-            max: 3,
-        });
-        deplacementFolder.addInput(this._controls, 'maxAzimuthAngle', {
-            step: 0.01,
-            min: -3,
-            max: 3,
-        });
+        // deplacementFolder.addInput(this._controls, 'minAzimuthAngle', {
+        //     step: 0.01,
+        //     min: -3,
+        //     max: 3,
+        // });
+        // deplacementFolder.addInput(this._controls, 'maxAzimuthAngle', {
+        //     step: 0.01,
+        //     min: -3,
+        //     max: 3,
+        // });
         deplacementFolder.addInput(this._controls, 'maxPolarAngle', {
             step: 0.01,
             min: 0,
@@ -74,38 +87,55 @@ export default class MainCamera extends Object3D {
         });
 
         const cameraPosition = mainCamera.addFolder({ title: 'Position' });
-        cameraPosition.addInput(this._camera.position, 'x', {
-            step: 0.01,
-            min: -3,
-            max: 3,
-        });
-        cameraPosition.addInput(this._camera.position, 'y', {
-            step: 0.01,
-            min: -3,
-            max: 3,
-        });
-        cameraPosition.addInput(this._camera.position, 'z', {
-            step: 0.01,
-            min: 0,
-            max: 10,
-        });
+        // cameraPosition.addInput(this._camera.position, 'x', {
+        //     step: 0.01,
+        //     min: -3,
+        //     max: 3,
+        // });
+        // cameraPosition.addInput(this._camera.position, 'y', {
+        //     step: 0.01,
+        //     min: -3,
+        //     max: 3,
+        // });
+        // cameraPosition.addInput(this._camera.position, 'z', {
+        //     step: 0.01,
+        //     min: 0,
+        //     max: 10,
+        // });
 
         const cameraRotation = mainCamera.addFolder({ title: 'Rotation' });
+        // cameraRotation.addInput(this._camera.rotation, 'x', {
+        //     step: 0.01,
+        //     min: -0.5,
+        //     max: 0.5,
+        // });
+        // cameraRotation.addInput(this._camera.rotation, 'y', {
+        //     step: 0.01,
+        //     min: -0.5,
+        //     max: 0.5,
+        // });
+        // cameraRotation.addInput(this._camera.rotation, 'z', {
+        //     step: 0.01,
+        //     min: -0.5,
+        //     max: 0.5,
+        // });
 
-        cameraRotation.addInput(this._camera.rotation, 'x', {
-            step: 0.01,
-            min: -0.5,
-            max: 0.5,
-        });
-        cameraRotation.addInput(this._camera.rotation, 'y', {
-            step: 0.01,
-            min: -0.5,
-            max: 0.5,
-        });
-        cameraRotation.addInput(this._camera.rotation, 'z', {
-            step: 0.01,
-            min: -0.5,
-            max: 0.5,
+        const exp = mainCamera.addFolder({ title: 'export' });
+        exp.addButton({ title: 'Click' }).on('click', () => {
+            const cameraState = {
+                position: this._controls.object.position,
+                rotation: this._controls.object.rotation,
+            };
+            const string = JSON.stringify(cameraState);
+            const input = document.createElement('input');
+            input.setAttribute('type', 'text');
+            input.setAttribute('value', string);
+            input.style.position = 'absolute';
+            input.style.opacity = 0;
+            document.body.appendChild(input);
+            input.select();
+            document.execCommand('copy');
+            document.body.removeChild(input);
         });
 
         const other = cameraRotation.addFolder({ title: 'Other' });

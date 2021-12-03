@@ -24,7 +24,7 @@
     p{
         width: 60%;
 
-        font-size: 14px;
+        font-size: rem(14px, 'large');;
         text-align: center;
     }
 
@@ -39,10 +39,10 @@
 
             width: 60%;
 
-            margin-bottom: 40px;
+            margin-bottom: rem(40px, 'large');;
 
             font-weight: 800;
-            font-size: 60px;
+            font-size: rem(60px, 'large');;
             text-align: center;
         }
         &--line{
@@ -53,15 +53,15 @@
     &-btn{
         position: relative;
 
-        margin-top: 40px;
+        margin-top: rem(40px, 'large');;
         button{
             display: inline-block;
 
-            padding: 15px 60px;
+            padding: rem(15px, 'large')rem(60px, 'large');;
 
             font-family: $font-primary;
             font-weight: 700;
-            font-size: 18px;
+            font-size: rem(18px, 'large');;
             color: $color-background-ui;
             text-align: center;
             text-decoration: none;
@@ -78,10 +78,10 @@
             opacity: 0;
 
             position: absolute;
-            top: -17px;
-            left: 10px;
+            top: rem(-17px, 'large');;
+            left: rem(10px, 'large');
 
-            width: 150px;
+            width: rem(150px, 'large');
         }
     }
 }

@@ -11,6 +11,19 @@ import ResourceLoader from '@/vendor/resource-loader';
 // Utils
 import AnimationManager from '@/utils/AnimationManager';
 
+const names = [
+    'panetttien',
+    'loukoumien',
+    'choucremien',
+    'tartatien',
+    'speculien',
+    'bakelavien',
+    'flaonien',
+    'crumblien',
+    'kouignien',
+    'peau',
+];
+
 export default class ChunkMesh extends component(Object3D) {
     init(options) {
         this._container = options.container;
@@ -32,6 +45,7 @@ export default class ChunkMesh extends component(Object3D) {
         this._initialPosition = new Vector3(this._mesh.position.x, this._mesh.position.y, this._mesh.position.z);
 
         this._mesh.traverse((child) => {
+        //     if (child.material && names.includes(child.material.name)) child.material = this._material;
             if (child.isMesh) child.material = child.material.clone();
         });
 
@@ -161,7 +175,7 @@ export default class ChunkMesh extends component(Object3D) {
      * Update cycle
      */
     onUpdate({ time, delta }) {
-
+        // this.rotation.y = Math.atan2( ( camera.position.x - obj.position.x ), ( camera.position.z - obj.position.z ) );
     }
 
     /**
